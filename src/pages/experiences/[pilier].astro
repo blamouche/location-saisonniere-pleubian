@@ -8,6 +8,7 @@ import { experiences } from '@/data/experiences';
 import { fichesLieux } from '@/data/decouvrir';
 import { buildDate } from '@/lib/build-date';
 import { experienceHeroImages } from '@/data/real-images';
+import { withBase } from '@/lib/base-path';
 
 export function getStaticPaths() {
   return experiences.map((e) => ({ params: { pilier: e.slug }, props: { experience: e } }));
@@ -172,7 +173,7 @@ const touristTripJsonLd = {
         {
           decouvrirLies.map((lieu) => (
             <li>
-              <a href={`/decouvrir/${lieu.slug}/`} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
+              <a href={withBase(`/decouvrir/${lieu.slug}/`)} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
                 {lieu.nom}
               </a>
             </li>

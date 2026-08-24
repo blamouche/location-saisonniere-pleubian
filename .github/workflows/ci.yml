@@ -22,7 +22,7 @@ jobs:
       # Type/diagnostics Astro (US-008).
       - run: npm run check
 
-      # Sortie 100 % statique — voir docs/PRD.md §14.1 et docs/user-stories.md §0bis.
+      # Sortie 100 % statique — voir documentation/PRD.md §14.1 et documentation/user-stories.md §0bis.
       - run: npm run build
 
       # Aucun lien interne cassé (US-008, US-047, US-050).

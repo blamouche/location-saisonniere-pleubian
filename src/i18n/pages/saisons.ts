@@ -54,7 +54,6 @@ export const saisonContent: Record<Locale, SaisonContent> = {
       { q: `Fait-il froid dans la maison en ${saisonLabel.toLowerCase()} ?`, r: 'La maison dispose d’un poêle à bois — l’argument confort principal hors saison estivale.' },
       { q: `Le Sillon de Talbert est-il accessible en ${saisonLabel.toLowerCase()} ?`, r: "Oui, la réserve naturelle est accessible toute l'année. Horaires de marée et conditions à vérifier avant la visite." },
       { q: `Quels sont les tarifs indicatifs en ${saisonLabel.toLowerCase()} ?`, r: tarif ?? 'Fourchette tarifaire non encore publiée pour cette saison — nous consulter via le formulaire de contact.' },
-      { q: 'Le sélecteur de saison affiche-t-il les disponibilités réelles ?', r: "Non — explorer une saison ne change pas le calendrier réel. Vérifiez toujours les disponibilités sur la page Réserver." },
     ],
     essentielTitre: "L'essentiel",
     essentielTexte: (saisonLabel, periode, nbActivites, dureeMer) =>
@@ -81,7 +80,6 @@ export const saisonContent: Record<Locale, SaisonContent> = {
       { q: `Is the house cold in ${saisonLabel.toLowerCase()}?`, r: 'The house has a wood stove — the main comfort feature outside summer.' },
       { q: `Is the Talbert sand spit accessible in ${saisonLabel.toLowerCase()}?`, r: 'Yes, the nature reserve is accessible year-round. Check tide times and conditions before visiting.' },
       { q: `What are the indicative rates in ${saisonLabel.toLowerCase()}?`, r: tarif ?? 'Rate range not yet published for this season — please contact us via the contact form.' },
-      { q: 'Does the season selector show real availability?', r: 'No — browsing a season does not change the real calendar. Always check availability on the Book page.' },
     ],
     essentielTitre: 'The essentials',
     essentielTexte: (saisonLabel, periode, nbActivites, dureeMer) =>
@@ -108,7 +106,6 @@ export const saisonContent: Record<Locale, SaisonContent> = {
       { q: `Ist es im Haus im ${saisonLabel.toLowerCase()} kalt?`, r: 'Das Haus verfügt über einen Holzofen — das wichtigste Komfortmerkmal außerhalb des Sommers.' },
       { q: `Ist der Sillon de Talbert im ${saisonLabel.toLowerCase()} zugänglich?`, r: 'Ja, das Naturschutzgebiet ist ganzjährig zugänglich. Gezeitenzeiten und Bedingungen vor dem Besuch prüfen.' },
       { q: `Wie hoch sind die Richtpreise im ${saisonLabel.toLowerCase()}?`, r: tarif ?? 'Preisspanne für diese Jahreszeit noch nicht veröffentlicht — bitte über das Kontaktformular anfragen.' },
-      { q: 'Zeigt der Jahreszeiten-Umschalter die echte Verfügbarkeit an?', r: 'Nein — das Ansehen einer anderen Jahreszeit ändert nichts am echten Kalender. Verfügbarkeit immer auf der Buchungsseite prüfen.' },
     ],
     essentielTitre: 'Das Wichtigste',
     essentielTexte: (saisonLabel, periode, nbActivites, dureeMer) =>

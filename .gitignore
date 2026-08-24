@@ -1,6 +1,10 @@
 node_modules/
-dist/
 .astro/
+
+# `docs/` (sortie de `npm run build`, voir astro.config.mjs `outDir`) N'EST PAS
+# ignoré : GitHub Pages sert ce dossier directement depuis `main` (Settings →
+# Pages → Deploy from a branch → /docs) — il doit donc être commité à chaque
+# publication (voir scripts/save.sh).
 .env
 .env.*
 !.env.example

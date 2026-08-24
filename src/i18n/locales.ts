@@ -5,6 +5,8 @@
  * pas nativement : slugs traduits par section et par fiche, pour ne jamais exposer
  * un mot-clé français dans une URL anglaise ou allemande.
  */
+import { withBase } from '@/lib/base-path';
+
 export type Locale = 'fr' | 'en' | 'de';
 
 export const locales: Locale[] = ['fr', 'en', 'de'];
@@ -59,7 +61,7 @@ export const saisonSlugs: Record<string, Record<Locale, string>> = {
   hiver: { fr: 'hiver', en: 'winter', de: 'winter' },
 };
 
-/** Libellés affichés des 4 saisons (SeasonSwitcher, pages saisons) — distincts des slugs d'URL. */
+/** Libellés affichés des 4 saisons (pages saisons, bandeau « En ce moment ») — distincts des slugs d'URL. */
 export const saisonLabels: Record<string, Record<Locale, string>> = {
   printemps: { fr: 'Printemps', en: 'Spring', de: 'Frühling' },
   ete: { fr: 'Été', en: 'Summer', de: 'Sommer' },
@@ -114,14 +116,14 @@ export const decouvrirSlugs: Record<string, Record<Locale, string>> = {
   'ou-manger-boire': { fr: 'ou-manger-boire', en: 'where-to-eat-drink', de: 'essen-und-trinken' },
 };
 
-/** Chemin absolu (avec préfixe langue + slash final) vers la racine d'une langue. */
+/** Chemin absolu (avec préfixe langue + slash final + `base`) vers la racine d'une langue. */
 export function homePath(locale: Locale): string {
-  return locale === 'fr' ? '/' : `${localePrefix(locale)}/`;
+  return withBase(locale === 'fr' ? '/' : `${localePrefix(locale)}/`);
 }
 
-/** Chemin absolu vers la page d'index d'une section (ex. `/en/discover/`). */
+/** Chemin absolu (avec `base`) vers la page d'index d'une section (ex. `/en/discover/`). */
 export function sectionPath(section: keyof typeof sectionSlugs, locale: Locale): string {
-  return `${localePrefix(locale)}/${sectionSlug(section, locale)}/`;
+  return withBase(`${localePrefix(locale)}/${sectionSlug(section, locale)}/`);
 }
 
 /** Chemin absolu vers une fiche traduite (expérience, lieu, saison…). */

@@ -1,0 +1,175 @@
+{
+  "licence": "CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/deed.fr (citer la source : https://blamouche.github.io/location-saisonniere-pleubian/)",
+  "genereLe": "2026-08-24T20:21:11.018Z",
+  "source": "https://blamouche.github.io/location-saisonniere-pleubian/",
+  "bien": {
+    "nom": "Maison Od Joge",
+    "slogan": "Huit autour d'une table, la mer à cinq minutes",
+    "hotes": [
+      {
+        "prenom": "Pauline",
+        "statut": "Hôte"
+      },
+      {
+        "prenom": "Maeva",
+        "statut": "Hôte"
+      }
+    ],
+    "superhost": true,
+    "adresse": {
+      "lieuDit": "l'Armor",
+      "commune": "Pleubian",
+      "codePostal": "22610",
+      "departement": "Côtes-d'Armor",
+      "region": "Bretagne",
+      "pays": "France",
+      "territoire": "Presqu'île sauvage (presqu'île de Lézardrieux)",
+      "geo": {
+        "latitude": 48.8393,
+        "longitude": -3.1301,
+        "verifie": false,
+        "note": "Coordonnées approximatives du hameau de l'Armor — à remplacer par les coordonnées exactes du bien avant mise en ligne (PRD §19, adresse précise communiquée aux voyageurs après réservation)."
+      }
+    },
+    "contact": {
+      "email": "contact@maison-odjoge.example",
+      "telephone": null,
+      "noteTodo": "Adresse email et téléphone de contact définitifs à renseigner avant mise en ligne."
+    },
+    "capacite": {
+      "voyageurs": 8,
+      "chambres": 4,
+      "couchages": 5,
+      "couchagesConvertible": 7,
+      "sallesDeBain": 2,
+      "wcSepare": true
+    },
+    "chambres": [
+      {
+        "nom": "Chambre 1 (étage)",
+        "niveau": "Étage",
+        "configuration": "Suite parentale, lit double"
+      },
+      {
+        "nom": "Chambre 2 (étage)",
+        "niveau": "Étage",
+        "configuration": "Lit double, séparable en lits simples"
+      },
+      {
+        "nom": "Chambre 3 (étage)",
+        "niveau": "Étage",
+        "configuration": "Deux lits simples"
+      },
+      {
+        "nom": "Chambre 4 (RDC)",
+        "niveau": "RDC",
+        "configuration": "Lit double"
+      }
+    ],
+    "sallesDeBain": [
+      {
+        "nom": "Salle de bain RDC",
+        "equipement": "Douche à l'italienne"
+      },
+      {
+        "nom": "Salle de bain étage",
+        "equipement": "Salle de bain & WC"
+      }
+    ],
+    "scenariosCouchage": [
+      "2 familles avec enfants (chambres séparées à l'étage + RDC)",
+      "4 couples (une chambre chacun)",
+      "1 famille + grands-parents (chambre RDC sans escalier pour les grands-parents)"
+    ],
+    "exterieur": {
+      "jardinClos": true,
+      "description": "Jardin privatif clos, sans vis-à-vis, adapté aux enfants en bas âge"
+    },
+    "stationnement": {
+      "gratuit": true,
+      "emplacements": [
+        "Cour",
+        "Devant la maison"
+      ]
+    },
+    "equipements": {
+      "confort": [
+        "Poêle à bois",
+        "WiFi",
+        "Espace de travail dédié",
+        "Machine à espresso",
+        "Cafetière manuelle"
+      ],
+      "cuisine": [
+        "Cuisine équipée",
+        "Lave-vaisselle",
+        "Réfrigérateur",
+        "Four",
+        "Four à micro-ondes",
+        "Robot de cuisine"
+      ],
+      "exterieur": [
+        "Jardin clos",
+        "Stationnement gratuit",
+        "Barbecue",
+        "Table et chaises",
+        "Chaises longues"
+      ],
+      "securite": [
+        "Boîte à clés sécurisée",
+        "Détecteur de fumée"
+      ],
+      "accessibilite": [
+        "Chambre et salle de bain de plain-pied au RDC (pas d'escalier)"
+      ]
+    },
+    "acces": {
+      "type": "Arrivée autonome",
+      "modalite": "Boîte à clés sécurisée"
+    },
+    "horaires": {
+      "arriveeBasseSaison": "15:00",
+      "arriveeHauteSaison": "17:00",
+      "depart": "10:00",
+      "noteTodo": "Heure de départ à confirmer (non précisée dans le cadrage initial)."
+    },
+    "animaux": {
+      "acceptes": false
+    },
+    "distances": {
+      "mer": {
+        "duree": "5 minutes à pied",
+        "verifiePortePorte": true
+      }
+    },
+    "cePasCest": [
+      "Pas d'animaux acceptés",
+      "Pas de piscine",
+      "Pas de vue mer panoramique depuis la maison"
+    ],
+    "reglementation": {
+      "numeroEnregistrementMeubleTourisme": null,
+      "noteTodo": "Numéro d'enregistrement de meublé de tourisme à obtenir en mairie de Pleubian avant mise en ligne réelle (PRD §19 Q5, §15.2, risque R9)."
+    },
+    "tarifs": {
+      "indicatifs": true,
+      "noteTodo": "Fourchettes tarifaires par saison non tranchées (PRD §19 Q4) — à renseigner avec Pauline & Maeva avant mise en ligne réelle.",
+      "parSaison": {
+        "printemps": null,
+        "ete": null,
+        "automne": null,
+        "hiver": null
+      }
+    },
+    "plateformes": {
+      "airbnb": {
+        "url": "https://www.airbnb.fr/rooms/1658044831450546341",
+        "utmSource": "site-odjoge",
+        "utmMedium": "cta"
+      },
+      "booking": {
+        "url": "https://www.booking.com/hotel/fr/gite-od-joge.fr.html"
+      }
+    }
+  }
+}

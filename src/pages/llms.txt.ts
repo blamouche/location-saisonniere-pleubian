@@ -4,6 +4,7 @@ import { maison } from '@/data/maison';
 import { fichesLieux } from '@/data/decouvrir';
 import { experiences } from '@/data/experiences';
 import { saisons } from '@/data/saisons';
+import { withBase } from '@/lib/base-path';
 
 /**
  * `/llms.txt` (US-053, PRD §12.2.D, convention llmstxt.org) : index du site pour
@@ -11,7 +12,7 @@ import { saisons } from '@/data/saisons';
  * pages elles-mêmes — jamais maintenu à la main, jamais en dérive.
  */
 export const GET: APIRoute = async ({ site }) => {
-  const url = (path: string) => new URL(path, site).toString();
+  const url = (path: string) => new URL(withBase(path), site).toString();
   const journal = (await getCollection('journal')).sort((a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf());
 
   const lignes: string[] = [];

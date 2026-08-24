@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Vérifie que tous les liens internes du build statique (`dist/`) pointent vers une
+ * Vérifie que tous les liens internes du build statique (`docs/`) pointent vers une
  * page réellement générée (US-008, US-047, PRD §14.5). Ne vérifie pas encore les
  * liens externes (à ajouter au Lot 3+ quand le volume de contenu le justifie).
  *
@@ -9,12 +9,13 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASE } from '../site.config.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DIST = join(__dirname, '..', 'dist');
+const DIST = join(__dirname, '..', 'docs');
 
 if (!existsSync(DIST)) {
-  console.error('✖ dist/ introuvable — lance `npm run build` avant ce script.');
+  console.error('✖ docs/ introuvable — lance `npm run build` avant ce script.');
   process.exit(1);
 }
 
@@ -27,8 +28,15 @@ function listHtmlFiles(dir) {
 }
 
 function resolvesToFile(hrefPath) {
-  const clean = hrefPath.split('#')[0].split('?')[0];
+  let clean = hrefPath.split('#')[0].split('?')[0];
   if (clean === '') return true;
+  // Le HTML généré doit préfixer chaque lien interne avec `base`
+  // (astro.config.mjs) — un lien racine-relatif qui ne l'a pas est cassé une fois
+  // déployé sous ce sous-dossier, même s'il « existe » ici par coïncidence
+  // structurelle : on le rejette explicitement plutôt que de le laisser passer.
+  if (clean === BASE) clean = '/';
+  else if (clean.startsWith(`${BASE}/`)) clean = clean.slice(BASE.length);
+  else return false;
   const target = join(DIST, clean);
   if (existsSync(target) && statSync(target).isFile()) return true;
   const asIndex = join(DIST, clean, 'index.html');
@@ -49,7 +57,7 @@ for (const file of htmlFiles) {
     checkedCount += 1;
     if (!resolvesToFile(href)) {
       brokenCount += 1;
-      console.error(`✖ Lien cassé dans ${file.replace(DIST, 'dist')} → ${href}`);
+      console.error(`✖ Lien cassé dans ${file.replace(DIST, 'docs')} → ${href}`);
     }
   }
 }

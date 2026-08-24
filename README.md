@@ -15,14 +15,14 @@ expérience visuelle qui change au fil des quatre saisons.
 
 ## Documents
 
-Toute la documentation projet vit dans [`docs/`](./docs/) :
+Toute la documentation projet vit dans [`documentation/`](./documentation/) :
 
-- [`docs/PRD.md`](./docs/PRD.md) — Product Requirements Document complet : vision, personas,
+- [`documentation/PRD.md`](./documentation/PRD.md) — Product Requirements Document complet : vision, personas,
   expérience multi-saisons, arborescence, design system, stratégie SEO/GEO, spécifications
   techniques, roadmap et critères d'acceptation.
-- [`docs/SEO-strategy.md`](./docs/SEO-strategy.md) — étude et stratégie SEO/GEO détaillée
+- [`documentation/SEO-strategy.md`](./documentation/SEO-strategy.md) — étude et stratégie SEO/GEO détaillée
   (audit du PRD, concurrence, mots-clés, roadmap SEO/GEO).
-- [`docs/user-stories.md`](./docs/user-stories.md) — backlog de User Stories pour le
+- [`documentation/user-stories.md`](./documentation/user-stories.md) — backlog de User Stories pour le
   développement du site, organisé par lot de la roadmap.
 - [`CLAUDE.md`](./CLAUDE.md) — instructions pour les sessions Claude travaillant sur ce dépôt.
 

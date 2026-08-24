@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { maison } from '@/data/maison';
+import { withBase } from '@/lib/base-path';
 
 /**
  * `/donnees.json` (US-056, PRD §12.2.C/§14.3) : faits structurés du bien, générés
@@ -8,9 +9,9 @@ import { maison } from '@/data/maison';
  */
 export const GET: APIRoute = ({ site }) => {
   const payload = {
-    licence: 'CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/deed.fr (citer la source : ' + new URL('/', site).toString() + ')',
+    licence: 'CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/deed.fr (citer la source : ' + new URL(withBase('/'), site).toString() + ')',
     genereLe: new Date().toISOString(),
-    source: new URL('/', site).toString(),
+    source: new URL(withBase('/'), site).toString(),
     bien: maison,
   };
 

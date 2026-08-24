@@ -5,7 +5,7 @@
  *  - chaque hub de niveau 1 (`/experiences/`, `/decouvrir/`, `/saisons/`) pointe
  *    vers au moins 6 pages de son cluster.
  *
- * Fonctionne sur le build statique (`dist/`) — reflète donc le maillage réel produit,
+ * Fonctionne sur le build statique (`docs/`) — reflète donc le maillage réel produit,
  * pas une intention déclarée dans le code source.
  *
  * Usage : npm run build && node scripts/check-orphans.mjs
@@ -13,16 +13,17 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASE } from '../site.config.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DIST = join(__dirname, '..', 'dist');
+const DIST = join(__dirname, '..', 'docs');
 
 // Pages qui n'ont légitimement pas besoin de lien entrant (points d'entrée /
 // pages utilitaires, pas des pages de contenu du maillage).
 const EXEMPTS = new Set(['/', '/404.html']);
 
 if (!existsSync(DIST)) {
-  console.error('✖ dist/ introuvable — lance `npm run build` avant ce script.');
+  console.error('✖ docs/ introuvable — lance `npm run build` avant ce script.');
   process.exit(1);
 }
 
@@ -51,7 +52,12 @@ for (const file of files) {
   const from = urlFor(file);
   const html = readFileSync(file, 'utf8');
   for (const match of html.matchAll(hrefRegex)) {
-    const to = match[1].split('#')[0].split('?')[0];
+    let to = match[1].split('#')[0].split('?')[0];
+    // Les URLs internes générées sont préfixées par `base` — on le retire pour
+    // comparer contre `urls`, qui reste exprimé en chemins non préfixés.
+    if (to === BASE) to = '/';
+    else if (to.startsWith(`${BASE}/`)) to = to.slice(BASE.length);
+    else continue;
     const normalized = to.endsWith('/') || to === '' ? to : `${to}/`;
     if (normalized !== from && urls.has(normalized)) {
       incoming.get(normalized).add(from);

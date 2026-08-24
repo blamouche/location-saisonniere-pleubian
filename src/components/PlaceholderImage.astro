@@ -2,12 +2,14 @@
 /**
  * Image placeholder générique (US-007). Convention : chaque fichier vient de
  * `public/medias/placeholder/placeholder-<slug>.svg` (généré par
- * `scripts/generate-placeholders.mjs`, voir docs/user-stories.md §0).
+ * `scripts/generate-placeholders.mjs`, voir documentation/user-stories.md §0).
  *
  * Quand le vrai média est livré : remplacer l'usage de ce composant par
  * `astro:assets` (`<Image>`), qui gère déjà AVIF/WebP + `srcset` (US-049). Le
  * contrat de props (largeur/hauteur/alt obligatoires) reste le même.
  */
+import { withBase } from '@/lib/base-path';
+
 export interface Props {
   /** Slug du visuel, ex. "salon" → placeholder-salon.svg */
   slug: string;
@@ -28,7 +30,7 @@ if (!alt.trim()) {
   throw new Error(`PlaceholderImage: "alt" ne peut pas être vide (slug="${slug}").`);
 }
 const [width, height] = RATIOS[ratio];
-const src = `/medias/placeholder/placeholder-${slug}.svg`;
+const src = withBase(`/medias/placeholder/placeholder-${slug}.svg`);
 ---
 
 <img src={src} width={width} height={height} alt={alt} loading={loading} decoding="async" class={className} />

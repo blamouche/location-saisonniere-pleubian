@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { withBase } from '@/lib/base-path';
 
 export async function GET(context: APIContext) {
   const articles = await getCollection('journal');
@@ -12,7 +13,7 @@ export async function GET(context: APIContext) {
       title: article.data.titre,
       description: article.data.description,
       pubDate: article.data.datePublished,
-      link: `/journal/${article.id}/`,
+      link: withBase(`/journal/${article.id}/`),
     })),
     customData: `<language>fr-fr</language>`,
   });

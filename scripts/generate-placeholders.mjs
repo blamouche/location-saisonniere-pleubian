@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Génère des visuels placeholder génériques (SVG) pour le développement du site,
- * en attendant les 4 shootings saisonniers réels (voir docs/user-stories.md §0 et §7).
+ * en attendant les 4 shootings saisonniers réels (voir documentation/user-stories.md §0 et §7).
  *
  * Aucune dépendance réseau ni licence à vérifier : ce sont des à-plats colorés avec
  * un libellé, pas des photos. Convention de nommage : `placeholder-<slug>.svg`.

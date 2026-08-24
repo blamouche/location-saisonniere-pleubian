@@ -1,0 +1,1412 @@
+# Maison Od Joge — contenu intégral
+
+> Huit autour d'une table, la mer à cinq minutes
+> Généré au build depuis les mêmes données que le site. FR uniquement.
+
+---
+
+## Le bien (source : https://blamouche.github.io/location-saisonniere-pleubian/donnees.json)
+
+{
+  "nom": "Maison Od Joge",
+  "slogan": "Huit autour d'une table, la mer à cinq minutes",
+  "hotes": [
+    {
+      "prenom": "Pauline",
+      "statut": "Hôte"
+    },
+    {
+      "prenom": "Maeva",
+      "statut": "Hôte"
+    }
+  ],
+  "superhost": true,
+  "adresse": {
+    "lieuDit": "l'Armor",
+    "commune": "Pleubian",
+    "codePostal": "22610",
+    "departement": "Côtes-d'Armor",
+    "region": "Bretagne",
+    "pays": "France",
+    "territoire": "Presqu'île sauvage (presqu'île de Lézardrieux)",
+    "geo": {
+      "latitude": 48.8393,
+      "longitude": -3.1301,
+      "verifie": false,
+      "note": "Coordonnées approximatives du hameau de l'Armor — à remplacer par les coordonnées exactes du bien avant mise en ligne (PRD §19, adresse précise communiquée aux voyageurs après réservation)."
+    }
+  },
+  "contact": {
+    "email": "contact@maison-odjoge.example",
+    "telephone": null,
+    "noteTodo": "Adresse email et téléphone de contact définitifs à renseigner avant mise en ligne."
+  },
+  "capacite": {
+    "voyageurs": 8,
+    "chambres": 4,
+    "couchages": 5,
+    "couchagesConvertible": 7,
+    "sallesDeBain": 2,
+    "wcSepare": true
+  },
+  "chambres": [
+    {
+      "nom": "Chambre 1 (étage)",
+      "niveau": "Étage",
+      "configuration": "Suite parentale, lit double"
+    },
+    {
+      "nom": "Chambre 2 (étage)",
+      "niveau": "Étage",
+      "configuration": "Lit double, séparable en lits simples"
+    },
+    {
+      "nom": "Chambre 3 (étage)",
+      "niveau": "Étage",
+      "configuration": "Deux lits simples"
+    },
+    {
+      "nom": "Chambre 4 (RDC)",
+      "niveau": "RDC",
+      "configuration": "Lit double"
+    }
+  ],
+  "sallesDeBain": [
+    {
+      "nom": "Salle de bain RDC",
+      "equipement": "Douche à l'italienne"
+    },
+    {
+      "nom": "Salle de bain étage",
+      "equipement": "Salle de bain & WC"
+    }
+  ],
+  "scenariosCouchage": [
+    "2 familles avec enfants (chambres séparées à l'étage + RDC)",
+    "4 couples (une chambre chacun)",
+    "1 famille + grands-parents (chambre RDC sans escalier pour les grands-parents)"
+  ],
+  "exterieur": {
+    "jardinClos": true,
+    "description": "Jardin privatif clos, sans vis-à-vis, adapté aux enfants en bas âge"
+  },
+  "stationnement": {
+    "gratuit": true,
+    "emplacements": [
+      "Cour",
+      "Devant la maison"
+    ]
+  },
+  "equipements": {
+    "confort": [
+      "Poêle à bois",
+      "WiFi",
+      "Espace de travail dédié",
+      "Machine à espresso",
+      "Cafetière manuelle"
+    ],
+    "cuisine": [
+      "Cuisine équipée",
+      "Lave-vaisselle",
+      "Réfrigérateur",
+      "Four",
+      "Four à micro-ondes",
+      "Robot de cuisine"
+    ],
+    "exterieur": [
+      "Jardin clos",
+      "Stationnement gratuit",
+      "Barbecue",
+      "Table et chaises",
+      "Chaises longues"
+    ],
+    "securite": [
+      "Boîte à clés sécurisée",
+      "Détecteur de fumée"
+    ],
+    "accessibilite": [
+      "Chambre et salle de bain de plain-pied au RDC (pas d'escalier)"
+    ]
+  },
+  "acces": {
+    "type": "Arrivée autonome",
+    "modalite": "Boîte à clés sécurisée"
+  },
+  "horaires": {
+    "arriveeBasseSaison": "15:00",
+    "arriveeHauteSaison": "17:00",
+    "depart": "10:00",
+    "noteTodo": "Heure de départ à confirmer (non précisée dans le cadrage initial)."
+  },
+  "animaux": {
+    "acceptes": false
+  },
+  "distances": {
+    "mer": {
+      "duree": "5 minutes à pied",
+      "verifiePortePorte": true
+    }
+  },
+  "cePasCest": [
+    "Pas d'animaux acceptés",
+    "Pas de piscine",
+    "Pas de vue mer panoramique depuis la maison"
+  ],
+  "reglementation": {
+    "numeroEnregistrementMeubleTourisme": null,
+    "noteTodo": "Numéro d'enregistrement de meublé de tourisme à obtenir en mairie de Pleubian avant mise en ligne réelle (PRD §19 Q5, §15.2, risque R9)."
+  },
+  "tarifs": {
+    "indicatifs": true,
+    "noteTodo": "Fourchettes tarifaires par saison non tranchées (PRD §19 Q4) — à renseigner avec Pauline & Maeva avant mise en ligne réelle.",
+    "parSaison": {
+      "printemps": null,
+      "ete": null,
+      "automne": null,
+      "hiver": null
+    }
+  },
+  "plateformes": {
+    "airbnb": {
+      "url": "https://www.airbnb.fr/rooms/1658044831450546341",
+      "utmSource": "site-odjoge",
+      "utmMedium": "cta"
+    },
+    "booking": {
+      "url": "https://www.booking.com/hotel/fr/gite-od-joge.fr.html"
+    }
+  }
+}
+
+---
+
+# La Presqu'île sauvage en printemps
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/saisons/printemps/ — Période : 1 mars – 31 mai
+
+## L'essentiel
+
+La lumière revient En printemps (1 mars – 31 mai), la Presqu'île sauvage de Pleubian propose 10 activités principales autour du Sillon de Talbert et du GR34. La Maison Od Joge (8 personnes, poêle à bois, jardin clos) sert de camp de base à 5 minutes à pied de la mer.
+
+## 10 choses à faire
+
+1. Suivre les grandes marées au Sillon de Talbert
+2. Observer les oiseaux migrateurs sur la réserve naturelle
+3. Marcher une boucle du GR34 sans la foule de l’été
+4. Pédaler une étape de la Vélomaritime (EuroVelo 4)
+5. Visiter Tréguier et sa cathédrale Saint-Tugdual
+6. Découvrir l’Abbaye de Beauport à Paimpol
+7. Voir les ajoncs en fleur sur la lande
+8. Profiter des tarifs de basse saison
+9. Marcher jusqu’à la plage de Kermagen
+10. Faire une pause à la distillerie Glann ar Mor
+
+## Tarifs indicatifs
+
+Fourchettes tarifaires par saison non tranchées (PRD §19 Q4) — à renseigner avec Pauline & Maeva avant mise en ligne réelle.
+
+## Météo moyenne et horaires d'ouverture
+
+Non publiés tant que non vérifiés (voir la charte de factualité du site) — pas de donnée inventée.
+
+---
+
+# La Presqu'île sauvage en été
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/saisons/ete/ — Période : 1 juin – 31 août
+
+## L'essentiel
+
+Huit autour d’une table, la mer à cinq minutes En été (1 juin – 31 août), la Presqu'île sauvage de Pleubian propose 10 activités principales autour du Sillon de Talbert et du GR34. La Maison Od Joge (8 personnes, poêle à bois, jardin clos) sert de camp de base à 5 minutes à pied de la mer.
+
+## 10 choses à faire
+
+1. Se baigner à la plage de Kermagen
+2. Manger dehors dans le jardin clos
+3. Pagayer en kayak ou en voile vers l’archipel de Bréhat
+4. Parcourir le Sillon de Talbert tôt le matin
+5. Explorer les criques : Port-la-Chaîne, Port-Béni, Pors Rand
+6. Pédaler l’EuroVelo 4 en famille
+7. Visiter la Côte de Granit Rose (Ploumanac’h, Perros-Guirec, Trégastel)
+8. Prendre le bateau pour l’Île de Bréhat depuis la Pointe de l’Arcouest
+9. Marcher une boucle du GR34 au lever ou au coucher du soleil
+10. Découvrir le Centre culturel Le Sillon (spectacles d’été)
+
+## Tarifs indicatifs
+
+Fourchettes tarifaires par saison non tranchées (PRD §19 Q4) — à renseigner avec Pauline & Maeva avant mise en ligne réelle.
+
+## Météo moyenne et horaires d'ouverture
+
+Non publiés tant que non vérifiés (voir la charte de factualité du site) — pas de donnée inventée.
+
+---
+
+# La Presqu'île sauvage en automne
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/saisons/automne/ — Période : 1 sept. – 30 nov.
+
+## L'essentiel
+
+Le vent, le feu, le silence En automne (1 sept. – 30 nov.), la Presqu'île sauvage de Pleubian propose 10 activités principales autour du Sillon de Talbert et du GR34. La Maison Od Joge (8 personnes, poêle à bois, jardin clos) sert de camp de base à 5 minutes à pied de la mer.
+
+## 10 choses à faire
+
+1. Regarder la mer se lever pendant les tempêtes d’équinoxe
+2. Marcher le GR34 sans croiser personne
+3. Allumer le poêle à bois au retour d’une balade
+4. Visiter Tréguier au calme
+5. Observer le panorama depuis le sémaphore de Creac’h Maout
+6. Profiter des tarifs bas de l’arrière-saison
+7. Faire le Circuit des Phares (8,6 km)
+8. Découvrir le goémon et son histoire sur la Presqu’île
+9. Visiter l’église Notre-Dame de l’Armor et son granit rose
+10. Se ressourcer à l’air marin, iodé et vivifiant
+
+## Tarifs indicatifs
+
+Fourchettes tarifaires par saison non tranchées (PRD §19 Q4) — à renseigner avec Pauline & Maeva avant mise en ligne réelle.
+
+## Météo moyenne et horaires d'ouverture
+
+Non publiés tant que non vérifiés (voir la charte de factualité du site) — pas de donnée inventée.
+
+---
+
+# La Presqu'île sauvage en hiver
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/saisons/hiver/ — Période : 1 déc. – fin février
+
+## L'essentiel
+
+Se mettre au chaud, très loin de tout En hiver (1 déc. – fin février), la Presqu'île sauvage de Pleubian propose 10 activités principales autour du Sillon de Talbert et du GR34. La Maison Od Joge (8 personnes, poêle à bois, jardin clos) sert de camp de base à 5 minutes à pied de la mer.
+
+## 10 choses à faire
+
+1. Se déconnecter complètement, sans écran
+2. Travailler à distance depuis l’espace dédié
+3. Observer le ciel étoilé, loin de la pollution lumineuse
+4. Passer les fêtes en famille au coin du feu
+5. Visiter la distillerie Glann ar Mor un jour de pluie
+6. Marcher une courte boucle du GR34 avant la nuit
+7. Découvrir l’église Saint-Georges et son clocher-mur
+8. Observer les tempêtes hivernales depuis la côte
+9. Lire au coin du poêle, jardin clos sous la pluie
+10. Préparer le prochain été en étudiant les cartes de randonnée
+
+## Tarifs indicatifs
+
+Fourchettes tarifaires par saison non tranchées (PRD §19 Q4) — à renseigner avec Pauline & Maeva avant mise en ligne réelle.
+
+## Météo moyenne et horaires d'ouverture
+
+Non publiés tant que non vérifiés (voir la charte de factualité du site) — pas de donnée inventée.
+
+---
+
+# Randonnée sur le GR34
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/randonnee-gr34/ — Pilier : Sport
+
+## L'essentiel
+
+Le GR34, sentier des douaniers, longe l'intégralité du littoral de la Presqu'île sauvage à Pleubian (Côtes-d'Armor). Depuis la Maison Od Joge, cinq boucles balisées du GR34 permettent de le découvrir sans voiture, de 3,2 km (Sillon de Talbert) à 13,6 km (Port-la-Chaîne), sans difficulté technique majeure.
+
+## Promesse
+
+Le sentier des douaniers longe l'intégralité du littoral de la Presqu'île sauvage. Depuis la maison, cinq boucles balisées permettent de le découvrir sans voiture, de 3,2 à 13,6 km.
+
+## Depuis la maison
+
+Le GR34 passe à proximité de Pleubian — départ à pied possible pour plusieurs boucles (distance exacte à vérifier porte-à-porte).
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Boucle du Sillon de Talbert | ~1h (estimée) | Facile, plat | Toute l'année, selon marée | Gratuit | [Source](https://www.cotesdarmor.com/fr/fiche/itineraires-touristiques/boucle-du-sillon-de-talbert-pleubian_TFOITIBRE022V50QNZJ/) |
+| Circuit des Phares (8,6 km) | ~2h10 (estimée) | Facile à modéré | Printemps, automne | Gratuit | [Source](https://www.mairie-pleubian.fr/decouvrir/circuit-des-phares) |
+| Circuit de Port-Béni (8,7 km) | ~2h10 (estimée) | Facile à modéré | Toute saison | Gratuit | [Source](https://www.mairie-pleubian.fr/decouvrir/randonnee-port-beni-en-boucle-depuis-pleubian) |
+| Circuit de Brestan (8,8 km) | ~2h15 (estimée) | Facile à modéré | Toute saison | Gratuit | [Source](https://www.mairie-pleubian.fr/decouvrir/circuit-de-brestan) |
+| Circuit de Port-la-Chaîne (13,6 km) | ~3h30 (estimée) | Modéré | Printemps, automne | Gratuit | [Source](https://www.presquile-de-lezardrieux.com/circuit-de-port-la-chaine) |
+
+## Encadré pratique
+
+- **Matériel** : Chaussures de marche, Coupe-vent (le vent côtier est constant), Eau
+- **Réservations** : Aucune réservation nécessaire — accès libre toute l’année.
+- **Prestataires** : Aucun prestataire requis pour la randonnée libre.
+
+## Questions fréquentes
+
+**Le GR34 est-il accessible toute l’année ?**
+Oui, mais certains passages (dont le Sillon de Talbert) sont submersibles aux grandes marées.
+
+**Faut-il être un randonneur expérimenté ?**
+Non — les boucles proposées sont faciles à modérées, sans dénivelé important.
+
+**Où se garer pour partir en boucle ?**
+Parkings à préciser avant publication définitive.
+
+**Peut-on faire ces boucles avec des enfants ?**
+Oui pour les plus courtes (Sillon de Talbert, Circuit des Phares).
+
+**Y a-t-il des points d’eau sur le parcours ?**
+À vérifier selon la boucle — prévoir de l’eau par précaution.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [La Côte de Granit Rose](/decouvrir/cote-de-granit-rose/)
+
+---
+
+# Vélo — La Vélomaritime (EuroVelo 4)
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/velo-velomaritime/ — Pilier : Sport
+
+## L'essentiel
+
+La Vélomaritime (EuroVelo 4) est un itinéraire cyclable qui longe la Manche et l'Atlantique ; il traverse la Presqu'île sauvage entre Paimpol et Tréguier (Côtes-d'Armor). Depuis la Maison Od Joge, un local à vélo est disponible pour préparer une étape de la Vélomaritime, idéalement de mai à septembre.
+
+## Promesse
+
+L'EuroVelo 4 (Vélomaritime) longe la Manche et l'Atlantique. La Presqu'île sauvage en constitue une étape, entre Paimpol et Tréguier.
+
+## Depuis la maison
+
+L'itinéraire passe à proximité de Pleubian — jonction exacte et distance à vérifier avant publication.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Étape courte vers Tréguier | À confirmer | Facile à modéré | Mai à septembre | Gratuit (hors location) | — |
+| Étape vers Paimpol | À confirmer | Modéré | Mai à septembre | Gratuit (hors location) | — |
+
+## Encadré pratique
+
+- **Matériel** : Vélo (local à vélo disponible à la maison), Antivol, Kit de réparation
+- **Réservations** : Aucune réservation pour l’itinéraire ; location de vélo à organiser séparément si besoin.
+- **Prestataires** : Loueur de vélos local à confirmer avant publication.
+
+## Questions fréquentes
+
+**Faut-il apporter son vélo ?**
+Un local à vélo est disponible à la maison ; la location locale reste à confirmer.
+
+**L’itinéraire est-il balisé ?**
+Oui, l’EuroVelo 4 est balisée sur l’ensemble de son tracé.
+
+**Convient-il aux familles ?**
+Certains tronçons oui — niveau exact à préciser par section.
+
+## À combiner avec
+
+- [Tréguier](/decouvrir/treguier/)
+- [Paimpol & l'Abbaye de Beauport](/decouvrir/paimpol-beauport/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Nautisme — kayak & voile
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/nautisme-kayak-voile/ — Pilier : Sport
+
+## L'essentiel
+
+Le nautisme (kayak et voile) se pratique entre les estuaires du Trieux et du Jaudy, face à l'archipel de Bréhat, sur la Presqu'île sauvage (Côtes-d'Armor). Depuis la Maison Od Joge, plusieurs criques permettent la mise à l'eau ; le kayak et la voile se planifient selon les marées et le vent.
+
+## Promesse
+
+Entre les estuaires du Trieux et du Jaudy, et face à l'archipel de Bréhat, le nautisme se pratique au rythme des marées et du vent.
+
+## Depuis la maison
+
+Plusieurs points de mise à l’eau (Kermagen, criques locales) à proximité — distance exacte à vérifier.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Kayak dans les criques locales | 2 à 3h | Facile (débutant accepté) | Mai à septembre | Location à confirmer | — |
+| Sortie voile vers l’archipel de Bréhat | Demi-journée à journée | Modéré (dépend du vent) | Été | Location/sortie encadrée à confirmer | — |
+
+## Encadré pratique
+
+- **Matériel** : Vêtements adaptés à l’eau, Gilet de flottaison (fourni en location encadrée)
+- **Réservations** : Réservation recommandée en haute saison auprès d’un prestataire local.
+- **Prestataires** : Loueur de kayak/voile local à confirmer avant publication (partenariat envisagé, PRD §11.5).
+
+## Questions fréquentes
+
+**Faut-il une expérience préalable pour le kayak ?**
+Non pour les sorties encadrées en crique abritée.
+
+**Le courant est-il fort autour de Bréhat ?**
+Le courant dépend fortement de la marée — sortie encadrée recommandée pour les débutants.
+
+**Peut-on louer le matériel sur place ?**
+Prestataire à confirmer avant publication définitive.
+
+## À combiner avec
+
+- [Île de Bréhat](/decouvrir/ile-de-brehat/)
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Accrobranche à Pleumeur-Bodou
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/accrobranche/ — Pilier : Sport
+
+## L'essentiel
+
+L'accrobranche Vivons Perchés, à Pleumeur-Bodou (Côtes-d'Armor, près du Radôme), propose 4 parcours dans les arbres, du plus accessible (Mini Forêt, dès 2 ans) au plus vertigineux (Grande Forêt, jusqu'à 17 m de haut avec vue mer). Vivons Perchés est ouvert du lundi au samedi, réservation recommandée.
+
+## Promesse
+
+Vivons Perchés, à Pleumeur-Bodou, propose 4 parcours accrobranche dans les arbres, du tout-petit dès 2 ans jusqu'aux sensations fortes à 17 m de haut avec vue sur la mer.
+
+## Depuis la maison
+
+Le parc est situé à Pleumeur-Bodou, sur la Côte de Granit Rose — distance et temps de trajet exacts depuis la maison à vérifier porte-à-porte avant publication.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Mini Forêt | 1h | Très facile (dès 2 ans, 80 cm de haut max) | Toute l'année (ouvert du lundi au samedi) | Voir tarifs sur le site | [Source](https://www.vivons-perches.bzh/accrobranche/) |
+| Parcours Découverte (3 parcours) | 1h | Facile (dès 4 ans et 1 m, jusqu’à 5 m de haut) | Toute l'année | Voir tarifs sur le site | [Source](https://www.vivons-perches.bzh/accrobranche/) |
+| Moyenne Forêt (5 parcours) | 2h | Modéré (dès 7 ans et 1,15 m, jusqu’à 8 m de haut) | Toute l'année | Voir tarifs sur le site | [Source](https://www.vivons-perches.bzh/accrobranche/) |
+| Grande Forêt (5 parcours, dont saut de Tarzan et Skyfall) | 2h30 | Sportif (dès 10 ans et 1,40 m, jusqu’à 17 m de haut) | Toute l'année | Voir tarifs sur le site | [Source](https://www.vivons-perches.bzh/accrobranche/) |
+
+## Encadré pratique
+
+- **Matériel** : Chaussures fermées, Tenue confortable, pas de vêtements amples
+- **Réservations** : Réservation recommandée en ligne sur le site de Vivons Perchés.
+- **Prestataires** : Vivons Perchés, Pleumeur-Bodou (entité réelle, source ci-dessous).
+
+## Questions fréquentes
+
+**À partir de quel âge peut-on faire de l’accrobranche à Vivons Perchés ?**
+Dès 2 ans sur la Mini Forêt (80 cm de haut maximum) ; l’accès aux parcours plus hauts dépend ensuite de l’âge et de la taille de l’enfant.
+
+**Faut-il réserver à l’avance ?**
+Réservation recommandée, en ligne sur le site de Vivons Perchés.
+
+**Quels sont les horaires d’ouverture ?**
+Le parc est ouvert du lundi au samedi — horaires précis à vérifier sur le site avant de s’y rendre.
+
+## À combiner avec
+
+- [La Côte de Granit Rose](/decouvrir/cote-de-granit-rose/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Bien-être & air marin
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/bien-etre-air-marin/ — Pilier : Bien-être
+
+## L'essentiel
+
+Le bien-être et l'air marin de la Presqu'île sauvage (Pleubian, Côtes-d'Armor) reposent sur la marche lente, les bains de mer et l'air iodé du littoral. Depuis la Maison Od Joge, la mer est à 5 minutes à pied ; le Sillon de Talbert offre un parcours idéal pour la marche méditative.
+
+## Promesse
+
+L'air iodé du littoral et la marche lente sur l'estran sont au cœur de l'expérience bien-être de la Presqu'île sauvage.
+
+## Depuis la maison
+
+La mer est à 5 minutes à pied de la maison — l’air marin se ressent dès la sortie du jardin.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Marche méditative sur le Sillon de Talbert | 1h | Facile | Toute l'année | Gratuit | — |
+| Bain de mer (hors saison inclus) | 15-30 min | Facile à modéré selon saison | Toute l'année pour les initiés | Gratuit | — |
+| Séance de sommeil réparateur au poêle à bois | Une soirée | Aucune | Automne, hiver | Inclus dans le séjour | — |
+
+## Encadré pratique
+
+- **Matériel** : Vêtements chauds pour les bains hors saison, Serviette
+- **Réservations** : Aucune réservation nécessaire pour la marche ou la baignade libre.
+- **Prestataires** : Centre de thalassothérapie à proximité à confirmer avant publication.
+
+## Questions fréquentes
+
+**Peut-on se baigner toute l’année ?**
+Oui pour les habitués, avec les précautions d’usage (température de l’eau).
+
+**Pourquoi je me sens fatigué·e les premiers jours ?**
+Voir l’article du journal : Pourquoi l’air marin fatigue.
+
+**Y a-t-il un centre de thalasso à proximité ?**
+À confirmer avant publication définitive.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Déconnexion & slow living
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/deconnexion-slow/ — Pilier : Déconnexion
+
+## L'essentiel
+
+La déconnexion et le slow living sur la Presqu'île sauvage (Pleubian, Côtes-d'Armor) reposent sur l'absence de foule, le rythme des marées et le poêle à bois de la Maison Od Joge. Idéale en automne et en hiver, cette expérience de déconnexion ne demande aucun matériel particulier.
+
+## Promesse
+
+Pas de foule, un rythme dicté par les marées, un poêle à bois pour seule notification : la déconnexion ici n’est pas un concept marketing.
+
+## Depuis la maison
+
+La maison est pensée pour ça : poêle à bois, jardin clos, silence, ciel dégagé de pollution lumineuse.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| 72h sans écran | 3 jours | Aucune (mentale) | Automne, hiver | Inclus dans le séjour | — |
+| Observation du ciel étoilé | 1h | Aucune | Hiver | Gratuit | — |
+| Marche au rythme des marées | Variable | Facile | Toute l'année | Gratuit | — |
+
+## Encadré pratique
+
+- **Matériel** : Un vrai livre, Vêtements chauds l’hiver
+- **Réservations** : Aucune.
+- **Prestataires** : Aucun prestataire nécessaire.
+
+## Questions fréquentes
+
+**Comment se préparer à 72h sans écran ?**
+Voir l’article du journal : 72h sans écran à Pleubian.
+
+**Y a-t-il du réseau mobile sur place ?**
+À confirmer — prévoir de prévenir ses proches en amont par précaution.
+
+**La déconnexion convient-elle aux familles ?**
+Oui, le jardin clos permet de laisser les enfants jouer sans écran.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+
+---
+
+# Télétravail & workation
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/teletravail-workation/ — Pilier : Déconnexion
+
+## L'essentiel
+
+Le télétravail et la workation à la Maison Od Joge (Pleubian, Côtes-d'Armor) s'appuient sur un espace de travail dédié, une connexion internet et la mer à 5 minutes. Idéale hors saison pour des séjours d'une à trois semaines, cette formule de workation reste à finaliser sur les tarifs longue durée.
+
+## Promesse
+
+Un espace de travail dédié, une bonne connexion, et la mer à 5 minutes pour la pause de midi.
+
+## Depuis la maison
+
+L’espace de travail est intégré à la maison — pas de trajet nécessaire.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Semaine de workation | 1 à 3 semaines | Aucune | Hors saison (tarifs et disponibilité) | Tarif longue durée à confirmer | — |
+| Pause déjeuner face à la mer | 30-45 min | Aucune | Toute l'année | Gratuit | — |
+
+## Encadré pratique
+
+- **Matériel** : Ordinateur portable, Adaptateur si besoin
+- **Réservations** : Aucune, hors réservation du séjour lui-même.
+- **Prestataires** : Débit internet exact et fournisseur à préciser avant publication définitive.
+
+## Questions fréquentes
+
+**Quel est le débit internet disponible ?**
+À mesurer et publier avant mise en ligne définitive.
+
+**Y a-t-il des tarifs pour les longs séjours ?**
+Fourchettes tarifaires en cours de définition (PRD §19, Q4).
+
+**L’espace de travail est-il séparé des chambres ?**
+Oui, il s’agit d’un espace dédié dans la maison.
+
+## À combiner avec
+
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+
+---
+
+# Culture & patrimoine
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/culture-patrimoine/ — Pilier : Culture
+
+## L'essentiel
+
+Le patrimoine culturel autour de la Maison Od Joge (Pleubian, Côtes-d'Armor) comprend la cathédrale Saint-Tugdual de Tréguier, l'Abbaye de Beauport à Paimpol, et la distillerie de whisky breton Glann ar Mor à Pleubian même. Ces sites de culture et patrimoine se visitent en moins d'une demi-journée depuis la maison.
+
+## Promesse
+
+Cathédrales, abbayes, whisky breton : le patrimoine du Trégor se découvre à moins d’une demi-heure de la maison.
+
+## Depuis la maison
+
+Tréguier, Paimpol et la distillerie Glann ar Mor sont accessibles en voiture — distances exactes à vérifier porte-à-porte.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Tréguier et sa cathédrale Saint-Tugdual | Demi-journée à journée | Facile (à pied) | Toute l'année | Gratuit pour la cité | — |
+| Abbaye de Beauport à Paimpol | 1 à 2h | Facile | Toute l'année | Payant (tarif à confirmer) | — |
+| Distillerie Glann ar Mor (whisky breton) | 1h (visite) | Aucune | Toute l'année | À confirmer | — |
+| Église Saint-Georges (clocher-mur) | 30 min | Aucune | Toute l'année | Gratuit | — |
+
+## Encadré pratique
+
+- **Matériel** : Aucun matériel spécifique
+- **Réservations** : Visite de la distillerie : réservation recommandée (à confirmer).
+- **Prestataires** : Distillerie Glann ar Mor, Pleubian (entité réelle citée au PRD §1.2).
+
+## Questions fréquentes
+
+**Peut-on visiter la distillerie Glann ar Mor ?**
+Oui, modalités exactes de visite à confirmer avant publication.
+
+**La cathédrale de Tréguier est-elle payante ?**
+La cité est en accès libre ; certains sites annexes peuvent être payants (à confirmer).
+
+**Combien de temps pour visiter Tréguier et Paimpol le même jour ?**
+Une journée complète est raisonnable pour combiner les deux.
+
+## À combiner avec
+
+- [Tréguier](/decouvrir/treguier/)
+- [Paimpol & l'Abbaye de Beauport](/decouvrir/paimpol-beauport/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Gastronomie & dégustations locales
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/gastronomie/ — Pilier : Culture
+
+## L'essentiel
+
+Autour de Pleubian, deux adresses gourmandes du Trégor valent le détour : l'Auberge du Trieux à Lézardrieux, restaurant Maître Restaurateur porté par Maudez Le Corre (4,6/5 sur environ 590 avis), et la Brasserie artisanale Philomenn à Tréguier, une ancienne gare reconvertie en brasserie de bières locales, ouverte à la dégustation et à la visite d'avril à septembre.
+
+## Promesse
+
+Deux adresses gourmandes du Trégor à quelques minutes de la maison : la table soignée de l'Auberge du Trieux à Lézardrieux, et la brasserie artisanale Philomenn à Tréguier, installée dans une ancienne gare au bord du Jaudy.
+
+## Depuis la maison
+
+Lézardrieux et Tréguier sont à quelques minutes de voiture de Pleubian — distances exactes à vérifier porte-à-porte avant publication.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Dîner à l'Auberge du Trieux (Lézardrieux) | 1h30 à 2h (repas) | Aucune | Toute l'année (fermé le mercredi) | Sur réservation, voir la carte | [Source](https://www.presquile-de-lezardrieux.com/index.php?codepage=3511) |
+| Dégustation & visite à la Brasserie Philomenn (Tréguier) | 1h (visite + dégustation) | Aucune | Avril à septembre pour le tap room | Voir tarifs sur le site | [Source](https://philomenn.fr/) |
+
+## Encadré pratique
+
+- **Matériel** : Aucun matériel spécifique
+- **Réservations** : Réservation recommandée pour l’Auberge du Trieux ; visite libre ou guidée pour Philomenn selon les jours.
+- **Prestataires** : Auberge du Trieux (Lézardrieux, Maître Restaurateur) et Brasserie Philomenn (Tréguier) — entités réelles, sources ci-dessous.
+
+## Questions fréquentes
+
+**Faut-il réserver à l’Auberge du Trieux ?**
+Réservation recommandée — le restaurant est fermé le mercredi.
+
+**Peut-on visiter la Brasserie Philomenn ?**
+Oui, dégustations et visites sont proposées, avec un tap room ouvert d’avril à septembre.
+
+**Ces adresses sont-elles loin de la maison ?**
+Lézardrieux et Tréguier sont proches de Pleubian — distances exactes à vérifier porte-à-porte avant publication.
+
+## À combiner avec
+
+- [Tréguier](/decouvrir/treguier/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Activités en famille
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/famille-enfants/ — Pilier : Famille
+
+## L'essentiel
+
+Les activités en famille autour de la Maison Od Joge combinent le jardin clos de la maison, la plage de Kermagen, une balade sur le Sillon de Talbert, et plusieurs sorties à la journée du côté de Pleumeur-Bodou et Paimpol : fermes pédagogiques, Zooparc de Trégomeur, Village Gaulois et Planétarium de Bretagne.
+
+## Promesse
+
+Jardin clos, plage familiale, fermes pédagogiques, zoo, village gaulois et planétarium : la Presqu'île sauvage et ses environs se prêtent bien à un séjour en famille avec de jeunes enfants.
+
+## Depuis la maison
+
+La maison elle-même est pensée pour les familles : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée, mer à 5 minutes à pied. Les sorties à la journée listées ci-dessous sont à Pleumeur-Bodou et Paimpol — distances exactes à vérifier porte-à-porte.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Plage de Kermagen | Une demi-journée | Facile | Été | Gratuit | — |
+| Balade courte sur le Sillon de Talbert | ~1h | Facile, plat | Toute l'année, selon marée | Gratuit | — |
+| Mini Forêt à Vivons Perchés (accrobranche, dès 2 ans) | 1h | Très facile | Toute l'année (ouvert du lundi au samedi) | Voir tarifs sur le site | [Source](https://www.vivons-perches.bzh/accrobranche/) |
+| Ferme équestre Les Chevaux du Coat (Plourivo, Paimpol) | Balade ~1h | Facile (dès 3 ans) | Toute l'année, sur réservation | Voir tarifs sur le site | [Source](https://www.leschevauxducoat.com/) |
+| Ferme Marine du Trieux (Paimpol) | 30-45 min (visite/vente directe) | Facile | Mardi à samedi, 14h-18h (à confirmer) | Gratuit | [Source](https://www.bretagnealaferme.com/cotes-d-armor/paimpol/ferme/ferme-marine-du-trieux/148275) |
+| Zooparc de Trégomeur | Une demi-journée à une journée | Facile | Toute l'année (horaires réduits hors saison) | 22,90 € adulte / 16,50 € enfant (tarifs 2026, à confirmer) | [Source](https://www.zoo-tregomeur.com/) |
+| Le Village Gaulois (Pleumeur-Bodou) | Une demi-journée | Facile | Juillet-août (réouverture 2026 après 2 ans de fermeture — à confirmer) | Billetterie sur place uniquement | [Source](https://www.levillagegaulois.org/php/home.php) |
+| Planétarium de Bretagne (Pleumeur-Bodou) | ~45 min (séance) | Facile (séances dès 5 ans) | Toute l'année, sur réservation | Voir tarifs sur le site | [Source](https://planetarium-bretagne.bzh/) |
+
+## Encadré pratique
+
+- **Matériel** : Vêtements de rechange, Chaussures fermées pour l’accrobranche et les fermes
+- **Réservations** : Réservation recommandée pour l’accrobranche, la ferme équestre et le planétarium ; billetterie sur place pour le Village Gaulois.
+- **Prestataires** : Vivons Perchés, Les Chevaux du Coat, Ferme Marine du Trieux, Zooparc de Trégomeur, Le Village Gaulois, Planétarium de Bretagne — entités réelles, sources ci-dessous.
+
+## Questions fréquentes
+
+**La maison est-elle adaptée aux jeunes enfants ?**
+Oui : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée.
+
+**Y a-t-il des activités accessibles aux tout-petits ?**
+Oui, la Mini Forêt de l’accrobranche Vivons Perchés est accessible dès 2 ans (80 cm de haut maximum).
+
+**Le Village Gaulois est-il ouvert ?**
+Le parc a rouvert après deux ans de fermeture, avec une ouverture annoncée en juillet-août 2026 — à confirmer sur place avant de s’y rendre.
+
+**Le planétarium convient-il aux jeunes enfants ?**
+Oui, des séances sont proposées dès 5 ans.
+
+## À combiner avec
+
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [La Côte de Granit Rose](/decouvrir/cote-de-granit-rose/)
+
+---
+
+# Festival du Chant de Marin (Paimpol, 2027)
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/experiences/festival-chant-de-marin/ — Pilier : Culture
+
+## L'essentiel
+
+Le Festival du Chant de Marin de Paimpol, l'un des plus grands rassemblements de musiques marines d'Europe (jusqu'à 170 000 festivaliers lors de l'édition 2025), revient à Paimpol les 6, 7 et 8 août 2027 pour sa 17ᵉ édition, sur le thème « De la Mer Noire à la Baltique ». Paimpol est à quelques minutes de la Maison Od Joge — réserver tôt est recommandé pour un tel événement.
+
+## Promesse
+
+Les 6, 7 et 8 août 2027, le port de Paimpol accueille la 17ᵉ édition du Festival du Chant de Marin — l'un des plus grands festivals de musiques marines d'Europe, à quelques minutes de la maison.
+
+## Depuis la maison
+
+Paimpol est à quelques minutes de la Maison Od Joge — distance exacte à vérifier porte-à-porte. La maison peut servir de camp de base pour le festival, en évitant la forte tension sur l'hébergement à Paimpol même pendant l'événement.
+
+## Propositions concrètes
+
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
+| Vendredi 6 août 2027 — Ouverture | Soirée | Aucune | 6 août 2027 | Voir billetterie officielle | [Source](https://www.paimpol-festival.bzh/) |
+| Samedi 7 août 2027 — Journée complète | Journée | Aucune | 7 août 2027 | Voir billetterie officielle | [Source](https://www.paimpol-festival.bzh/) |
+| Dimanche 8 août 2027 — Clôture | Journée | Aucune | 8 août 2027 | Voir billetterie officielle | [Source](https://www.paimpol-festival.bzh/) |
+| Défilé des bateaux traditionnels sur les quais | Quelques heures | Aucune | Sur les 3 jours (environ 200 bateaux lors de l’édition 2025) | Gratuit (déambulation sur les quais) | [Source](https://www.paimpol-festival.bzh/le-festival/decouvrir-le-festival/) |
+
+## Encadré pratique
+
+- **Matériel** : Vêtements adaptés à la météo (événement en extérieur, sur les quais), Chaussures confortables
+- **Réservations** : Réserver l'hébergement très en avance — l'édition 2025 a rassemblé jusqu'à 170 000 festivaliers sur 3 jours. Billetterie des concerts sur le site officiel du festival.
+- **Prestataires** : Festival du Chant de Marin, Paimpol (association organisatrice, entité réelle — source ci-dessous).
+
+## Questions fréquentes
+
+**Quelles sont les dates du festival en 2027 ?**
+Les 6, 7 et 8 août 2027, pour la 17ᵉ édition.
+
+**Quel est le thème de l’édition 2027 ?**
+« De la Mer Noire à la Baltique » — le festival met cap à l’Est : Balkans, Pays Baltes, Turquie, Roumanie, Ukraine, Pologne.
+
+**Faut-il réserver l’hébergement longtemps à l’avance ?**
+Oui — l’édition 2025 a rassemblé jusqu’à 170 000 festivaliers sur 3 jours ; réserver plusieurs mois à l’avance est recommandé, en particulier sur Paimpol même.
+
+**Le festival est-il gratuit ?**
+La déambulation sur les quais et une partie de la programmation sont accessibles librement ; certains concerts et animations sont payants — voir la billetterie officielle.
+
+**Combien de temps dure le festival ?**
+Trois jours, du vendredi au dimanche.
+
+## À combiner avec
+
+- [Paimpol & l'Abbaye de Beauport](/decouvrir/paimpol-beauport/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# Le Sillon de Talbert
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/sillon-de-talbert/
+
+## L'essentiel
+
+Le Sillon de Talbert est une flèche de galets de 3,2 km à Pleubian (Côtes-d'Armor), classée réserve naturelle régionale, qui s'avance dans la mer entre les estuaires du Trieux et du Jaudy. Accessible gratuitement toute l'année, le Sillon de Talbert est partiellement submersible aux grandes marées : vérifier l'horaire de marée avant la visite.
+
+## Résumé factuel
+
+- **Où** : Pleubian, entre les estuaires du Trieux et du Jaudy
+- **Durée de visite** : 1h à 1h30 aller-retour
+- **Gratuit ou payant** : Gratuit
+- **Meilleure saison** : Toute l'année — selon l'horaire de marée
+- **Accessible poussette / PMR** : Non (sol de galets, non stabilisé)
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+Le Sillon de Talbert est une flèche de galets de 3,2 km qui s'avance dans la mer, entre les estuaires du Trieux et du Jaudy. Classée réserve naturelle régionale, c'est l'un des sites géologiques les plus singuliers du littoral breton.
+
+La flèche est **submersible aux grandes marées** : se renseigner sur l'horaire de marée avant de s'y engager, en particulier en vives-eaux. C'est un point de sécurité, pas un détail.
+
+Le site abrite une faune d'oiseaux migrateurs et nicheurs, particulièrement visible au printemps et à l'automne.
+
+## Conseil pratique
+
+Vérifier l’horaire de marée avant de partir — le sillon change complètement d’aspect entre marée haute et marée basse.
+
+## À combiner avec
+
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+- [Randonnée sur le GR34](/experiences/randonnee-gr34/)
+
+---
+
+# La Presqu'île sauvage
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/presquile-sauvage/
+
+## L'essentiel
+
+La Presqu'île sauvage désigne le territoire littoral de la commune de Pleubian, entre les estuaires du Trieux et du Jaudy, dans les Côtes-d'Armor. Peu urbanisée, la Presqu'île sauvage est dominée par la lande, les criques et le granit, et se découvre principalement à pied via le GR34, le sentier des douaniers qui longe tout le littoral.
+
+## Résumé factuel
+
+- **Où** : Presqu'île de Lézardrieux, Côtes-d'Armor
+- **Durée de visite** : Plusieurs jours pour en faire le tour
+- **Gratuit ou payant** : Gratuit (territoire en accès libre)
+- **Meilleure saison** : Toute l'année — ambiance différente à chaque saison
+- **Accessible poussette / PMR** : Variable selon les sites
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+La Presqu'île sauvage désigne l'ensemble du territoire entre les estuaires du Trieux et du Jaudy, dont Pleubian et son hameau de l'Armor font partie. Le nom vient de son caractère peu urbanisé, dominé par la lande, les criques et le granit.
+
+Le GR34 (sentier des douaniers) longe l'intégralité du littoral, reliant les hameaux de Kermagen, Port-la-Chaîne, Port-Béni et Creac'h Maout.
+
+C'est un territoire à vivre au rythme des marées, pas à cocher en une journée.
+
+## Conseil pratique
+
+Le meilleur moyen de découvrir le territoire reste la marche — le GR34 dessert la quasi-totalité des points d’intérêt.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [Les plages de Pleubian](/decouvrir/plages-pleubian/)
+- [La Côte de Granit Rose](/decouvrir/cote-de-granit-rose/)
+- [Randonnée sur le GR34](/experiences/randonnee-gr34/)
+
+---
+
+# Les plages de Pleubian
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/plages-pleubian/
+
+## L'essentiel
+
+Pleubian, sur la Presqu'île sauvage (Côtes-d'Armor), compte plusieurs plages et criques : la plage de Kermagen, familiale et équipée d'une cale de mise à l'eau, ainsi que les criques plus discrètes de Port-la-Chaîne, Port-Béni et Pors Rand. L'accès aux plages de Pleubian est gratuit toute l'année.
+
+## Résumé factuel
+
+- **Où** : Pleubian et ses environs
+- **Durée de visite** : Une demi-journée
+- **Gratuit ou payant** : Gratuit
+- **Meilleure saison** : Été pour la baignade, toute l’année pour la marche
+- **Accessible poussette / PMR** : Kermagen : cale de mise à l’eau — à confirmer pour le reste
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+La plage de Kermagen est la plage familiale de référence à Pleubian, avec sa cale de mise à l'eau. Au-delà, plusieurs criques plus discrètes (Port-la-Chaîne, Port-Béni, Pors Rand) offrent des mouillages abrités.
+
+Ces criques changent radicalement d'aspect entre marée haute et marée basse — voir « Comprendre les marées » dans le journal.
+
+## Conseil pratique
+
+Les criques (Port-la-Chaîne, Port-Béni) sont moins fréquentées que la plage de Kermagen en haute saison.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Nautisme — kayak & voile](/experiences/nautisme-kayak-voile/)
+
+---
+
+# Île de Bréhat
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/ile-de-brehat/
+
+## L'essentiel
+
+L'île de Bréhat est un archipel breton sans voiture, situé au large de la Presqu'île de Lézardrieux (Côtes-d'Armor), accessible en bateau depuis la Pointe de l'Arcouest. L'île de Bréhat est connue pour son climat doux, ses jardins fleuris et son granit rose, et se visite idéalement du printemps à l'automne.
+
+## Résumé factuel
+
+- **Où** : Archipel de Bréhat, embarquement à la Pointe de l'Arcouest
+- **Durée de visite** : Une journée
+- **Gratuit ou payant** : Payant (traversée en bateau)
+- **Meilleure saison** : Printemps à automne
+- **Accessible poussette / PMR** : À vérifier avant publication
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+L'île de Bréhat, accessible en bateau depuis la Pointe de l'Arcouest, est un archipel sans voiture, connu pour son climat doux, ses jardins et son granit rose.
+
+La traversée se fait par bateau depuis la Pointe de l'Arcouest — horaires et tarifs à vérifier et publier avant mise en ligne définitive (dépendent de la compagnie et de la saison).
+
+## Conseil pratique
+
+Réserver la traversée en haute saison — les départs peuvent afficher complet.
+
+## À combiner avec
+
+- [La Côte de Granit Rose](/decouvrir/cote-de-granit-rose/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Nautisme — kayak & voile](/experiences/nautisme-kayak-voile/)
+
+---
+
+# Tréguier
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/treguier/
+
+## L'essentiel
+
+Tréguier est une cité de caractère du Trégor (Côtes-d'Armor), connue pour sa cathédrale gothique Saint-Tugdual et son tissu médiéval de maisons à pans de bois. Tréguier est aussi la ville natale de l'écrivain Ernest Renan, dont la maison natale se visite. La cité de Tréguier se découvre entièrement à pied.
+
+## Résumé factuel
+
+- **Où** : Tréguier, Côtes-d'Armor
+- **Durée de visite** : Une demi-journée à une journée
+- **Gratuit ou payant** : Gratuit pour la cité, payant pour certains sites (à confirmer)
+- **Meilleure saison** : Toute l'année
+- **Accessible poussette / PMR** : Variable selon les sites
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+Tréguier est l'une des cités de caractère du Trégor, connue pour sa cathédrale gothique Saint-Tugdual et son tissu médiéval de maisons à pans de bois.
+
+La ville est aussi liée à Ernest Renan, écrivain et philologue né à Tréguier, dont la maison natale se visite.
+
+## Conseil pratique
+
+Voir l’itinéraire complet à pied dans le journal : Tréguier en une journée.
+
+## À combiner avec
+
+- [Paimpol & l'Abbaye de Beauport](/decouvrir/paimpol-beauport/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Culture & patrimoine](/experiences/culture-patrimoine/)
+
+---
+
+# Paimpol & l'Abbaye de Beauport
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/paimpol-beauport/
+
+## L'essentiel
+
+Paimpol est un port breton historique des Côtes-d'Armor, marqué par la pêche à la morue en Islande au XIXe siècle. À proximité de Paimpol, l'Abbaye de Beauport est un site cistercien en ruines partiellement restaurées, dans un cadre naturel préservé en bord d'estuaire. Les deux sites se combinent sur une même sortie.
+
+## Résumé factuel
+
+- **Où** : Paimpol, Côtes-d'Armor (via Lézardrieux)
+- **Durée de visite** : Une demi-journée à une journée
+- **Gratuit ou payant** : Port gratuit, abbaye payante (tarif à confirmer)
+- **Meilleure saison** : Toute l'année
+- **Accessible poussette / PMR** : À vérifier
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+Paimpol est un port breton historique, marqué par la pêche à la morue en Islande au XIXe siècle. Le port et son bassin restent le cœur de la ville.
+
+L'Abbaye de Beauport, à proximité, est un site cistercien en ruines partiellement restaurées, dans un cadre naturel préservé en bord d'estuaire.
+
+## Conseil pratique
+
+Combiner Paimpol et l’Abbaye de Beauport sur la même sortie — les deux sites sont proches l’un de l’autre.
+
+## À combiner avec
+
+- [Tréguier](/decouvrir/treguier/)
+- [Île de Bréhat](/decouvrir/ile-de-brehat/)
+- [Culture & patrimoine](/experiences/culture-patrimoine/)
+
+---
+
+# La Côte de Granit Rose
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/cote-de-granit-rose/
+
+## L'essentiel
+
+La Côte de Granit Rose regroupe les communes de Ploumanac'h, Perros-Guirec et Trégastel, dans les Côtes-d'Armor, célèbres pour leurs formations rocheuses roses sculptées par l'érosion. Le sentier des douaniers (GR34) longe la Côte de Granit Rose et permet de découvrir les rochers à pied, près du phare de Ploumanac'h.
+
+## Résumé factuel
+
+- **Où** : Ploumanac'h, Perros-Guirec, Trégastel
+- **Durée de visite** : Une journée
+- **Gratuit ou payant** : Gratuit (sentier des douaniers)
+- **Meilleure saison** : Printemps à automne pour la lumière
+- **Accessible poussette / PMR** : Variable selon les tronçons
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+La Côte de Granit Rose regroupe Ploumanac'h, Perros-Guirec et Trégastel, célèbres pour leurs formations rocheuses roses sculptées par l'érosion — parmi les paysages les plus photographiés de Bretagne.
+
+Le sentier des douaniers (GR34) longe la côte et permet de découvrir les rochers à pied, notamment autour du phare de Ploumanac'h.
+
+## Conseil pratique
+
+La lumière du matin ou de fin de journée met le mieux en valeur la couleur rose du granit.
+
+## À combiner avec
+
+- [Île de Bréhat](/decouvrir/ile-de-brehat/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Randonnée sur le GR34](/experiences/randonnee-gr34/)
+
+---
+
+# Où manger et boire
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/decouvrir/ou-manger-boire/
+
+## L'essentiel
+
+Cette page recense les adresses pour manger et boire autour de Pleubian (Côtes-d'Armor). Par souci d'honnêteté, seules les adresses réellement testées y figurent : à ce stade, uniquement la distillerie Glann ar Mor, à Pleubian, qui produit du whisky breton et se visite. D'autres adresses seront ajoutées au fil des tests.
+
+## Résumé factuel
+
+- **Où** : Pleubian et environs
+- **Durée de visite** : —
+- **Gratuit ou payant** : Variable
+- **Meilleure saison** : Toute l'année
+- **Accessible poussette / PMR** : À vérifier par établissement
+- Temps de trajet depuis la Maison Od Joge : à vérifier porte-à-porte (non publié tant que non mesuré).
+
+## Présentation
+
+Cette page est volontairement incomplète : plutôt que de citer des adresses non vérifiées, nous préférons attendre d'avoir testé et confirmé chaque recommandation — c'est l'engagement d'honnêteté du site (voir CLAUDE.md du projet).
+
+Une adresse réelle et vérifiable : la **distillerie Glann ar Mor**, à Pleubian, qui produit du whisky breton et se visite.
+
+Les crêperies, marchés et autres adresses locales seront ajoutés au fil des tests personnels — voir le calendrier éditorial (US-068).
+
+## Conseil pratique
+
+Revenir régulièrement : cette page s’enrichit au fil des visites réellement testées.
+
+## À combiner avec
+
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [Culture & patrimoine](/experiences/culture-patrimoine/)
+
+---
+
+# Comprendre les marées, et pourquoi ça change tout
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/journal/comprendre-les-marees/ — 2026-05-18
+
+## L'essentiel
+
+Sur la Presqu'île sauvage, la marée n'est pas un détail météo : elle décide si le
+Sillon de Talbert est praticable, si telle crique est accessible, et à quelle heure
+sortir en kayak. Comprendre le principe des marées change la façon de préparer chaque
+journée.
+
+## Le principe, en bref
+
+Deux marées hautes et deux marées basses se succèdent environ toutes les 6h12 (cycle
+semi-diurne, typique des côtes de la Manche et de l'Atlantique Nord). L'amplitude varie
+selon le cycle lunaire : les grandes marées (vives-eaux) surviennent environ tous les
+15 jours, autour des nouvelles et pleines lunes.
+
+## Pourquoi ça change tout ici
+
+- **Le Sillon de Talbert** peut être partiellement recouvert lors des grandes marées —
+  s'y engager sans connaître l'horaire est le principal risque de la sortie.
+- **Les criques** (Port-la-Chaîne, Port-Béni, Pors Rand) changent complètement d'aspect
+  entre marée haute et marée basse.
+- **Le kayak et la voile** vers l'archipel de Bréhat se planifient en fonction du
+  courant, lui-même dépendant de la marée.
+
+## Où trouver l'horaire du jour
+
+Un horodatage réel des marées (SHOM ou équivalent) doit être intégré au site avant
+publication définitive — voir le pipeline `fetch-tides.mjs` (US-032), pour l'instant
+non connecté à une source réelle. En attendant, consulter une source officielle avant
+toute sortie sur l'estran.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [72 h sans écran à Pleubian](/journal/72h-sans-ecran-pleubian/)
+- [Nautisme — kayak & voile](/experiences/nautisme-kayak-voile/)
+
+---
+
+# Pourquoi l'air marin fatigue (et pourquoi c'est une bonne nouvelle)
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/journal/pourquoi-air-marin-fatigue/ — 2026-05-04
+
+## L'essentiel
+
+Beaucoup de voyageurs rapportent une fatigue plus marquée les premiers jours d'un séjour
+au bord de mer, avec un sommeil plus profond. Le phénomène est réel et documenté à
+grande échelle (effet largement rapporté en thalassothérapie et en médecine du
+sommeil) : il ne s'agit pas d'un signe négatif, mais d'un relâchement.
+
+## Ce qui explique cette fatigue
+
+- **Le vent constant** sur le littoral sollicite le corps en continu (thermorégulation,
+  équilibre), une dépense d'énergie qu'on ne remarque pas consciemment.
+- **La marche sur sable ou galets** (comme au Sillon de Talbert) engage davantage les
+  muscles stabilisateurs qu'une marche en terrain plat urbain.
+- **La rupture de rythme** avec la vie quotidienne (écrans, notifications, horaires
+  contraints) libère une charge mentale qui se manifeste souvent par un besoin de
+  sommeil accru les deux ou trois premiers jours.
+
+## Pourquoi c'est une bonne nouvelle
+
+Cette fatigue initiale précède généralement un sommeil de meilleure qualité en fin de
+séjour. C'est un argument concret pour les séjours d'au moins 4 à 5 nuits plutôt qu'un
+simple week-end : le temps d'atteindre la phase de récupération, pas seulement celle de
+la fatigue d'adaptation.
+
+## À combiner avec
+
+- [Bien-être & air marin](/experiences/bien-etre-air-marin/)
+- [La qualité de l'air en Bretagne littorale, en chiffres](/journal/qualite-air-bretagne-littorale/)
+- [Déconnexion & slow living](/experiences/deconnexion-slow/)
+
+---
+
+# Tréguier en une journée : l'itinéraire à pied
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/journal/treguier-une-journee/ — 2026-04-20
+
+## L'essentiel
+
+Tréguier, à environ 15 km de Pleubian, se visite entièrement à pied en une demi-journée
+à une journée : cathédrale Saint-Tugdual, ruelles à pans de bois de la cité médiévale,
+et le port sur le Jaudy. Distance exacte depuis la maison à vérifier porte-à-porte avant
+publication.
+
+## Pourquoi Tréguier
+
+C'est l'une des « villes d'art et d'histoire » du Trégor, connue pour sa cathédrale
+gothique Saint-Tugdual (l'une des plus importantes de Bretagne) et pour son lien avec
+Ernest Renan, né dans la ville. La cité conserve un tissu médiéval dense, avec des
+maisons à pans de bois autour de la cathédrale.
+
+## L'itinéraire
+
+1. **La cathédrale Saint-Tugdual** — point de départ naturel, sur la place centrale.
+2. **Le cloître** attenant à la cathédrale.
+3. **Les ruelles de la cité médiévale**, en particulier autour de la place du Martray.
+4. **La maison natale d'Ernest Renan**, transformée en musée.
+5. **Le port**, sur les rives du Jaudy, pour finir la visite en bord d'eau.
+
+Horaires d'ouverture (cathédrale, musée) et tarifs éventuels à vérifier et publier avant
+mise en ligne définitive (audit semestriel prévu, US-069) — aucun horaire n'est affiché
+ici tant qu'il n'est pas confirmé.
+
+## Depuis la maison
+
+Tréguier est accessible en voiture depuis Pleubian ; le temps de trajet exact reste à
+mesurer porte-à-porte (contrainte du dépôt — jamais à vol d'oiseau).
+
+## À combiner avec
+
+- [Tréguier](/decouvrir/treguier/)
+- [Culture & patrimoine](/experiences/culture-patrimoine/)
+- [Paimpol & l'Abbaye de Beauport](/decouvrir/paimpol-beauport/)
+
+---
+
+# La qualité de l'air en Bretagne littorale, en chiffres
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/journal/qualite-air-bretagne-littorale/ — 2026-04-06
+
+## L'essentiel
+
+L'air du littoral breton bénéficie de deux atouts structurels : des vents dominants
+d'ouest venus directement de l'Atlantique (peu de sources de pollution sur leur
+trajet), et une densité industrielle très faible sur la Presqu'île sauvage. Cet article
+explique **pourquoi**, sans inventer de chiffre — les mesures réelles doivent venir
+d'une source vérifiable (voir plus bas).
+
+## Ce qu'on peut affirmer sans mesure chiffrée
+
+- Les vents dominants sur la Presqu'île de Lézardrieux viennent majoritairement du
+  secteur ouest/sud-ouest, depuis l'océan Atlantique — un air qui n'a traversé aucune
+  zone industrielle avant d'arriver ici.
+- La commune de Pleubian et ses environs sont ruraux et littoraux, sans installation
+  industrielle notable à proximité immédiate.
+- L'air marin transporte des embruns chargés en sels et en composés iodés, souvent cités
+  (à juste titre, avec prudence) dans les discours sur le bien-être respiratoire — voir
+  [Pourquoi l'air marin fatigue](/journal/pourquoi-air-marin-fatigue/) pour la nuance.
+
+## Ce qu'il ne faut pas inventer
+
+Un indice de qualité de l'air (ATMO, particules fines PM2.5/PM10, etc.) est une donnée
+mesurée, datée, et qui varie au jour le jour. Publier un chiffre non sourcé serait
+exactement le type d'erreur que ce site cherche à éviter (voir la charte de factualité
+du PRD, §12.2.C) — un site qui affirme un chiffre faux perd toute crédibilité GEO.
+
+**TODO avant publication définitive** : intégrer une donnée réelle et datée, par exemple
+via l'observatoire régional **ATMO Bretagne**, avec attribution et date de mesure
+explicites — prévu au Lot 4 (`donnees.json`, US-056) en même temps que la météo et les
+marées (US-032).
+
+## À combiner avec
+
+- [Pourquoi l'air marin fatigue (et pourquoi c'est une bonne nouvelle)](/journal/pourquoi-air-marin-fatigue/)
+- [Bien-être & air marin](/experiences/bien-etre-air-marin/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+
+---
+
+# 72 h sans écran à Pleubian : ce qu'on fait à la place
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/journal/72h-sans-ecran-pleubian/ — 2026-03-16
+
+## L'essentiel
+
+72 heures sans écran, ça se prépare : prévenir ses proches, couper les notifications
+avant d'arriver, et remplacer le réflexe du téléphone par une contrainte plus lente — la
+marée, la lumière, le feu. Voici un déroulé possible, pas une obligation.
+
+## Jour 1 — arriver, ralentir
+
+Arrivée en fin d'après-midi (15h ou 17h selon la saison). Poser le téléphone en mode
+avion dès l'entrée dans la maison. Allumer le poêle à bois — le geste prend 15 à
+20 minutes et impose déjà un autre rythme. Marcher jusqu'à la mer (5 minutes) pour voir
+où en est la marée : c'est elle qui va rythmer les deux prochains jours, pas une
+notification.
+
+## Jour 2 — le Sillon, dans un sens puis dans l'autre
+
+Le Sillon de Talbert se marche différemment selon l'heure de la marée. Partir le matin,
+observer, revenir en fin de journée voir comment la lumière a changé le paysage. Entre
+les deux : lire, cuisiner à plusieurs, ne rien faire de productif. C'est le point le
+plus difficile de l'exercice — le vide n'est pas un problème à résoudre.
+
+## Jour 3 — repartir sans avoir tout vu
+
+Le meilleur signe que la déconnexion a fonctionné : ne pas avoir « rentabilisé » le
+séjour en cochant une liste d'activités. Il restera des choses à découvrir la prochaine
+fois — c'est le principe.
+
+## Ce qui aide concrètement
+
+- Prévenir son entourage d'une coupure de 72h avant de partir.
+- Emporter un vrai livre, pas une liseuse connectée.
+- Le poêle à bois occupe les mains et l'attention sans écran.
+- Le jardin clos permet de laisser les enfants dehors sans surveillance rapprochée.
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [Comprendre les marées, et pourquoi ça change tout](/journal/comprendre-les-marees/)
+- [Télétravail & workation](/experiences/teletravail-workation/)
+
+---
+
+# Le GR34 au départ de Pleubian : 5 boucles chronométrées
+
+> Source : https://blamouche.github.io/location-saisonniere-pleubian/journal/gr34-pleubian-5-boucles/ — 2026-03-02
+
+## L'essentiel
+
+Depuis Pleubian, cinq boucles balisées permettent de découvrir le GR34 (« sentier des
+douaniers ») et la Presqu'île sauvage sans voiture : de 3,2 km (Sillon de Talbert) à
+13,6 km (Port-la-Chaîne). Les durées ci-dessous sont des **estimations** à un rythme de
+marche côtier moyen (~4 km/h) — à ajuster selon la météo et le niveau du groupe.
+
+## Les 5 boucles
+
+| Boucle | Distance | Durée estimée* | Niveau |
+|---|---|---|---|
+| Boucle du Sillon de Talbert | 3,2 km (aller-retour sur la flèche) | ~1 h | Facile, plat |
+| Circuit des Phares | 8,6 km | ~2 h 10 | Facile à modéré |
+| Circuit de Port-Béni | 8,7 km | ~2 h 10 | Facile à modéré |
+| Circuit de Brestan | 8,8 km | ~2 h 15 | Facile à modéré |
+| Circuit de Port-la-Chaîne | 13,6 km | ~3 h 30 | Modéré |
+
+*Durée de marche pure, hors pauses, à un rythme moyen de 4 km/h sur terrain côtier —
+non chronométrée officiellement. Départs et horaires exacts (parking, accès) à vérifier
+avant publication définitive.
+
+## Le Sillon de Talbert, la boucle à ne pas rater
+
+C'est la boucle la plus courte et la plus spectaculaire : une flèche de galets de 3,2 km
+qui s'avance dans la mer, entre les estuaires du Trieux et du Jaudy, classée réserve
+naturelle régionale. On la parcourt aller-retour, sans difficulté technique, mais avec
+un vrai enjeu de sécurité : elle est submersible aux grandes marées — se renseigner sur
+les horaires de marée avant de partir (donnée à intégrer au Lot 4 via `donnees.json`).
+
+## Les circuits plus longs
+
+Les circuits de Port-Béni, Brestan, des Phares et de Port-la-Chaîne (8,6 à 13,6 km)
+suivent le tracé du GR34 en boucle, avec retour par les chemins de l'intérieur des
+terres. Ils permettent de voir successivement des criques (Port-la-Chaîne, Port-Béni,
+Pors Rand), le sémaphore de Creac'h Maout et ses points de vue, et les hameaux du
+littoral.
+
+## Depuis la maison
+
+Toutes ces boucles sont accessibles au départ de Pleubian ; la distance et le temps de
+trajet exacts depuis le hameau de l'Armor jusqu'à chaque point de départ restent à
+vérifier porte-à-porte avant publication (convention du dépôt).
+
+## À combiner avec
+
+- [Le Sillon de Talbert](/decouvrir/sillon-de-talbert/)
+- [La Presqu'île sauvage](/decouvrir/presquile-sauvage/)
+- [Vélo — La Vélomaritime](/experiences/velo-velomaritime/)

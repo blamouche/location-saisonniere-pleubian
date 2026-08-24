@@ -4,6 +4,7 @@ import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import { fichesLieux } from '@/data/decouvrir';
 import { experiences } from '@/data/experiences';
 import { buildDate } from '@/lib/build-date';
+import { withBase } from '@/lib/base-path';
 
 export function getStaticPaths() {
   return fichesLieux.map((f) => ({ params: { lieu: f.slug }, props: { fiche: f } }));
@@ -89,7 +90,7 @@ const placeJsonLd = {
         {
           liensCombiner.map((lieu) => (
             <li>
-              <a href={`/decouvrir/${lieu.slug}/`} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
+              <a href={withBase(`/decouvrir/${lieu.slug}/`)} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
                 {lieu.nom}
               </a>
             </li>
@@ -98,7 +99,7 @@ const placeJsonLd = {
         {
           experienceLiee && (
             <li>
-              <a href={`/experiences/${experienceLiee.slug}/`} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
+              <a href={withBase(`/experiences/${experienceLiee.slug}/`)} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
                 {experienceLiee.titre}
               </a>
             </li>

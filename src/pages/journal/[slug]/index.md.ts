@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '@/lib/base-path';
 
 export async function getStaticPaths() {
   const articles = await getCollection('journal');
@@ -9,7 +10,7 @@ export async function getStaticPaths() {
 export const GET: APIRoute = async ({ params, site }) => {
   const articles = await getCollection('journal');
   const article = articles.find((a) => a.id === params.slug)!;
-  const url = new URL(`/journal/${article.id}/`, site).toString();
+  const url = new URL(withBase(`/journal/${article.id}/`), site).toString();
 
   const md = `# ${article.data.titre}
 

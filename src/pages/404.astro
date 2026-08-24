@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/base-path';
 
 const pagesPrincipales = [
   { href: '/', label: 'Accueil' },
@@ -21,7 +22,7 @@ const pagesPrincipales = [
       {
         pagesPrincipales.map((p) => (
           <li>
-            <a href={p.href} class="block rounded-lg border border-border px-4 py-3 font-semibold hover:bg-surface-alt">
+            <a href={withBase(p.href)} class="block rounded-lg border border-border px-4 py-3 font-semibold hover:bg-surface-alt">
               {p.label}
             </a>
           </li>

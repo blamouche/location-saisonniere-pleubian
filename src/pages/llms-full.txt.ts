@@ -5,6 +5,7 @@ import { fichesLieux } from '@/data/decouvrir';
 import { experiences } from '@/data/experiences';
 import { saisons } from '@/data/saisons';
 import { decouvrirMarkdown, experienceMarkdown, saisonMarkdown } from '@/lib/markdown-content';
+import { withBase } from '@/lib/base-path';
 
 /**
  * `/llms-full.txt` (US-054, PRD §12.2.D) : contenu intégral du site en markdown,
@@ -13,7 +14,7 @@ import { decouvrirMarkdown, experienceMarkdown, saisonMarkdown } from '@/lib/mar
  * FR uniquement (pas de multilingue actif — US-011), donc aucun doublon de langue.
  */
 export const GET: APIRoute = async ({ site }) => {
-  const url = (path: string) => new URL(path, site).toString();
+  const url = (path: string) => new URL(withBase(path), site).toString();
   const journal = (await getCollection('journal')).sort((a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf());
 
   const parts: string[] = [];

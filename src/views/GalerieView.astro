@@ -5,6 +5,7 @@ import { saisons } from '@/data/saisons';
 import { galerieContent } from '@/i18n/pages/galerie';
 import { houseImages } from '@/data/real-images';
 import { sectionPath, sectionSlug, saisonLabels, type Locale } from '@/i18n/locales';
+import { withBase } from '@/lib/base-path';
 
 export interface Props {
   locale: Locale;
@@ -38,7 +39,7 @@ const photos = await Promise.all(
       ]);
       return { ...photo, thumbSrc: thumb.src, fullSrc: full.src, width: real.width, height: real.height };
     }
-    const placeholder = `/medias/placeholder/placeholder-${photo.slug}.svg`;
+    const placeholder = withBase(`/medias/placeholder/placeholder-${photo.slug}.svg`);
     return { ...photo, thumbSrc: placeholder, fullSrc: placeholder, width: 1000, height: 1250 };
   })
 );

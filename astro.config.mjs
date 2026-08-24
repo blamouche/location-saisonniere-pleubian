@@ -4,11 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { visit } from 'unist-util-visit';
 import { fichesLieux } from './src/data/decouvrir.ts';
 import { experiences } from './src/data/experiences.ts';
 import { saisons } from './src/data/saisons.ts';
-
-const SITE = 'https://maison-odjoge.example'; // TODO (PRD §19, Q1) : domaine définitif.
+import { SITE, BASE } from './site.config.mjs';
 
 // Les endpoints `.md` (US-055) sont des routes de type "endpoint", pas "page" —
 // @astrojs/sitemap ne les découvre pas automatiquement. On les déclare ici pour
@@ -18,19 +18,46 @@ const journalSlugs = readdirSync(fileURLToPath(new URL('./src/content/journal', 
   .filter((f) => f.endsWith('.md'))
   .map((f) => f.replace(/\.md$/, ''));
 
+// Les liens internes écrits à la main dans les articles du journal (Markdown,
+// `src/content/journal/*.md`, ex. `[Sillon de Talbert](/decouvrir/sillon-de-talbert/)`)
+// ignorent `base` — contrairement aux pages `.astro`, qui passent toutes par le
+// helper `withBase()` (`src/lib/base-path.ts`). Ce plugin rehype fait la même chose
+// au rendu du Markdown, sans jamais toucher au contenu source (racine-relatif,
+// portable si le site change un jour d'hébergement — PRD §19, Q1).
+function rehypeBasePath() {
+  /** @param {import('hast').Root} tree */
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      for (const attr of ['href', 'src']) {
+        const value = node.properties?.[attr];
+        if (typeof value === 'string' && value.startsWith('/') && !value.startsWith('//') && !value.startsWith(BASE + '/')) {
+          node.properties[attr] = `${BASE}${value}`;
+        }
+      }
+    });
+  };
+}
+
 const markdownPages = [
-  ...fichesLieux.map((f) => `${SITE}/decouvrir/${f.slug}/index.md`),
-  ...experiences.map((e) => `${SITE}/experiences/${e.slug}/index.md`),
-  ...saisons.map((s) => `${SITE}/saisons/${s.id}/index.md`),
-  ...journalSlugs.map((slug) => `${SITE}/journal/${slug}/index.md`),
+  ...fichesLieux.map((f) => `${SITE}${BASE}/decouvrir/${f.slug}/index.md`),
+  ...experiences.map((e) => `${SITE}${BASE}/experiences/${e.slug}/index.md`),
+  ...saisons.map((s) => `${SITE}${BASE}/saisons/${s.id}/index.md`),
+  ...journalSlugs.map((slug) => `${SITE}${BASE}/journal/${slug}/index.md`),
 ];
 
-// Contrainte non négociable (voir docs/PRD.md §14.1) : sortie 100 % statique.
+// Contrainte non négociable (voir documentation/PRD.md §14.1) : sortie 100 % statique.
 // Aucun adaptateur SSR/serverless ne doit être ajouté ici.
 export default defineConfig({
   site: SITE,
+  base: BASE,
   output: 'static',
+  // GitHub Pages sert directement le contenu commité de ce dossier (Settings →
+  // Pages → Deploy from a branch → /docs), sans workflow de déploiement séparé.
+  outDir: './docs',
   trailingSlash: 'always',
+  markdown: {
+    rehypePlugins: [rehypeBasePath],
+  },
   integrations: [
     sitemap({
       customPages: markdownPages,

@@ -10,6 +10,11 @@ if [[ -z "$msg" ]]; then
   exit 1
 fi
 
+# `docs/` (sortie de build, servie telle quelle par GitHub Pages) doit toujours
+# refléter la source qu'on s'apprête à committer — jamais de déploiement en retard
+# sur le code.
+npm run build
+
 if [[ -n "$(git status --porcelain)" ]]; then
   git add -A
   git commit -m "$msg"

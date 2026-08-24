@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import { fichesLieux } from '@/data/decouvrir';
 import { lieuxAProximite } from '@/data/a-proximite';
+import { withBase } from '@/lib/base-path';
 ---
 
 <BaseLayout
@@ -19,7 +20,7 @@ import { lieuxAProximite } from '@/data/a-proximite';
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {
         fichesLieux.map((fiche) => (
-          <a href={`/decouvrir/${fiche.slug}/`} class="group overflow-hidden rounded-xl border border-border bg-surface">
+          <a href={withBase(`/decouvrir/${fiche.slug}/`)} class="group overflow-hidden rounded-xl border border-border bg-surface">
             <PlaceholderImage slug={fiche.heroSlug} ratio="4x5" alt={`${fiche.nom} (visuel provisoire)`} class="h-48 w-full object-cover" />
             <div class="p-4">
               <p class="font-display font-semibold group-hover:text-accent">{fiche.nom}</p>
@@ -41,7 +42,7 @@ import { lieuxAProximite } from '@/data/a-proximite';
           lieuxAProximite.map((lieu) => (
             <li>
               {lieu.lien ? (
-                <a href={`/decouvrir/${lieu.lien}/`} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
+                <a href={withBase(`/decouvrir/${lieu.lien}/`)} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
                   <p class="font-display font-semibold">{lieu.nom}</p>
                   <p class="mt-1 text-sm text-ink-muted">{lieu.description}</p>
                 </a>

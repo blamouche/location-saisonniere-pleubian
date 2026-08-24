@@ -9,6 +9,7 @@ import { getSaisonCourante } from '@/data/saisons';
 import { buildDate, formatDateLocale } from '@/lib/build-date';
 import { locales, localeTags, homePath, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/dictionary';
+import { withBase } from '@/lib/base-path';
 
 export interface Crumb {
   label: string;
@@ -53,7 +54,7 @@ const breadcrumbJsonLd =
           '@type': 'ListItem',
           position: i + 1,
           name: c.label,
-          item: new URL(c.href, Astro.site).toString(),
+          item: new URL(withBase(c.href), Astro.site).toString(),
         })),
       }
     : null;
@@ -66,10 +67,10 @@ const hreflangAlternates: { lang: string; href: string }[] = [
   { lang: localeTags[locale], href: canonical },
   ...locales
     .filter((l) => l !== locale && alternates[l])
-    .map((l) => ({ lang: localeTags[l], href: new URL(alternates[l]!, Astro.site).toString() })),
+    .map((l) => ({ lang: localeTags[l], href: new URL(withBase(alternates[l]!), Astro.site).toString() })),
 ];
 if (alternates.fr || locale === 'fr') {
-  hreflangAlternates.push({ lang: 'x-default', href: locale === 'fr' ? canonical : new URL(alternates.fr!, Astro.site).toString() });
+  hreflangAlternates.push({ lang: 'x-default', href: locale === 'fr' ? canonical : new URL(withBase(alternates.fr!), Astro.site).toString() });
 }
 
 const ogLocaleMap: Record<Locale, string> = { fr: 'fr_FR', en: 'en_GB', de: 'de_DE' };
@@ -93,14 +94,14 @@ const ogLocaleMap: Record<Locale, string> = { fr: 'fr_FR', en: 'en_GB', de: 'de_
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta property="og:image" content={new URL(withBase(ogImage), Astro.site).toString()} />
     <meta property="og:locale" content={ogLocaleMap[locale]} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
 
     {jsonLdBlocks.map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />)}
   </head>
@@ -116,7 +117,7 @@ const ogLocaleMap: Record<Locale, string> = { fr: 'fr_FR', en: 'en_GB', de: 'de_
         {crumbs.map((c) => (
           <>
             <li aria-hidden="true">/</li>
-            <li><a href={c.href} class="hover:text-accent">{c.label}</a></li>
+            <li><a href={withBase(c.href)} class="hover:text-accent">{c.label}</a></li>
           </>
         ))}
       </ol>

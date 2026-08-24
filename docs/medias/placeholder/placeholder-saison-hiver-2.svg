@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1250" viewBox="0 0 1000 1250" role="img" aria-label="Hiver — ciel étoilé — visuel provisoire">
+  <defs>
+    <linearGradient id="g" gradientTransform="rotate(232)">
+      <stop offset="0%" stop-color="#2a3550"/>
+      <stop offset="100%" stop-color="#5a6a86"/>
+    </linearGradient>
+    <pattern id="p" width="64" height="64" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="transparent"/>
+      <line x1="0" y1="0" x2="0" y2="64" stroke="#f4f6f8" stroke-opacity="0.06" stroke-width="32"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#g)"/>
+  <rect width="1000" height="1250" fill="url(#p)"/>
+  <rect x="24" y="24" width="420" height="44" rx="8" fill="#0a0d14" fill-opacity="0.55"/>
+  <text x="40" y="54" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" fill="#f4f6f8" font-weight="600">PLACEHOLDER</text>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="ui-serif, Georgia, serif" font-size="50" fill="#f4f6f8" fill-opacity="0.95">Hiver — ciel étoilé</text>
+  <text x="50%" y="1214" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" fill="#f4f6f8" fill-opacity="0.75">Visuel générique — remplacé au shooting réel</text>
+</svg>

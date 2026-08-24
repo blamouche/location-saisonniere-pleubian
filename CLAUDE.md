@@ -4,14 +4,28 @@
 
 Site vitrine marketing pour **Maison Od Joge**, location saisonnière familiale (8 personnes)
 à Pleubian (22610), Presqu'île sauvage, Côtes-d'Armor.
-Le cadrage complet est dans [`docs/PRD.md`](./docs/PRD.md) — le lire avant toute décision produit.
-Le backlog de développement est dans [`docs/user-stories.md`](./docs/user-stories.md).
+Le cadrage complet est dans [`documentation/PRD.md`](./documentation/PRD.md) — le lire avant toute décision produit.
+Le backlog de développement est dans [`documentation/user-stories.md`](./documentation/user-stories.md).
 
 Positionnement : le site n'est pas une fiche d'annonce mais un guide de référence sur la
 Presqu'île sauvage, optimisé SEO **et** GEO (Generative Engine Optimization), avec une
 expérience visuelle qui change au fil des quatre saisons.
 
-Stack cible : Astro 5 + Tailwind CSS 4, statique, FR/EN/DE, hébergement Vercel ou Netlify.
+Stack cible : Astro + Tailwind CSS 4, statique, FR/EN/DE.
+
+**Hébergement actuel** : GitHub Pages, sur ce repo (`blamouche/location-saisonniere-pleubian`),
+sans domaine personnalisé pour l'instant. Conséquences dans le code :
+- `astro.config.mjs` déclare `site`/`base` (repris depuis `site.config.mjs`, source unique) et
+  `outDir: './docs'` — GitHub Pages sert directement le contenu commité de `docs/`
+  (Settings → Pages → Deploy from a branch → `main` → `/docs`), sans workflow de déploiement.
+- Tout chemin interne écrit à la main (pas généré par un helper `sectionPath`/`homePath`
+  existant) doit passer par `withBase()` (`src/lib/base-path.ts`) pour rester valide sous ce
+  sous-dossier — voir le commentaire en tête de ce fichier pour le détail.
+- `./scripts/save.sh` rebuild avant de committer : `docs/` ne doit jamais être en retard sur
+  la source.
+- Si un domaine dédié est branché un jour (PRD §19, Q1) : mettre à jour `site.config.mjs`
+  (`SITE`, `BASE: ''`) — le reste du code n'a pas besoin de changer, `withBase('')` devient
+  un no-op.
 
 ## ⚠️ Synchronisation multi-machines — À FAIRE EN PREMIER
 

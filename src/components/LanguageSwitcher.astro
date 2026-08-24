@@ -1,6 +1,7 @@
 ---
 import { locales, localeLabels, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/dictionary';
+import { withBase } from '@/lib/base-path';
 
 export interface Props {
   locale: Locale;
@@ -28,7 +29,7 @@ const dict = t(locale).languageSwitcher;
               {l.toUpperCase()}
             </span>
           ) : href ? (
-            <a href={href} hreflang={l} class="text-ink-muted hover:text-accent">
+            <a href={withBase(href)} hreflang={l} class="text-ink-muted hover:text-accent">
               {l.toUpperCase()}
             </a>
           ) : (
