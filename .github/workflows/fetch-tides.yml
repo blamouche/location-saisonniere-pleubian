@@ -1,12 +1,14 @@
 name: Rafraîchir les marées
 
 # Récupère quotidiennement les horaires de marée officiels du SHOM pour Port-Béni
-# (port de référence le plus proche de Pleubian, US-032, PRD §14.5) et committe le
-# résultat — voir scripts/fetch-tides.mjs pour le détail de la source.
+# (port de référence le plus proche de Pleubian, US-032, PRD §14.5) — voir
+# scripts/fetch-tides.mjs pour le détail de la source.
 #
-# Tant qu'aucun hébergement n'est branché avec rebuild automatique (US-009), ce
-# commit est ce qui garde `src/data/meteo-marees.generated.json` à jour ; le
-# prochain déploiement (manuel ou automatique) embarquera alors la donnée fraîche.
+# GitHub Pages sert `docs/` tel quel depuis `main` (Settings → Pages → Deploy from a
+# branch → /docs, voir astro.config.mjs `outDir`) : il n'y a pas de rebuild côté
+# hébergeur. Ce workflow doit donc lui-même rebuilder le site après avoir rafraîchi
+# la donnée, sans quoi `src/data/meteo-marees.generated.json` serait à jour mais le
+# site publié resterait figé sur l'ancienne marée.
 
 on:
   schedule:
@@ -32,14 +34,17 @@ jobs:
 
       - run: npm run fetch-tides
 
-      - name: Commit si la donnée a changé
+      - name: Rebuild (docs/ doit refléter la donnée fraîche)
+        run: npm run build
+
+      - name: Commit si la donnée ou le site publié a changé
         run: |
-          if git diff --quiet -- src/data/meteo-marees.generated.json; then
+          if git diff --quiet -- src/data/meteo-marees.generated.json docs/; then
             echo "Aucun changement de marée à committer."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/meteo-marees.generated.json
+          git add src/data/meteo-marees.generated.json docs/
           git commit -m "marees: mise a jour quotidienne (SHOM, Port-Beni)"
           git push
