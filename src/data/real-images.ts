@@ -16,9 +16,11 @@ import maisonSalleAManger from '@/assets/images/la-maison/salle-a-manger.jpg';
 import maisonTerrasse from '@/assets/images/la-maison/terrasse.jpg';
 import maisonJardin from '@/assets/images/la-maison/jardin.jpg';
 import maisonSalleDeBainRdc from '@/assets/images/la-maison/salle-de-bain-rdc.jpg';
+import maisonSalleDeBainRdcDouche from '@/assets/images/la-maison/salle-de-bain-rdc-douche.jpg';
 import maisonSalleDeBainEtage from '@/assets/images/la-maison/salle-de-bain-etage.jpg';
 import maisonSalleDeBainEtageDouche from '@/assets/images/la-maison/salle-de-bain-etage-douche.jpg';
 import maisonSalleDeBainEtageVue from '@/assets/images/la-maison/salle-de-bain-etage-vue.jpg';
+import maisonFacade from '@/assets/images/la-maison/facade.jpg';
 import type { SaisonId } from './saisons';
 
 /**
@@ -67,7 +69,9 @@ export const houseImages: Record<string, ImageMetadata> = {
   terrasse: maisonTerrasse,
   jardin: maisonJardin,
   'salle-de-bain-rdc': maisonSalleDeBainRdc,
+  'salle-de-bain-rdc-douche': maisonSalleDeBainRdcDouche,
   'salle-de-bain-etage': maisonSalleDeBainEtage,
   'salle-de-bain-etage-douche': maisonSalleDeBainEtageDouche,
   'salle-de-bain-etage-vue': maisonSalleDeBainEtageVue,
+  facade: maisonFacade,
 };

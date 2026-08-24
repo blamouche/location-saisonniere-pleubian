@@ -28,7 +28,9 @@ Ce sont les photos qui apparaissent sur l'accueil, `/la-maison/` et la galerie. 
 | `salle-a-manger` | Salle à manger (nouvelle pièce ajoutée au modèle) |
 | `terrasse` | Terrasse (nouvelle pièce ajoutée au modèle) |
 | `jardin` | Jardin clos |
+| `facade` | Façade / extérieur de la maison |
 | `salle-de-bain-rdc` | Salle de bain RDC |
+| `salle-de-bain-rdc-douche` | Salle de bain RDC — douche (galerie uniquement) |
 | `salle-de-bain-etage` | Salle de bain étage |
 | `salle-de-bain-etage-douche` | Salle de bain étage — douche (galerie uniquement) |
 | `salle-de-bain-etage-vue` | Salle de bain étage — vue d'ensemble (galerie uniquement) |
@@ -37,7 +39,6 @@ Ce sont les photos qui apparaissent sur l'accueil, `/la-maison/` et la galerie. 
 
 | Fichier à remplacer | Sujet | Format |
 |---|---|---|
-| `placeholder-facade.svg` | Façade / extérieur de la maison | 4:5 |
 | `placeholder-espace-travail.svg` | Espace de travail dédié | 4:5 |
 
 **Où ça apparaît** : accueil (aperçu 6 photos), `/la-maison/` (visite pièce par pièce), `/la-maison/galerie/` (toutes les photos, filtrables par pièce).
@@ -103,13 +104,13 @@ Photos du territoire (pas de la maison) illustrant la saison sur `/saisons/[sais
 
 | Catégorie | Nombre | Type | Restant à fournir |
 |---|---|---|---|
-| A. La maison | 17 | Photo | 2 (façade, espace de travail) |
+| A. La maison | 18 | Photo | 1 (espace de travail) |
 | B. Hero par saison | 4 (+ 2 recadrages été) | Photo | 2 recadrages été (4:5, 1:1) — les 4 hero 16:9 sont couverts par du stock interim |
 | C. Territoire par saison | 12 | Photo | 12 |
 | D. Carte du territoire | 1 | Photo (basse priorité) | 1 |
-| **Total photos** | **34** | | **15 (+ 4 à confirmer/remplacer)** |
+| **Total photos** | **35** | | **13 (+ 4 à confirmer/remplacer)** |
 
-**Stratégie de démarrage suggérée** (reprend PRD §16) : la catégorie A (maison, valable toute l'année) est quasiment complète (15/17). Reste à shooter la façade et l'espace de travail, puis la saison en cours (été, aujourd'hui). Les 3 autres saisons (24 photos restantes) peuvent suivre au fil des 4 shootings trimestriels prévus.
+**Stratégie de démarrage suggérée** (reprend PRD §16) : la catégorie A (maison, valable toute l'année) est quasiment complète (17/18). Reste à shooter l'espace de travail, puis la saison en cours (été, aujourd'hui). Les 3 autres saisons (24 photos restantes) peuvent suivre au fil des 4 shootings trimestriels prévus.
 
 Une fois un fichier prêt, il suffit de le déposer dans `public/medias/` (hors du dossier `placeholder/`) et de mettre à jour le `slug` correspondant dans le code — voir `docs/user-stories.md` US-070 pour le suivi du remplacement.
 
