@@ -1,8 +1,8 @@
 name: Rafraîchir les marées
 
-# Récupère quotidiennement les horaires de marée de Pleubian (US-032, PRD §14.5) et
-# committe le résultat — voir scripts/fetch-tides.mjs pour la source et la clause
-# d'usage du site scrapé (horaire-maree.fr).
+# Récupère quotidiennement les horaires de marée officiels du SHOM pour Port-Béni
+# (port de référence le plus proche de Pleubian, US-032, PRD §14.5) et committe le
+# résultat — voir scripts/fetch-tides.mjs pour le détail de la source.
 #
 # Tant qu'aucun hébergement n'est branché avec rebuild automatique (US-009), ce
 # commit est ce qui garde `src/data/meteo-marees.generated.json` à jour ; le
@@ -41,5 +41,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/meteo-marees.generated.json
-          git commit -m "marees: mise a jour quotidienne (horaire-maree.fr)"
+          git commit -m "marees: mise a jour quotidienne (SHOM, Port-Beni)"
           git push

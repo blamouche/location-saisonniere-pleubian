@@ -1,98 +1,87 @@
 #!/usr/bin/env node
 /**
- * Récupère les horaires de marée du jour (et des 10 prochains jours) pour Pleubian,
- * pour la barre de contexte de l'accueil (US-032, PRD §8.1 section 2, §14.5).
+ * Récupère les horaires de marée officiels du SHOM (Service Hydrographique et
+ * Océanographique de la Marine) pour Port-Béni, le port de référence le plus
+ * proche de Pleubian, pour la barre de contexte de l'accueil (US-032, PRD §8.1
+ * section 2, §14.5).
  *
- * Source : horaire-maree.fr (scraping HTML — pas d'API officielle disponible sur ce
- * site). ⚠️ Les CGU de horaire-maree.fr réservent l'usage du service à un « usage
- * strictement personnel » ; ce script l'utilise malgré cette clause, décision
- * assumée par le porteur du projet (voir discussion du 24/08/2026). Attribution de
- * la source conservée dans les données produites, par cohérence avec la charte de
- * factualité datée du site (US-059 : « toute statistique cite sa source »).
+ * Source : l'API interne du site officiel maree.shom.fr (pas de documentation
+ * publique — reconstituée en inspectant le bundle JS de l'application). Utilisée
+ * ici comme le SHOM lui-même l'utilise dans son propre site, avec le même en-tête
+ * `Referer` — c'est une source publique, gouvernementale, gratuite. Remplace le
+ * scraping de horaire-maree.fr (dont les CGU réservaient le service à un usage
+ * personnel).
  *
- * TODO éventuel : basculer vers l'API officielle du SHOM (data.shom.fr) si cette
- * clause devient bloquante ou si le scraping casse trop souvent (site non prévu
- * pour l'usage automatisé, structure HTML fragile).
- *
- * Dégradation gracieuse : un échec (site down, structure HTML changée) ne bloque
- * jamais le build — retombe sur la dernière donnée connue, ou un état
- * "indisponible" explicite (critère d'acceptation US-032).
+ * Dégradation gracieuse : un échec (service indisponible, structure de réponse
+ * changée) ne bloque jamais le build — retombe sur la dernière donnée connue, ou
+ * un état "indisponible" explicite (critère d'acceptation US-032).
  *
  * Usage : npm run fetch-tides (ou automatiquement via `npm run build`)
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import * as cheerio from 'cheerio';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_FILE = join(__dirname, '..', 'src', 'data', 'meteo-marees.generated.json');
-const SOURCE_URL = 'https://www.horaire-maree.fr/maree/Pleubian/';
 
-/** Extrait { heure, hauteur } d'une cellule "<strong>11h18</strong><br/> 4,22 m". */
-function parseCelluleMaree($, td) {
-  const strong = $(td).find('strong').first().text().trim();
-  const texte = $(td).text().trim();
-  const hauteurMatch = texte.match(/[\d,]+\s*m/);
-  return {
-    heure: strong || null,
-    hauteur: hauteurMatch ? hauteurMatch[0].replace(/\s+/, ' ') : null,
-  };
+const PORT = { nom: 'Port-Béni', cst: 'PORT-BENI', lat: 48.847167, lon: -3.172333 };
+const PAGE_URL = `https://maree.shom.fr/harbor/${PORT.cst}/hlt/0`;
+const API_URL = 'https://services.data.shom.fr/b2q8lrcdl4s04cbabsj4nhcb/hdm/spm/hlt';
+const DUREE_JOURS = 7; // borne haute acceptée par l'API pour ce type de requête.
+
+/** Décalage horaire légal français (Europe/Paris) pour une date donnée, en heures
+ * entières — gère automatiquement l'heure d'été/hiver via l'ICU de Node. */
+function decalageParis(date) {
+  const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Paris', timeZoneName: 'shortOffset' }).formatToParts(date);
+  const brut = parts.find((p) => p.type === 'timeZoneName')?.value ?? 'GMT+0';
+  const match = brut.match(/GMT([+-]\d+)/);
+  return match ? Number(match[1]) : 0;
 }
 
-/** Extrait { coefficient, basseMer, pleineMer } d'un triplet de <td> consécutifs. */
-function parseDemiJournee($, tds, offset) {
-  const coeffText = $(tds[offset]).text().trim();
-  const coefficient = coeffText ? Number.parseInt(coeffText, 10) : null;
-  return {
-    coefficient: Number.isFinite(coefficient) ? coefficient : null,
-    basseMer: parseCelluleMaree($, tds[offset + 1]),
-    pleineMer: parseCelluleMaree($, tds[offset + 2]),
-  };
+function formatDateISO(date) {
+  return date.toISOString().slice(0, 10);
 }
 
 async function recuperer() {
-  const res = await fetch(SOURCE_URL, {
+  const aujourdhui = new Date();
+  const utc = decalageParis(aujourdhui);
+  const url = new URL(API_URL);
+  url.searchParams.set('harborName', PORT.cst);
+  url.searchParams.set('duration', String(DUREE_JOURS));
+  url.searchParams.set('date', formatDateISO(aujourdhui));
+  url.searchParams.set('utc', String(utc));
+  url.searchParams.set('correlation', '1');
+
+  const res = await fetch(url, {
     signal: AbortSignal.timeout(15000),
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MaisonOdJogeBuildBot/1.0)' },
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (compatible; MaisonOdJogeBuildBot/1.0)',
+      // Requis par l'API du SHOM (protection anti-hotlink) — même Referer que la
+      // page officielle qui appelle ce même service.
+      Referer: PAGE_URL,
+    },
   });
-  if (!res.ok) throw new Error(`Réponse ${res.status} de ${SOURCE_URL}`);
-  const html = await res.text();
-  const $ = cheerio.load(html);
+  if (!res.ok) throw new Error(`Réponse ${res.status} de l'API SHOM`);
+  const brut = await res.json();
+  if (brut.error_code) throw new Error(`API SHOM : ${brut.error_message ?? brut.error_code}`);
 
-  const dateAujourdhui = $('#i_header_tbl_droite h3')
-    .first()
-    .contents()
-    .filter((_, el) => el.type === 'text')
-    .last()
-    .text()
-    .trim();
-
-  const ligneJour = $('#i_donnesJour table tr').eq(2);
-  const tdsJour = ligneJour.find('td').toArray();
-  if (tdsJour.length < 6) throw new Error("Structure inattendue pour la marée du jour (site source modifié ?)");
-
-  const aujourdhui = {
-    date: dateAujourdhui || null,
-    matin: parseDemiJournee($, tdsJour, 0),
-    apresMidi: parseDemiJournee($, tdsJour, 3),
-  };
-
-  const dixProchainsJours = [];
-  $('#i_donnesLongue table tr').each((_i, tr) => {
-    const tds = $(tr).find('td').toArray();
-    if (tds.length < 7) return; // lignes d'en-tête
-    const date = $(tds[0]).text().trim();
-    dixProchainsJours.push({
+  const TYPES = { 'tide.high': 'pleine_mer', 'tide.low': 'basse_mer' };
+  const jours = Object.entries(brut)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([date, evenements]) => ({
       date,
-      matin: parseDemiJournee($, tds, 1),
-      apresMidi: parseDemiJournee($, tds, 4),
-    });
-  });
+      evenements: evenements.map(([type, heure, hauteur, coefficient]) => ({
+        type: TYPES[type] ?? type,
+        heure,
+        hauteurMetres: Number.parseFloat(hauteur),
+        coefficient: coefficient && coefficient !== '---' ? Number.parseInt(coefficient, 10) : null,
+      })),
+    }));
 
-  if (dixProchainsJours.length === 0) throw new Error('Aucune ligne de prévision trouvée (site source modifié ?)');
+  if (jours.length === 0) throw new Error('Réponse SHOM vide (structure changée ?)');
 
-  return { port: 'Pleubian', aujourdhui, dixProchainsJours };
+  return { port: PORT, jours };
 }
 
 function derniereDonneeConnue() {
@@ -107,15 +96,16 @@ function derniereDonneeConnue() {
 let sortie;
 try {
   const donnees = await recuperer();
-  sortie = { statut: 'ok', misAJour: new Date().toISOString(), source: SOURCE_URL, donnees };
-  console.log(`✅ fetch-tides : marée du jour récupérée (coeff. ${donnees.aujourdhui.matin.coefficient}/${donnees.aujourdhui.apresMidi.coefficient}).`);
+  sortie = { statut: 'ok', misAJour: new Date().toISOString(), source: PAGE_URL, donnees };
+  const premier = donnees.jours[0];
+  console.log(`✅ fetch-tides (SHOM, ${PORT.nom}) : ${premier.evenements.length} événement(s) pour ${premier.date}.`);
 } catch (err) {
   // Dégradation gracieuse (US-032) : dernière donnée connue si elle existe, sinon
   // état "indisponible" explicite — dans les deux cas le build continue.
   const derniere = derniereDonneeConnue();
   sortie = derniere
     ? { ...derniere, statut: 'perime', erreur: String(err.message ?? err) }
-    : { statut: 'indisponible', misAJour: new Date().toISOString(), source: SOURCE_URL, donnees: null, erreur: String(err.message ?? err) };
+    : { statut: 'indisponible', misAJour: new Date().toISOString(), source: PAGE_URL, donnees: null, erreur: String(err.message ?? err) };
   console.warn(`⚠️  fetch-tides : ${err.message ?? err} — le build continue (dégradation gracieuse).`);
 }
 

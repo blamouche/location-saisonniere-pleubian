@@ -3,20 +3,26 @@ import { join } from 'node:path';
 
 /**
  * Lit `src/data/meteo-marees.generated.json` (produit par `scripts/fetch-tides.mjs`
- * en `prebuild`, US-032). Lecture défensive plutôt qu'un `import` statique : le
- * fichier n'existe pas forcément (première fois, `astro dev` sans avoir lancé le
- * script) — dans ce cas on dégrade vers "indisponible" sans casser le build/dev.
+ * en `prebuild`, US-032, source : SHOM / Port-Béni). Lecture défensive plutôt qu'un
+ * `import` statique : le fichier n'existe pas forcément (première fois, `astro dev`
+ * sans avoir lancé le script) — dans ce cas on dégrade vers "indisponible" sans
+ * casser le build/dev.
  */
-export interface DemiJournee {
+export interface EvenementMaree {
+  type: 'pleine_mer' | 'basse_mer';
+  heure: string;
+  hauteurMetres: number;
   coefficient: number | null;
-  basseMer: { heure: string | null; hauteur: string | null };
-  pleineMer: { heure: string | null; hauteur: string | null };
+}
+
+export interface JourMaree {
+  date: string;
+  evenements: EvenementMaree[];
 }
 
 export interface DonneesMaree {
-  port: string;
-  aujourdhui: { date: string | null; matin: DemiJournee; apresMidi: DemiJournee };
-  dixProchainsJours: { date: string; matin: DemiJournee; apresMidi: DemiJournee }[];
+  port: { nom: string; cst: string; lat: number; lon: number };
+  jours: JourMaree[];
 }
 
 export interface FichierMaree {

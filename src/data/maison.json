@@ -108,8 +108,7 @@
       "utmMedium": "cta"
     },
     "booking": {
-      "url": null,
-      "noteTodo": "Le bien est-il aussi listé sur Booking ? (PRD §19 Q3) — lien à renseigner si oui."
+      "url": "https://www.booking.com/hotel/fr/gite-od-joge.fr.html"
     }
   }
 }

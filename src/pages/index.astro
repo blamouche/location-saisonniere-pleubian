@@ -75,22 +75,29 @@ const raisonsDeVenir = [
       <span><strong class="text-ink">Saison affichée :</strong> {saison.label} ({saison.periode})</span>
       <span aria-hidden="true">·</span>
       {
-        maree.statut !== 'indisponible' && maree.donnees ? (
-          <span>
-            <strong class="text-ink">Marées à Pleubian</strong> ({maree.donnees.aujourdhui.date ?? "aujourd'hui"}) : pleine mer {maree.donnees.aujourdhui.matin.pleineMer.heure} ({maree.donnees.aujourdhui.matin.pleineMer.hauteur}) &amp;{' '}
-            {maree.donnees.aujourdhui.apresMidi.pleineMer.heure} ({maree.donnees.aujourdhui.apresMidi.pleineMer.hauteur}) · basse mer {maree.donnees.aujourdhui.matin.basseMer.heure} &amp; {maree.donnees.aujourdhui.apresMidi.basseMer.heure} · coeff.{' '}
-            {maree.donnees.aujourdhui.matin.coefficient}/{maree.donnees.aujourdhui.apresMidi.coefficient}
-            {maree.statut === 'perime' && ' (donnée d’une précédente mise à jour)'}
-            {maree.source && (
-              <>
-                {' '}
-                — <a href={maree.source} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">source</a>
-              </>
-            )}
-          </span>
-        ) : (
-          <span>Marées du jour : <em>indisponibles</em> pour ce build — météo à connecter (US-032)</span>
-        )
+        (() => {
+          const jour = maree.donnees?.jours[0];
+          if (maree.statut === 'indisponible' || !jour) {
+            return <span>Marées du jour : <em>indisponibles</em> pour ce build — météo à connecter (US-032)</span>;
+          }
+          const pleinesMer = jour.evenements.filter((e) => e.type === 'pleine_mer');
+          const bassesMer = jour.evenements.filter((e) => e.type === 'basse_mer');
+          const coeffs = pleinesMer.map((e) => e.coefficient).filter((c): c is number => c !== null);
+          return (
+            <span>
+              <strong class="text-ink">Marées à {maree.donnees!.port.nom}</strong> ({jour.date}) : pleine mer {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · basse mer{' '}
+              {bassesMer.map((e) => e.heure).join(' & ')}
+              {coeffs.length > 0 && <> · coeff. {coeffs.join('/')}</>}
+              {maree.statut === 'perime' && ' (donnée d’une précédente mise à jour)'}
+              {maree.source && (
+                <>
+                  {' '}
+                  — <a href={maree.source} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">source SHOM</a>
+                </>
+              )}
+            </span>
+          );
+        })()
       }
     </div>
   </section>
