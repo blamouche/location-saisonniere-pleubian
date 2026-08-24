@@ -1,7 +1,9 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { saisons } from '@/data/saisons';
 import { galerieContent } from '@/i18n/pages/galerie';
+import { houseImages } from '@/data/real-images';
 import { sectionPath, sectionSlug, saisonLabels, type Locale } from '@/i18n/locales';
 
 export interface Props {
@@ -17,11 +19,29 @@ const photosSaisons = saisons.flatMap((s) =>
     slug: `saison-${s.id}-${n}`,
     titre: dict.territoireEnSaison(saisonLabels[s.id][locale], n),
     categorie: 'saison' as const,
-    saison: s.id,
+    saison: s.id as string | undefined,
   }))
 );
 
-const photos = [...dict.photosMaison, ...photosSaisons];
+const photosBrutes = [...dict.photosMaison.map((p) => ({ ...p, saison: undefined as string | undefined })), ...photosSaisons];
+
+// Résolution des vraies photos (US-070) en AVIF optimisé, vignette + plein format ;
+// dégradation gracieuse vers le placeholder SVG générique tant qu'aucune vraie
+// photo n'est enregistrée pour ce slug (voir `src/data/real-images.ts`).
+const photos = await Promise.all(
+  photosBrutes.map(async (photo) => {
+    const real = houseImages[photo.slug];
+    if (real) {
+      const [thumb, full] = await Promise.all([
+        getImage({ src: real, width: 500, format: 'avif' }),
+        getImage({ src: real, width: 1400, format: 'avif' }),
+      ]);
+      return { ...photo, thumbSrc: thumb.src, fullSrc: full.src, width: real.width, height: real.height };
+    }
+    const placeholder = `/medias/placeholder/placeholder-${photo.slug}.svg`;
+    return { ...photo, thumbSrc: placeholder, fullSrc: placeholder, width: 1000, height: 1250 };
+  })
+);
 ---
 
 <BaseLayout
@@ -51,12 +71,12 @@ const photos = [...dict.photosMaison, ...photosSaisons];
     <ul id="galerie-grid" class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {
         photos.map((photo, i) => (
-          <li data-categorie={photo.categorie} data-saison={'saison' in photo ? photo.saison : undefined}>
+          <li data-categorie={photo.categorie} data-saison={photo.saison}>
             <button type="button" class="block w-full overflow-hidden rounded-lg border border-border" data-ouvre-lightbox={i} aria-label={photo.titre}>
               <img
-                src={`/medias/placeholder/placeholder-${photo.slug}.svg`}
-                width="1000"
-                height="1250"
+                src={photo.thumbSrc}
+                width={photo.width}
+                height={photo.height}
                 alt={photo.titre}
                 loading="lazy"
                 decoding="async"
@@ -121,7 +141,7 @@ const photos = [...dict.photosMaison, ...photosSaisons];
   function ouvrir(i) {
     index = i;
     const photo = photos[index];
-    img.src = `/medias/placeholder/placeholder-${photo.slug}.svg`;
+    img.src = photo.fullSrc;
     img.alt = photo.titre;
     titre.textContent = photo.titre;
     dialog.showModal();

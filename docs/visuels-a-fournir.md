@@ -9,43 +9,42 @@
 
 ---
 
-## A. La maison — 12 photos (un seul shooting suffit, réutilisées toute l'année)
+## A. La maison — photos (un seul shooting suffit, réutilisées toute l'année)
 
 Ce sont les photos qui apparaissent sur l'accueil, `/la-maison/` et la galerie. Priorité haute : ce sont les plus vues du site.
+
+**Livrées** (remplacent déjà le placeholder correspondant, voir `src/data/real-images.ts`) :
+
+| Slug | Sujet |
+|---|---|
+| `chambre-1-etage` | Suite parentale — étage |
+| `chambre-2-etage` | Chambre double — étage |
+| `chambre-3-etage` | Chambre à lit simple gigogne — étage |
+| `chambre-4-rdc` | Chambre RDC |
+| `cuisine` | Cuisine équipée |
+| `salon` | Salon |
+| `salon-coin-poele` | Salon — coin poêle (galerie uniquement) |
+| `poele-a-bois` | Le poêle à bois |
+| `salle-a-manger` | Salle à manger (nouvelle pièce ajoutée au modèle) |
+| `terrasse` | Terrasse (nouvelle pièce ajoutée au modèle) |
+| `jardin` | Jardin clos |
+| `salle-de-bain-rdc` | Salle de bain RDC |
+| `salle-de-bain-etage` | Salle de bain étage |
+| `salle-de-bain-etage-douche` | Salle de bain étage — douche (galerie uniquement) |
+| `salle-de-bain-etage-vue` | Salle de bain étage — vue d'ensemble (galerie uniquement) |
+
+**Encore en placeholder** :
 
 | Fichier à remplacer | Sujet | Format |
 |---|---|---|
 | `placeholder-facade.svg` | Façade / extérieur de la maison | 4:5 |
-| `placeholder-jardin.svg` | Jardin clos | 4:5 |
-| `placeholder-salon.svg` | Salon (avec le poêle si possible) | 4:5 |
-| `placeholder-cuisine.svg` | Cuisine équipée | 4:5 |
-| `placeholder-chambre-1-etage.svg` | Chambre 1 — étage (lit double) | 4:5 |
-| `placeholder-chambre-2-etage.svg` | Chambre 2 — étage (lit double) | 4:5 |
-| `placeholder-chambre-3-etage.svg` | Chambre avec lit gigogne — étage | 4:5 |
-| `placeholder-chambre-4-rdc.svg` | Chambre RDC (accessible sans escalier) | 4:5 |
-| `placeholder-salle-de-bain-rdc.svg` | Salle de bain RDC (douche à l'italienne) | 4:5 |
-| `placeholder-salle-de-bain-etage.svg` | Salle de bain étage | 4:5 |
-| `placeholder-poele-a-bois.svg` | Le poêle à bois (idéalement allumé) | 4:5 |
 | `placeholder-espace-travail.svg` | Espace de travail dédié | 4:5 |
 
-**Où ça apparaît** : accueil (aperçu 6 photos), `/la-maison/` (visite pièce par pièce), `/la-maison/galerie/` (les 12 + filtrables par pièce).
+**Où ça apparaît** : accueil (aperçu 6 photos), `/la-maison/` (visite pièce par pièce), `/la-maison/galerie/` (toutes les photos, filtrables par pièce).
 
 ---
 
-## B. Plans des 2 niveaux — 2 visuels (pas des photos)
-
-Ce ne sont pas des photos mais des **plans schématiques** — à faire réaliser par un graphiste ou vous-même (croquis vectorisé, cotes non nécessaires, juste la disposition des pièces).
-
-| Fichier à remplacer | Sujet | Format |
-|---|---|---|
-| `placeholder-plan-rdc.svg` | Plan du rez-de-chaussée | 1:1 |
-| `placeholder-plan-etage.svg` | Plan de l'étage | 1:1 |
-
-**Où ça apparaît** : `/la-maison/`, galerie (catégorie « Plans »).
-
----
-
-## C. Un hero par saison — 4 photos (haute priorité visuelle)
+## B. Un hero par saison — 4 photos (haute priorité visuelle)
 
 Ce sont les photos plein écran en tête de l'accueil (saison en cours) et de chaque page `/saisons/[saison]/`. Ce sont les visuels les plus impactants du site — à shooter en priorité si le budget photo doit être séquencé (PRD §16 : la saison en cours d'abord).
 
@@ -64,7 +63,7 @@ Ce sont les photos plein écran en tête de l'accueil (saison en cours) et de ch
 
 ---
 
-## D. Territoire par saison — 12 photos (3 par saison)
+## C. Territoire par saison — 12 photos (3 par saison)
 
 Photos du territoire (pas de la maison) illustrant la saison sur `/saisons/[saison]/` et la galerie (catégorie « Le territoire par saison »).
 
@@ -85,7 +84,7 @@ Photos du territoire (pas de la maison) illustrant la saison sur `/saisons/[sais
 
 ---
 
-## E. Autre
+## D. Autre
 
 | Fichier à remplacer | Sujet | Format | Priorité |
 |---|---|---|---|
@@ -93,7 +92,7 @@ Photos du territoire (pas de la maison) illustrant la saison sur `/saisons/[sais
 
 ---
 
-## F. Non encore prévu sur le site, mais mentionné au PRD
+## E. Non encore prévu sur le site, mais mentionné au PRD
 
 - **Vidéos courtes (20–40 s, muettes, en boucle)** — une par saison. Format AV1/WebM, < 2 Mo (PRD §6.5). Le site ne les affiche pas encore (aucun composant vidéo construit) : à prévoir techniquement avant de les intégrer.
 - **Portraits de Pauline & Maeva** — utile pour humaniser le site et le futur balisage `Person`/`Organization` (PRD §11.4), mais aucune page ne l'affiche pour l'instant.
@@ -104,14 +103,13 @@ Photos du territoire (pas de la maison) illustrant la saison sur `/saisons/[sais
 
 | Catégorie | Nombre | Type | Restant à fournir |
 |---|---|---|---|
-| A. La maison | 12 | Photo | 12 |
-| B. Plans | 2 | Plan schématique (pas une photo) | 2 |
-| C. Hero par saison | 4 (+ 2 recadrages été) | Photo | 2 recadrages été (4:5, 1:1) — les 4 hero 16:9 sont couverts par du stock interim |
-| D. Territoire par saison | 12 | Photo | 12 |
-| E. Carte du territoire | 1 | Photo (basse priorité) | 1 |
-| **Total photos** | **31** | | **27 (+ 4 à confirmer/remplacer)** |
+| A. La maison | 17 | Photo | 2 (façade, espace de travail) |
+| B. Hero par saison | 4 (+ 2 recadrages été) | Photo | 2 recadrages été (4:5, 1:1) — les 4 hero 16:9 sont couverts par du stock interim |
+| C. Territoire par saison | 12 | Photo | 12 |
+| D. Carte du territoire | 1 | Photo (basse priorité) | 1 |
+| **Total photos** | **34** | | **15 (+ 4 à confirmer/remplacer)** |
 
-**Stratégie de démarrage suggérée** (reprend PRD §16) : shooter d'abord la saison en cours (été, aujourd'hui) + les 12 photos de la maison (catégorie A, valables toute l'année) = **19 photos prioritaires**. Les 3 autres saisons (24 photos restantes) peuvent suivre au fil des 4 shootings trimestriels prévus.
+**Stratégie de démarrage suggérée** (reprend PRD §16) : la catégorie A (maison, valable toute l'année) est quasiment complète (15/17). Reste à shooter la façade et l'espace de travail, puis la saison en cours (été, aujourd'hui). Les 3 autres saisons (24 photos restantes) peuvent suivre au fil des 4 shootings trimestriels prévus.
 
 Une fois un fichier prêt, il suffit de le déposer dans `public/medias/` (hors du dossier `placeholder/`) et de mettre à jour le `slug` correspondant dans le code — voir `docs/user-stories.md` US-070 pour le suivi du remplacement.
 

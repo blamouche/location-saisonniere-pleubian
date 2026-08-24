@@ -2,7 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import FactBox from '@/components/FactBox.astro';
 import Cta from '@/components/Cta.astro';
-import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import RoomImage from '@/components/RoomImage.astro';
 import HeroImage from '@/components/HeroImage.astro';
 import EnCeMoment from '@/components/EnCeMoment.astro';
 import { Image } from 'astro:assets';
@@ -159,7 +159,7 @@ const chiffresCles = [
       <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
         {
           dict.apercuPhotos.map((photo) => (
-            <PlaceholderImage slug={photo.slug} ratio="4x5" alt={photo.label} class="w-full rounded-lg object-cover" />
+            <RoomImage slug={photo.slug} ratio="4x5" alt={photo.label} class="w-full rounded-lg object-cover" />
           ))
         }
       </div>

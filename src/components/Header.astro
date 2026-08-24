@@ -1,6 +1,5 @@
 ---
 import { maison } from '@/data/maison';
-import SeasonSwitcher from '@/components/SeasonSwitcher.astro';
 import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
 import { homePath, sectionPath, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/dictionary';
@@ -16,12 +15,10 @@ const dict = t(locale).nav;
 // Expériences/Découvrir : encore FR uniquement (Lot 5 en cours, US-062/063) — masqués
 // en EN/DE plutôt que de pointer vers du contenu inexistant (US-064).
 const nav = [
-  { href: homePath(locale), label: dict.accueil },
   { href: sectionPath('la-maison', locale), label: dict.laMaison },
   ...(locale === 'fr' ? [{ href: sectionPath('experiences', locale), label: dict.experiences }] : []),
   ...(locale === 'fr' ? [{ href: sectionPath('decouvrir', locale), label: dict.decouvrir }] : []),
   { href: sectionPath('saisons', locale), label: dict.saisons },
-  ...(locale === 'fr' ? [{ href: sectionPath('journal', locale), label: dict.journal }] : []),
   { href: sectionPath('reserver', locale), label: dict.reserver },
   { href: sectionPath('contact', locale), label: dict.contact },
 ];
@@ -60,7 +57,6 @@ const current = new URL(Astro.request.url).pathname;
           </a>
         ))
       }
-      <SeasonSwitcher locale={locale} />
       <LanguageSwitcher locale={locale} alternates={alternates} />
       <a
         href={sectionPath('reserver', locale)}
@@ -81,9 +77,6 @@ const current = new URL(Astro.request.url).pathname;
           </a>
         ))
       }
-      <div class="mt-2">
-        <SeasonSwitcher idSuffix="mobile" locale={locale} />
-      </div>
       <div class="mt-2">
         <LanguageSwitcher idSuffix="mobile" locale={locale} alternates={alternates} />
       </div>

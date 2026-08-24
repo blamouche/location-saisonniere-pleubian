@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import RoomImage from '@/components/RoomImage.astro';
 import { maison } from '@/data/maison';
 import { lodgingBusinessJsonLd } from '@/lib/jsonld';
 import { laMaisonContent, translateItem, equipementItems, scenarioItems, cePasCestItems } from '@/i18n/pages/la-maison';
@@ -43,7 +43,7 @@ const canonical = new URL(sectionPath('la-maison', locale), Astro.site).toString
         {
           dict.pieces.map((piece) => (
             <figure class="overflow-hidden rounded-lg border border-border bg-surface">
-              <PlaceholderImage slug={piece.slug} ratio="4x5" alt={piece.titre} class="w-full object-cover" />
+              <RoomImage slug={piece.slug} ratio="4x5" alt={piece.titre} class="w-full object-cover" />
               <figcaption class="p-3">
                 <p class="font-semibold">{piece.titre}</p>
                 <p class="mt-1 text-sm text-ink-muted">{piece.description}</p>

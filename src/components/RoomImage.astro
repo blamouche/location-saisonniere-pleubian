@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { houseImages } from '@/data/real-images';
+
+/**
+ * Bascule automatique placeholder → vraie photo de la maison (US-070), même
+ * contrat de props que `PlaceholderImage` pour un remplacement transparent
+ * partout où un `slug` de pièce est utilisé.
+ */
+export interface Props {
+  slug: string;
+  ratio?: '16x9' | '4x5' | '1x1';
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { slug, ratio = '4x5', alt, class: className, loading = 'lazy' } = Astro.props;
+const real = houseImages[slug];
+const widthsParRatio = { '16x9': [480, 800, 1200], '4x5': [400, 640, 900], '1x1': [400, 640, 900] } as const;
+const sizesParRatio = { '16x9': '(min-width: 1024px) 33vw, 100vw', '4x5': '(min-width: 1024px) 25vw, 50vw', '1x1': '(min-width: 1024px) 25vw, 50vw' } as const;
+---
+
+{
+  real ? (
+    <Image src={real} alt={alt} loading={loading} class={className} widths={[...widthsParRatio[ratio]]} sizes={sizesParRatio[ratio]} format="avif" />
+  ) : (
+    <PlaceholderImage slug={slug} ratio={ratio} alt={alt} loading={loading} class={className} />
+  )
+}

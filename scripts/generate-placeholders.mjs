@@ -63,8 +63,6 @@ const ASSETS = [
   { slug: 'facade', label: 'Façade', ratio: '4x5' },
   { slug: 'poele-a-bois', label: 'Poêle à bois', ratio: '4x5' },
   { slug: 'espace-travail', label: 'Espace de travail', ratio: '4x5' },
-  { slug: 'plan-rdc', label: 'Plan — RDC', ratio: '1x1' },
-  { slug: 'plan-etage', label: 'Plan — étage', ratio: '1x1' },
 ];
 
 function svg(label, ratioKey, seed, palette) {
