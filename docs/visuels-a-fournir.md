@@ -51,7 +51,7 @@ Ce sont les photos plein écran en tête de l'accueil (saison en cours) et de ch
 
 | Fichier à remplacer | Saison | Sujet suggéré | Format | Statut |
 |---|---|---|---|---|
-| `placeholder-hero-printemps-16x9.svg` | Printemps | Maison ou Sillon de Talbert, ajoncs en fleur | 16:9 | À fournir |
+| `placeholder-hero-printemps-16x9.svg` | Printemps | Maison ou Sillon de Talbert, ajoncs en fleur | 16:9 | ⚠️ Remplacé par une photo de stock (mouillage breton générique) |
 | `placeholder-hero-ete-16x9.svg` | Été | Jardin, tablée dehors, ou plage de Kermagen | 16:9 | ⚠️ Remplacé par une photo de stock (littoral rocheux générique, pas la maison) |
 | `placeholder-hero-automne-16x9.svg` | Automne | Tempête, sentier, feu de bois | 16:9 | ⚠️ Remplacé par une photo de stock (maison bretonne générique) |
 | `placeholder-hero-hiver-16x9.svg` | Hiver | Poêle allumé, nuit tombante, ciel étoilé | 16:9 | ⚠️ Remplacé par une photo de stock (mer démontée générique) |
@@ -106,10 +106,10 @@ Photos du territoire (pas de la maison) illustrant la saison sur `/saisons/[sais
 |---|---|---|---|
 | A. La maison | 12 | Photo | 12 |
 | B. Plans | 2 | Plan schématique (pas une photo) | 2 |
-| C. Hero par saison | 4 (+ 2 recadrages été) | Photo | 1 (printemps) — 3 couvertes par du stock interim, 2 recadrages été |
+| C. Hero par saison | 4 (+ 2 recadrages été) | Photo | 2 recadrages été (4:5, 1:1) — les 4 hero 16:9 sont couverts par du stock interim |
 | D. Territoire par saison | 12 | Photo | 12 |
 | E. Carte du territoire | 1 | Photo (basse priorité) | 1 |
-| **Total photos** | **31** | | **28 (+ 3 à confirmer/remplacer)** |
+| **Total photos** | **31** | | **27 (+ 4 à confirmer/remplacer)** |
 
 **Stratégie de démarrage suggérée** (reprend PRD §16) : shooter d'abord la saison en cours (été, aujourd'hui) + les 12 photos de la maison (catégorie A, valables toute l'année) = **19 photos prioritaires**. Les 3 autres saisons (24 photos restantes) peuvent suivre au fil des 4 shootings trimestriels prévus.
 
@@ -117,6 +117,7 @@ Une fois un fichier prêt, il suffit de le déposer dans `public/medias/` (hors 
 
 ### Déjà reçus (voir note ⚠️ plus haut)
 
+- `src/assets/images/hero/hero-printemps.jpg` — photo de stock (Gilles Boutault / Unsplash)
 - `src/assets/images/hero/hero-ete.jpg` — photo de stock (Peter Burdon / Unsplash)
 - `src/assets/images/hero/hero-automne.jpg` — photo de stock (Amzallag Micheline / Unsplash)
 - `src/assets/images/hero/hero-hiver.jpg` — photo de stock (Cédric Le Bars / Unsplash)

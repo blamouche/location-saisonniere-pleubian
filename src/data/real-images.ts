@@ -1,4 +1,5 @@
 import type { ImageMetadata } from 'astro';
+import heroPrintemps from '@/assets/images/hero/hero-printemps.jpg';
 import heroEte from '@/assets/images/hero/hero-ete.jpg';
 import heroAutomne from '@/assets/images/hero/hero-automne.jpg';
 import heroHiver from '@/assets/images/hero/hero-hiver.jpg';
@@ -13,6 +14,7 @@ import type { SaisonId } from './saisons';
  * Sillon de Talbert — à ne pas présenter comme telles.
  */
 export const heroImages: Partial<Record<SaisonId, { src: ImageMetadata; credit: string }>> = {
+  printemps: { src: heroPrintemps, credit: 'Photo : Gilles Boutault / Unsplash (mouillage breton, générique)' },
   ete: { src: heroEte, credit: 'Photo : Peter Burdon / Unsplash (littoral rocheux, générique)' },
   automne: { src: heroAutomne, credit: 'Photo : Amzallag Micheline / Unsplash (maison bretonne en granit, générique)' },
   hiver: { src: heroHiver, credit: 'Photo : Cédric Le Bars / Unsplash (mer démontée, générique)' },
