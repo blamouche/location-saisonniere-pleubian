@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import { fichesLieux } from '@/data/decouvrir';
+import { lieuxAProximite } from '@/data/a-proximite';
 ---
 
 <BaseLayout
@@ -28,5 +29,33 @@ import { fichesLieux } from '@/data/decouvrir';
         ))
       }
     </div>
+
+    <section class="mt-16" aria-labelledby="proximite-titre">
+      <h2 id="proximite-titre" class="font-display text-2xl font-semibold">À proximité — jusqu'à 1h de route</h2>
+      <p class="mt-2 max-w-2xl text-sm text-ink-muted">
+        Au-delà de la Presqu'île sauvage, ces lieux restent accessibles en moins d'une heure de route (PRD §1.2). Temps de trajet exacts à vérifier
+        porte-à-porte avant publication définitive.
+      </p>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          lieuxAProximite.map((lieu) => (
+            <li>
+              {lieu.lien ? (
+                <a href={`/decouvrir/${lieu.lien}/`} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
+                  <p class="font-display font-semibold">{lieu.nom}</p>
+                  <p class="mt-1 text-sm text-ink-muted">{lieu.description}</p>
+                </a>
+              ) : (
+                <a href={lieu.lienExterne} target="_blank" rel="noopener noreferrer nofollow" class="block rounded-lg border border-dashed border-border bg-surface p-4 hover:bg-surface-alt">
+                  <p class="font-display font-semibold">{lieu.nom} ↗</p>
+                  <p class="mt-1 text-sm text-ink-muted">{lieu.description}</p>
+                  <p class="mt-2 text-xs text-ink-muted">Pas encore de fiche dédiée — lien vers une source externe.</p>
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </div>
 </BaseLayout>

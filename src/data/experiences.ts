@@ -10,7 +10,7 @@ export interface Proposition {
 
 export interface Experience {
   slug: string;
-  pilier: 'Sport' | 'Bien-être' | 'Déconnexion' | 'Culture';
+  pilier: 'Sport' | 'Bien-être' | 'Déconnexion' | 'Culture' | 'Famille';
   titre: string;
   /** Encadré « L'essentiel » (US-051) : 40-60 mots, autonome hors contexte. */
   essentiel: string;
@@ -343,5 +343,39 @@ export const experiences: Experience[] = [
     ],
     decouvrirLies: ['treguier', 'presquile-sauvage'],
     heroSlug: 'saison-automne-1',
+  },
+  {
+    slug: 'famille-enfants',
+    pilier: 'Famille',
+    titre: 'Activités en famille',
+    essentiel:
+      "Les activités en famille autour de la Maison Od Joge combinent le jardin clos et sans vis-à-vis de la maison, la plage de Kermagen avec sa cale de mise à l'eau, une balade courte sur le Sillon de Talbert, et l'accrobranche Vivons Perchés à Pleumeur-Bodou, accessible dès 2 ans sur la Mini Forêt.",
+    promesse: "Jardin clos, plage familiale, balades courtes et accrobranche dès 2 ans : la Presqu'île sauvage se prête bien à un séjour en famille avec de jeunes enfants.",
+    depuisLaMaison: 'La maison elle-même est pensée pour les familles : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée, mer à 5 minutes à pied.',
+    propositions: [
+      { titre: 'Jouer dans le jardin clos', duree: 'Libre', difficulte: 'Aucune', saisonIdeale: "Toute l'année", cout: 'Inclus dans le séjour' },
+      { titre: 'Plage de Kermagen', duree: 'Une demi-journée', difficulte: 'Facile', saisonIdeale: 'Été', cout: 'Gratuit' },
+      { titre: 'Balade courte sur le Sillon de Talbert', duree: '~1h', difficulte: 'Facile, plat', saisonIdeale: "Toute l'année, selon marée", cout: 'Gratuit' },
+      {
+        titre: 'Mini Forêt à Vivons Perchés (accrobranche, dès 2 ans)',
+        duree: '1h',
+        difficulte: 'Très facile',
+        saisonIdeale: "Toute l'année (ouvert du lundi au samedi)",
+        cout: 'Voir tarifs sur le site',
+        source: 'https://www.vivons-perches.bzh/accrobranche/',
+      },
+    ],
+    encadrePratique: {
+      materiel: ['Vêtements de rechange', 'Chaussures fermées pour l’accrobranche'],
+      reservations: 'Réservation recommandée pour l’accrobranche (Vivons Perchés) ; le reste est en accès libre.',
+      prestataires: 'Vivons Perchés (Pleumeur-Bodou) pour l’accrobranche.',
+    },
+    faq: [
+      { q: 'La maison est-elle adaptée aux jeunes enfants ?', r: 'Oui : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée.' },
+      { q: 'Y a-t-il des activités accessibles aux tout-petits ?', r: 'Oui, la Mini Forêt de l’accrobranche Vivons Perchés est accessible dès 2 ans (80 cm de haut maximum).' },
+      { q: 'La plage de Kermagen convient-elle aux enfants ?', r: 'C’est la plage familiale de référence à Pleubian, avec une cale de mise à l’eau — surveillance parentale recommandée comme partout.' },
+    ],
+    decouvrirLies: ['plages-pleubian', 'sillon-de-talbert'],
+    heroSlug: 'saison-ete-3',
   },
 ];
