@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import { experiences } from '@/data/experiences';
+import { experienceHeroImages } from '@/data/real-images';
 
 const piliers = ['Famille', 'Sport', 'Bien-être', 'Déconnexion', 'Culture'] as const;
 ---
@@ -27,7 +29,20 @@ const piliers = ['Famille', 'Sport', 'Bien-être', 'Déconnexion', 'Culture'] as
             <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((e) => (
                 <a href={`/experiences/${e.slug}/`} class="group overflow-hidden rounded-xl border border-border bg-surface">
-                  <PlaceholderImage slug={e.heroSlug} ratio="16x9" alt={`${e.titre} (visuel provisoire)`} class="h-36 w-full object-cover" />
+                  {
+                    experienceHeroImages[e.slug] ? (
+                      <Image
+                        src={experienceHeroImages[e.slug].src}
+                        alt={e.titre}
+                        class="h-36 w-full object-cover"
+                        widths={[320, 480, 640]}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        format="avif"
+                      />
+                    ) : (
+                      <PlaceholderImage slug={e.heroSlug} ratio="16x9" alt={`${e.titre} (visuel provisoire)`} class="h-36 w-full object-cover" />
+                    )
+                  }
                   <div class="p-4">
                     <p class="font-display font-semibold group-hover:text-accent">{e.titre}</p>
                     <p class="mt-1 text-sm text-ink-muted">{e.promesse}</p>
