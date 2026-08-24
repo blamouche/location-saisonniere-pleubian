@@ -34,14 +34,14 @@
     "wcSepare": true
   },
   "chambres": [
-    { "nom": "Chambre 1 (étage)", "niveau": "Étage", "configuration": "Lit double" },
-    { "nom": "Chambre 2 (étage)", "niveau": "Étage", "configuration": "Lit double" },
-    { "nom": "Chambre 3 (étage)", "niveau": "Étage", "configuration": "Lit gigogne" },
+    { "nom": "Chambre 1 (étage)", "niveau": "Étage", "configuration": "Suite parentale, lit double" },
+    { "nom": "Chambre 2 (étage)", "niveau": "Étage", "configuration": "Lit double, séparable en lits simples" },
+    { "nom": "Chambre 3 (étage)", "niveau": "Étage", "configuration": "Deux lits simples" },
     { "nom": "Chambre 4 (RDC)", "niveau": "RDC", "configuration": "Lit double" }
   ],
   "sallesDeBain": [
     { "nom": "Salle de bain RDC", "equipement": "Douche à l'italienne" },
-    { "nom": "Salle de bain étage", "equipement": "Standard" }
+    { "nom": "Salle de bain étage", "equipement": "Salle de bain & WC" }
   ],
   "scenariosCouchage": [
     "2 familles avec enfants (chambres séparées à l'étage + RDC)",
