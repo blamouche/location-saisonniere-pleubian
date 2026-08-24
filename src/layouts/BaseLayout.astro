@@ -121,8 +121,11 @@ const ogLocaleMap: Record<Locale, string> = { fr: 'fr_FR', en: 'en_GB', de: 'de_
         ))}
       </ol>
       {/* Fraîcheur datée (US-059, PRD §12.2.C) : visible sur toutes les pages de
-          contenu, recalculée à chaque build. */}
-      <p>{dict.misAJourLe} {formatDateLocale(buildDate, locale)}</p>
+          contenu, recalculée à chaque build — remplaçable par un contenu plus
+          utile (ex. marées du jour sur l'accueil) via le slot nommé "freshness". */}
+      <slot name="freshness">
+        <p>{dict.misAJourLe} {formatDateLocale(buildDate, locale)}</p>
+      </slot>
     </nav>
 
     <main id="contenu">

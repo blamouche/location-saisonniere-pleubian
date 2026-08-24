@@ -7,7 +7,6 @@ export interface HomeContent {
   heroTitle: string;
   heroKicker: (saisonLabel: string, commune: string, departement: string) => string;
   heroPitch: (voyageurs: number, commune: string, lieuDit: string, dureeMer: string) => string;
-  saisonAffichee: string;
   mareesIndisponibles: string;
   mareesLabel: string;
   pleineMer: string;
@@ -45,7 +44,6 @@ export const homeContent: Record<Locale, HomeContent> = {
     heroKicker: (saisonLabel, commune, departement) => `${saisonLabel} · ${commune}, ${departement}`,
     heroPitch: (voyageurs, commune, lieuDit, dureeMer) =>
       `Maison familiale de ${voyageurs} personnes entre ${commune} et ${lieuDit}, à ${dureeMer} de la mer, sur la Presqu'île sauvage.`,
-    saisonAffichee: 'Saison affichée :',
     mareesIndisponibles: 'Marées du jour : indisponibles pour ce build — météo à connecter (US-032)',
     mareesLabel: 'Marées à Pleubian',
     pleineMer: 'pleine mer',
@@ -97,7 +95,6 @@ export const homeContent: Record<Locale, HomeContent> = {
     heroKicker: (saisonLabel, commune, departement) => `${saisonLabel} · ${commune}, ${departement}, France`,
     heroPitch: (voyageurs, commune, lieuDit, dureeMer) =>
       `A family holiday home for ${voyageurs}, between ${commune} and ${lieuDit}, ${dureeMer} from the sea, on Brittany's wild peninsula.`,
-    saisonAffichee: 'Season shown:',
     mareesIndisponibles: 'Today’s tides: unavailable for this build — live feed to be connected (US-032)',
     mareesLabel: 'Tides at Pleubian',
     pleineMer: 'high tide',
@@ -149,7 +146,6 @@ export const homeContent: Record<Locale, HomeContent> = {
     heroKicker: (saisonLabel, commune, departement) => `${saisonLabel} · ${commune}, ${departement}, Frankreich`,
     heroPitch: (voyageurs, commune, lieuDit, dureeMer) =>
       `Ferienhaus für ${voyageurs} Personen zwischen ${commune} und ${lieuDit}, ${dureeMer} vom Meer entfernt, auf der wilden Halbinsel der Bretagne.`,
-    saisonAffichee: 'Angezeigte Jahreszeit:',
     mareesIndisponibles: 'Gezeiten heute: für diesen Build nicht verfügbar — Live-Anbindung folgt (US-032)',
     mareesLabel: 'Gezeiten bei Pleubian',
     pleineMer: 'Flut',

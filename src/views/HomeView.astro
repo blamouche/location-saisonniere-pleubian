@@ -13,7 +13,7 @@ import { pointsInteret } from '@/data/points-interet';
 import { lireMaree } from '@/lib/maree';
 import { experienceHeroImages } from '@/data/real-images';
 import { homeContent } from '@/i18n/pages/home';
-import { entryPath, homePath, sectionPath, sectionSlug, experienceSlugs, decouvrirSlugs, saisonLabels, saisonPeriodes, type Locale } from '@/i18n/locales';
+import { entryPath, homePath, sectionPath, sectionSlug, experienceSlugs, decouvrirSlugs, saisonLabels, type Locale } from '@/i18n/locales';
 
 export interface Props {
   locale: Locale;
@@ -26,7 +26,6 @@ const festivalHero = experienceHeroImages['festival-chant-de-marin'];
 
 const saison = getSaisonCourante();
 const saisonLabel = saisonLabels[saison.id][locale];
-const saisonPeriode = saisonPeriodes[saison.id][locale];
 const maree = lireMaree();
 const canonical = new URL(homePath(locale), Astro.site).toString();
 
@@ -69,45 +68,40 @@ const chiffresCles = [
     </div>
   </section>
 
-  <!-- 2. Barre de contexte -->
-  <section class="bg-surface-alt">
-    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm text-ink-muted sm:px-6">
-      <span><strong class="text-ink">{dict.saisonAffichee}</strong> {saisonLabel} ({saisonPeriode})</span>
-      <span aria-hidden="true">·</span>
-      {
-        (() => {
-          const jour = maree.donnees?.jours[0];
-          if (maree.statut === 'indisponible' || !jour) {
-            return <span>{dict.mareesIndisponibles}</span>;
-          }
-          const pleinesMer = jour.evenements.filter((e) => e.type === 'pleine_mer');
-          const bassesMer = jour.evenements.filter((e) => e.type === 'basse_mer');
-          const coeffs = pleinesMer.map((e) => e.coefficient).filter((c): c is number => c !== null);
-          return (
-            <span>
-              <strong class="text-ink">{dict.mareesLabel}</strong> ({jour.date}) : {dict.pleineMer} {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · {dict.basseMer}{' '}
-              {bassesMer.map((e) => e.heure).join(' & ')}
-              {coeffs.length > 0 && <> · {dict.coeff} {coeffs.join('/')}</>}
-              {maree.statut === 'perime' && ` (${dict.donneePrecedente})`}
-              {maree.source && (
-                <>
-                  {' '}
-                  — <a href={maree.source} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">{dict.sourceShom}</a>
-                </>
-              )}
-            </span>
-          );
-        })()
-      }
-    </div>
-  </section>
+  <Fragment slot="freshness">
+    {
+      (() => {
+        const jour = maree.donnees?.jours[0];
+        if (maree.statut === 'indisponible' || !jour) {
+          return <p>{dict.mareesIndisponibles}</p>;
+        }
+        const pleinesMer = jour.evenements.filter((e) => e.type === 'pleine_mer');
+        const bassesMer = jour.evenements.filter((e) => e.type === 'basse_mer');
+        const coeffs = pleinesMer.map((e) => e.coefficient).filter((c): c is number => c !== null);
+        return (
+          <p>
+            <strong class="text-ink">{dict.mareesLabel}</strong> ({jour.date}) : {dict.pleineMer} {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · {dict.basseMer}{' '}
+            {bassesMer.map((e) => e.heure).join(' & ')}
+            {coeffs.length > 0 && <> · {dict.coeff} {coeffs.join('/')}</>}
+            {maree.statut === 'perime' && ` (${dict.donneePrecedente})`}
+            {maree.source && (
+              <>
+                {' '}
+                — <a href={maree.source} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">{dict.sourceShom}</a>
+              </>
+            )}
+          </p>
+        );
+      })()
+    }
+  </Fragment>
 
   {
     /* Bloc événement : Festival du Chant de Marin 2027 — FR uniquement pour
        l'instant, tant que la page expérience correspondante n'est pas traduite
        (US-064 : jamais de lien vers du contenu inexistant). */
     locale === 'fr' && (
-      <section>
+      <section class="mt-10 sm:mt-16">
         <a href={entryPath('experiences', experienceSlugs, 'festival-chant-de-marin', locale)} class="mx-auto grid max-w-6xl gap-0 sm:grid-cols-2 hover:opacity-95">
           {
             festivalHero ? (
