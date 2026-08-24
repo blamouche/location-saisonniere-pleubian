@@ -17,7 +17,7 @@ const chiffresCles = [
   { label: 'Voyageurs', value: `${maison.capacite.voyageurs}` },
   { label: 'Chambres', value: `${maison.capacite.chambres}` },
   { label: 'Salles de bain', value: `${maison.capacite.sallesDeBain}` },
-  { label: 'Jardin', value: 'Clos, privatif' },
+  { label: 'Jardin', value: 'Clos, privatif, sans vis-à-vis' },
   { label: 'Mer à pied', value: maison.distances.mer.duree },
   { label: 'Statut', value: maison.superhost ? 'Superhost' : 'Hôte' },
 ];
@@ -81,7 +81,7 @@ const raisonsDeVenir = [
     <section aria-labelledby="pitch-titre">
       <h2 id="pitch-titre" class="sr-only">En bref</h2>
       <p class="max-w-3xl font-display text-xl leading-snug sm:text-2xl">
-        {maison.nom} est une maison bretonne pour {maison.capacite.voyageurs} personnes, au hameau de {maison.adresse.lieuDit} à {maison.adresse.commune} ({maison.adresse.codePostal}), sur la Presqu'île sauvage entre les estuaires du Trieux et du Jaudy. Jardin clos, poêle à bois, espace de travail dédié, et le Sillon de Talbert à quelques minutes.
+        {maison.nom} est une maison bretonne pour {maison.capacite.voyageurs} personnes, à {maison.adresse.commune} ({maison.adresse.codePostal}), sur la Presqu'île sauvage entre les estuaires du Trieux et du Jaudy. Jardin clos, poêle à bois, espace de travail dédié, et le Sillon de Talbert à quelques minutes.
       </p>
     </section>
 
