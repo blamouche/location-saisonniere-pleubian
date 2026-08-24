@@ -742,4 +742,139 @@ Le PRD « Maison Od Joge » est **l'un des mieux préparés sur le plan SEO/GEO*
 
 ---
 
+## 12. Stratégie de nom de domaine (NDD)
+
+### 12.1 Enjeu et contexte
+
+Le choix du nom de domaine est une décision **stratégique et quasi irréversible** — il impacte le SEO, la mémorisation, la confiance, et l'identité de marque pour des années. En 2026, les règles ont changé :
+
+- **Les EMD (Exact Match Domains) ne donnent plus d'avantage ranking direct** depuis l'update Google 2012. Un domaine `location-pleubian.fr` ne rankera pas mieux qu'un domaine de marque à contenu égal.
+- **Le nom de domaine est un signal de marque, pas un signal de mots-clés.** Ce qui compte : mémorisable, prononçable, trustworthy, aligné avec l'identité du projet.
+- **L'extension (TLD) a un impact SEO local réel.** Un `.fr` envoie un signal géographique fort à Google pour les recherches en France. Un `.com` est neutre. Un `.bzh` signale l'ancrage breton.
+- **Le domaine influence le CTR en SERP.** Un domaine court, clair et trustworthy augmente le taux de clic. Un domaine de marque mémorisable génère des recherches directes (branded search), qui sont un signal d'autorité.
+
+### 12.2 Critères de choix
+
+| Critère | Poids | Justification |
+|---|---|---|
+| **Mémorisable** | Élevé | Le visiteur doit pouvoir retenir le nom après une lecture rapide. Court > long. |
+| **Prononçable** | Élevé | Doit passer le « radio test » : entendu à la radio, on sait l'écrire. |
+| **Pas d'ambiguïté** | Élevé | Pas de tirets si possible, pas de chiffres, pas d'homophones. |
+| **Alignement marque** | Élevé | Le domaine doit refléter l'identité du projet (Maison Od Joge = marque du bien). |
+| **Extension SEO locale** | Moyen | `.fr` = signal France, `.bzh` = signal Bretagne, `.com` = neutre/international. |
+| **Disponibilité** | Obligatoire | Le domaine doit être disponible à l'enregistrement. |
+| **Coût** | Faible | Différence minime entre extensions (sauf .bzh ~50€/an vs .fr ~10€/an). |
+| **Protectibilité** | Moyen | Pouvoir enregistrer les variantes principales pour éviter le cybersquatting. |
+
+### 12.3 Extensions (TLD) analysées
+
+| TLD | Prix/an | Avantage SEO | Avantage confiance | Inconvénient | Verdict |
+|---|---|---|---|---|---|
+| **.fr** | ~10–12 € | **Signal local France fort** (ccTLD reconnu par Google). 85% des Français considèrent .fr comme un gage de fiabilité. | Très élevé en France. Implication de respecter la législation française. | Aucun signal international. Pas d'ancrage breton. | **Recommandé comme domaine principal si marché FR prioritaire.** |
+| **.com** | ~12 € | Neutre (aucun signal géographique). Google le traite comme gTLD. | Universellement reconnu, bonne pour l'international (EN/DE). | Pas de signal local. Plus difficile à obtenir court. | **Recommandé en complément (redirection ou domaine principal si international prioritaire).** |
+| **.bzh** | ~50 € | Signal géographique Bretagne (geoTLD géré par AFNIC). Reconnaissance locale et culturelle. Peut aider sur les recherches incluant « Bretagne ». | Forte identification bretonne pour les visiteurs qui connaissent l'extension. | Moins universellement reconnu que .fr/.com. Prix plus élevé. Peut sembler niche pour un public international (DE/UK). Conditions d'éligibilité (lien avec la Bretagne). | **Excellent choix si l'ancrage breton est un argument de marque. À utiliser en domaine principal ou en redirection.** |
+
+### 12.4 Stratégie recommandée
+
+#### Option A — Recommandée : `.bzh` comme domaine principal
+
+```
+odjoge.bzh            ← Domaine principal
+odjoge.fr             ← Redirection 301 vers odjoge.bzh
+odjoge.com            ← Redirection 301 vers odjoge.bzh
+```
+
+**Pourquoi :**
+- L'identité du projet est **bretonne** (Presqu'île sauvage, Pleubian, Côtes-d'Armor). Le `.bzh` renforce cet ancrage.
+- Le site vise les marchés FR, EN, DE. Le `.bzh` signale « Bretagne » à tous les publics, y compris internationaux (les voyageurs allemands et britanniques connaissent la Bretagne comme destination).
+- C'est un domaine de marque (`odjoge`), pas un EMD. Le `.bzh` ajoute la dimension territoriale sans compromettre la mémorisation.
+- Se démarque des portails génériques (Airbnb, Booking, Amivac) qui utilisent tous `.com` ou `.fr`.
+
+**Inconvénient :** prix (~50€/an vs ~10€/an pour .fr) et reconnaissance moindre chez les visiteurs non-européens.
+
+#### Option B — Alternative solide : `.fr` comme domaine principal
+
+```
+odjoge.fr             ← Domaine principal
+odjoge.bzh            ← Redirection 301 vers odjoge.fr
+odjoge.com            ← Redirection 301 vers odjoge.fr
+```
+
+**Pourquoi :**
+- Signal SEO local France le plus fort (ccTLD reconnu).
+- Confiance maximale pour le marché principal (FR = 70–80% du trafic cible).
+- Prix le plus bas.
+- Le `.fr` est lisible par tous les publics, y compris internationaux.
+
+**Inconvénient :** pas de signal breton spécifique dans le domaine.
+
+#### Option C — International : `.com` comme domaine principal
+
+```
+odjoge.com            ← Domaine principal
+odjoge.fr             ← Redirection 301
+odjoge.bzh            ← Redirection 301
+```
+
+**Pourquoi :** si la stratégie internationale (EN/DE) devient prioritaire dès le lancement, le `.com` est neutre et universellement reconnu.
+
+**Inconvénient :** perd le signal local FR qui est le marché principal. **Non recommandé en V1.**
+
+### 12.5 Recommandation finale
+
+> **Recommandation : `odjoge.bzh` comme domaine principal + `odjoge.fr` et `odjoge.com` en redirection 301.**
+
+**Justification :**
+1. **Marque** : `odjoge` est court (6 lettres), prononçable, mémorisable, sans ambiguïté. Il passe le radio test.
+2. **Ancrage** : `.bzh` renforce l'identité bretonne, qui est le cœur du discours du site.
+3. **SEO local** : geoTLD géré par AFNIC, signal géographique Bretagne reconnu.
+4. **Différenciation** : se distingue de tous les concurrents (portails, annuaires) qui utilisent `.com`/`.fr`.
+5. **Protection** : enregistrer `.fr` et `.com` en redirection protège la marque contre le cybersquatting.
+6. **Prix acceptable** : ~72€/an pour 3 domaines (50€ .bzh + 10€ .fr + 12€ .com) — négligeable vs l'enjeu.
+
+### 12.6 Noms de domaine vérifiés disponibles (24 août 2026)
+
+| Domaine | Disponibilité | Recommandation |
+|---|---|---|
+| **odjoge.bzh** | ✅ Disponible | **Domaine principal recommandé** |
+| **odjoge.fr** | ✅ Disponible | **Redirection 301 → domaine principal** |
+| **odjoge.com** | ✅ Disponible | **Redirection 301 → domaine principal** |
+| od-joge.bzh | ✅ Disponible | Réserver si possible (variante avec tiret) |
+| od-joge.fr | ✅ Disponible | Réserver si possible |
+| od-joge.com | ✅ Disponible | Réserver si possible |
+| maison-od-joge.fr | ✅ Disponible | Réserver (protection de marque, longue traîne) |
+| maison-od-joge.bzh | ✅ Disponible | Réserver (protection de marque) |
+| maison-od-joge.com | ✅ Disponible | Réserver (protection de marque) |
+| maison-odjoge.fr | ✅ Disponible | Réserver (protection, variante sans tiret) |
+| maison-odjoge.bzh | ✅ Disponible | Réserver |
+| maison-odjoge.com | ✅ Disponible | Réserver |
+| presquile-sauvage-gite.fr | ✅ Disponible | **Non recommandé** (EMD, marque diluée) |
+| pleubian-location.fr | ✅ Disponible | **Non recommandé** (EMD, marque diluée) |
+| location-pleubian.fr | ✅ Disponible | **Non recommandé** (EMD, marque diluée) |
+
+### 12.7 Pourquoi éviter les EMD (Exact Match Domains)
+
+| Domaine EMD | Pourquoi l'éviter |
+|---|---|
+| `location-pleubian.fr` | En 2026, Google n'accorde plus d'avantage ranking aux EMD. Le domaine paraît générique, pas une marque. Difficile à mémoriser. Impossibilité d'étendre la marque au-delà de « location Pleubian ». |
+| `pleubian-location.fr` | Idem. De plus, le tiret complique la mémorisation et la saisie orale. |
+| `presquile-sauvage-gite.fr` | Trop long (22 caractères), 3 mots, 2 tirets. Non prononçable au téléphone. Paraît spammy. |
+
+**Règle 2026** : un domaine de marque court (`odjoge`) avec une extension territoriale (`.bzh` ou `.fr`) est supérieur à un EMD pour le SEO, la mémorisation, la confiance, et l'évolutivité de la marque.
+
+### 12.8 Checklist d'enregistrement
+
+- [ ] Enregistrer `odjoge.bzh` (domaine principal)
+- [ ] Enregistrer `odjoge.fr` (redirection 301)
+- [ ] Enregistrer `odjoge.com` (redirection 301)
+- [ ] Configurer les DNS vers Vercel/Netlify
+- [ ] Activer HTTPS (certificat Let's Encrypt automatique via Vercel/Netlify)
+- [ ] Configurer les redirections 301 des domaines secondaires vers le domaine principal
+- [ ] Vérifier que `https://odjoge.bzh` sert bien le site et que `http://` redirige vers `https://`
+- [ ] Soumettre le sitemap à Google Search Console avec le domaine principal
+- [ ] Vérifier la propriété dans Bing Webmaster Tools
+- [ ] (Optionnel) Réserver `maison-od-joge.fr/.bzh/.com` pour protection de marque
+
+---
+
 *Document généré le 24 août 2026 à partir du PRD v1.0, de l'analyse des SERP Google, et des bonnes pratiques SEO/GEO 2026 (E-E-A-T, Core Web Vitals, GEO/AI citations, Astro SEO).*
