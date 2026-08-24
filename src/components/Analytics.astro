@@ -1,0 +1,43 @@
+---
+/**
+ * Plausible (US-025). TODO : remplacer `data-domain` par le nom de domaine définitif
+ * une fois tranché (PRD §19 Q1) et activer le script — désactivé par défaut tant que
+ * le domaine placeholder est en place, pour ne pas envoyer de faux événements.
+ */
+const PLAUSIBLE_DOMAIN = 'maison-odjoge.example'; // TODO Q1
+const ENABLED = false; // TODO : passer à true une fois le domaine réel branché
+---
+
+{
+  ENABLED && (
+    <script is:inline defer data-domain={PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.tagged-events.js" />
+  )
+}
+
+<script>
+  /**
+   * Pont générique événements → Plausible (§15.1 du PRD).
+   * - Déclenché par `window.dispatchEvent(new CustomEvent('analytics', { detail: { event, props } }))`
+   * - Ou par tout élément portant `data-analytics-event="nom_evenement"` (clic).
+   */
+  type PlausibleFn = (event: string, options?: { props?: Record<string, string> }) => void;
+  declare global {
+    interface Window {
+      plausible?: PlausibleFn;
+    }
+  }
+
+  function track(eventName: string, props?: Record<string, string>) {
+    window.plausible?.(eventName, props ? { props } : undefined);
+  }
+
+  window.addEventListener('analytics', (event) => {
+    const detail = (event as CustomEvent<{ event: string; props?: Record<string, string> }>).detail;
+    if (detail?.event) track(detail.event, detail.props);
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement)?.closest<HTMLElement>('[data-analytics-event]');
+    if (target) track(target.dataset.analyticsEvent!);
+  });
+</script>

@@ -7,7 +7,7 @@
 | **Version** | 1.0 — 23 août 2026 |
 | **Auteur** | Ben Lamouche |
 | **Statut** | Draft à valider |
-| **Stack retenue** | Astro + Tailwind CSS, site statique, hébergement Vercel/Netlify |
+| **Stack retenue** | Astro + Tailwind CSS, export **100 % statique** (HTML pur, aucun serveur Node en production), URLs SEO-friendly, hébergement Vercel/Netlify comme simple CDN |
 | **Objectif business** | Notoriété directe, captation de trafic organique, redirection qualifiée vers les plateformes de réservation |
 
 ---
@@ -459,8 +459,8 @@ Traductions EN et DE : recherche de mots-clés **native**, pas de traduction lit
 
 | Élément | Spécification |
 |---|---|
-| Rendu | 100 % statique (SSG), HTML complet servi, aucune dépendance JS pour le contenu |
-| URLs | Minuscules, tirets, sans paramètre, avec slash final, slugs traduits par langue |
+| Rendu | 100 % statique (SSG), export `dist/` en HTML complet servable sans serveur Node (voir §14.1), aucune dépendance JS pour le contenu |
+| URLs | SEO-friendly : lisibles, minuscules, mots séparés par des tirets, sans paramètre ni extension (`/decouvrir/sillon-de-talbert/`, jamais `/page.php?id=12`), avec slash final, slugs traduits par langue |
 | Canonical | Auto-référentiel systématique sur chaque page/langue |
 | hreflang | Cluster complet FR/EN/DE + `x-default` pointant sur FR |
 | Sitemap | `sitemap-index.xml` segmenté par langue, `lastmod` réel, régénéré au build |
@@ -587,18 +587,31 @@ Créer des pages qui répondent littéralement à des prompts fréquents :
 
 | Couche | Choix | Justification |
 |---|---|---|
-| Framework | **Astro 5+** | Zéro JS par défaut, îlots d'interactivité, i18n natif, collections de contenu typées, excellent pour un site éditorial statique |
+| Framework | **Astro 5+**, `output: 'static'` (SSG pur, aucun adaptateur SSR/serverless) | Zéro JS par défaut, îlots d'interactivité, i18n natif, collections de contenu typées, excellent pour un site éditorial statique |
+| Sortie | **HTML/CSS/JS statiques purs** dans `dist/` | Servable par n'importe quel serveur de fichiers ou CDN, sans runtime Node en production — voir contrainte ci-dessous |
 | CSS | **Tailwind CSS 4** | Design tokens en variables CSS, purge agressive, cohérence garantie |
 | Contenu | **Content Collections** (Markdown/MDX + frontmatter typé Zod) | Contenu versionné en Git, pas de CMS à maintenir en V1 |
 | Images | **Astro Image** + Sharp | AVIF/WebP, `srcset` automatique, dimensions garanties |
 | Interactivité | Vanilla JS / Web Components légers | Sélecteur de saison, galerie, menu mobile, carte |
 | Carte | **MapLibre GL** + tuiles OSM auto-hébergées ou statiques | Pas de tiers Google, RGPD-safe, léger |
-| Hébergement | **Vercel** ou **Netlify** (plan gratuit suffisant) | CDN mondial, builds programmés, previews de branche |
-| Formulaires | Netlify Forms / Formspree + honeypot | Pas de backend |
-| Newsletter | Buttondown ou Brevo | RGPD, double opt-in, hébergement UE pour Brevo |
+| Hébergement | **Vercel** ou **Netlify** (plan gratuit suffisant), utilisés comme **CDN de fichiers statiques + automation de build** uniquement | CDN mondial, builds programmés, previews de branche — aucune fonction serverless requise pour servir le site |
+| Formulaires | Netlify Forms / Formspree + honeypot | Formulaire HTML natif posté à un service tiers, pas de backend applicatif |
+| Newsletter | Buttondown ou Brevo | Appel API côté client ou formulaire natif, RGPD, double opt-in, hébergement UE pour Brevo |
 | Analytics | **Plausible** (auto-hébergé ou cloud UE) | Sans cookie, pas de bandeau de consentement nécessaire, RGPD |
 | CI | GitHub Actions | Lint, tests de liens, budget de perf, validation Schema |
 | Versioning | GitHub | Ce dépôt |
+
+> **Contrainte non négociable — site 100 % statique** : `npm run build` doit produire un
+> dossier `dist/` de fichiers HTML/CSS/JS/assets purs, ouvrables et navigables **sans
+> aucun serveur applicatif ni runtime Node** — un simple serveur de fichiers statiques
+> (ou même `file://` pour l'essentiel de la navigation) suffit à consulter le site. Node
+> n'intervient **qu'au build** (génération du HTML, du sitemap, des données météo/marées,
+> des imports iCal — §14.5) et en CI, jamais en production. Aucun adaptateur SSR/serverless
+> Astro (`@astrojs/vercel`, `@astrojs/netlify` en mode fonctions, etc.) ne doit être
+> installé ; l'intégration `@astrojs/sitemap` et l'adaptateur d'images sont compatibles
+> avec la sortie statique et ne changent pas ce mode de rendu. Les formulaires, la
+> newsletter et les événements analytics restent 100 % côté client (appels vers des
+> services tiers), jamais via une route serveur du site lui-même.
 
 ### 14.2 Structure du dépôt (cible)
 

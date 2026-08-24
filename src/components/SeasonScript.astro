@@ -1,0 +1,64 @@
+---
+/**
+ * Script anti-flash (US-031, PRD §6.4) : corrige `data-season` sur <html> côté
+ * client, avant peinture, dans cet ordre de priorité :
+ *   1. Paramètre d'URL `?saison=` (liens de campagne, PRD §6.1).
+ *   2. Choix mémorisé (`localStorage`, posé par le sélecteur — US-030).
+ *   3. Si le build a plus de 24h, recalcul de la saison depuis la date du jour.
+ *   4. Sinon : on ne touche à rien, la valeur posée au build (SSR) reste.
+ *
+ * Doit rester **synchrone** (pas de `defer`/`async`) et placé tôt dans <head>
+ * pour s'exécuter avant la première peinture (pas de flash de contenu).
+ * Volontairement minimal : < 2 ko (contrainte US-031).
+ */
+---
+
+<script is:inline>
+  (function () {
+    var SAISONS = [
+      { id: 'printemps', debut: 3, fin: 5 },
+      { id: 'ete', debut: 6, fin: 8 },
+      { id: 'automne', debut: 9, fin: 11 },
+      { id: 'hiver', debut: 12, fin: 2 },
+    ];
+    var VALIDES = SAISONS.map(function (s) {
+      return s.id;
+    });
+
+    function saisonDuMois(mois) {
+      for (var i = 0; i < SAISONS.length; i++) {
+        var s = SAISONS[i];
+        if (s.debut <= s.fin ? mois >= s.debut && mois <= s.fin : mois >= s.debut || mois <= s.fin) return s.id;
+      }
+      return 'ete';
+    }
+
+    var html = document.documentElement;
+    var choix = null;
+
+    try {
+      var params = new URLSearchParams(location.search);
+      var depuisUrl = params.get('saison');
+      if (depuisUrl && VALIDES.indexOf(depuisUrl) !== -1) {
+        choix = depuisUrl;
+        localStorage.setItem('saison-preference', depuisUrl);
+      } else {
+        var stocke = localStorage.getItem('saison-preference');
+        if (stocke && VALIDES.indexOf(stocke) !== -1) choix = stocke;
+      }
+    } catch (e) {
+      /* localStorage indisponible (navigation privée, etc.) : on continue sans. */
+    }
+
+    if (!choix) {
+      var builtAt = Number(html.getAttribute('data-built-at') || 0);
+      if (builtAt && Date.now() - builtAt > 86400000) {
+        choix = saisonDuMois(new Date().getMonth() + 1);
+      }
+    }
+
+    if (choix && choix !== html.getAttribute('data-season')) {
+      html.setAttribute('data-season', choix);
+    }
+  })();
+</script>

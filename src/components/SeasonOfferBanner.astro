@@ -1,0 +1,25 @@
+---
+import { saisons } from '@/data/saisons';
+
+/**
+ * Bandeau offre contextualisé à la saison affichée (US-036, Could). Messages
+ * qualitatifs uniquement — pas de tarif chiffré inventé, cohérent avec les
+ * fourchettes réelles (encore « à venir ») de `/reserver/` (US-019).
+ */
+const messages: Record<string, string> = {
+  printemps: 'Tarifs de basse saison — réservez avant la ruée de l’été.',
+  ete: 'Haute saison : les disponibilités partent vite, mieux vaut réserver tôt.',
+  automne: 'Tarifs de l’arrière-saison — la Presqu’île sans la foule.',
+  hiver: 'Longs séjours bienvenus hors saison — nous consulter pour un tarif dégressif.',
+};
+---
+
+<div class="rounded-lg border border-accent bg-accent-soft px-4 py-3 text-sm text-ink">
+  {
+    saisons.map((s) => (
+      <p data-season-panel={s.id}>
+        <strong class="font-display">{s.label} :</strong> {messages[s.id]}
+      </p>
+    ))
+  }
+</div>

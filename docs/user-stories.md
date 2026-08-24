@@ -33,11 +33,13 @@ shootings saisonniers** (§6.5 et §16 du PRD) :
 - Toutes les US qui impliquent un visuel (hero, galerie, OG image, portraits des hôtes…)
   sont livrables avec des **visuels génériques placeholder**, tant que le shooting réel
   n'est pas disponible. Ce n'est **jamais un critère bloquant** de lot.
-- **Provenance** : photos libres de droits (licence Unsplash/Pexels ou équivalent),
-  thématiquement cohérentes avec la saison et le sujet (littoral breton, granit, jardin,
-  poêle à bois, intérieur cosy…), **téléchargées en local** dans le dépôt — pas de
-  hotlink vers un CDN tiers, pour respecter le budget perf « 0 requête tierce sur le
-  chemin critique » (§14.4 du PRD).
+- **Provenance** : implémenté en Lot 0/1 sous forme de visuels **générés localement**
+  (SVG à-plats colorés + libellé, via `scripts/generate-placeholders.mjs`) plutôt que de
+  photos de stock téléchargées — zéro dépendance réseau, zéro question de licence, et
+  conforme de fait au budget perf « 0 requête tierce sur le chemin critique » (§14.4 du
+  PRD). Des photos libres de droits (Unsplash/Pexels ou équivalent) téléchargées en local
+  restent une alternative possible si un rendu plus « photo » est souhaité avant les
+  shootings réels — la convention de nommage ci-dessous s'applique dans les deux cas.
 - **Rangement** : `public/medias/placeholder/<saison|section>/…`, séparé des vrais
   médias qui iront dans `public/medias/`. Un préfixe de nom de fichier `placeholder-`
   permet un `grep` global pour retrouver tout ce qui reste à remplacer.
@@ -55,6 +57,28 @@ shootings saisonniers** (§6.5 et §16 du PRD) :
 - **Sortie de cette stratégie** : chaque shooting réel remplace les placeholders de sa
   saison au fil de l'eau (US-070, Lot 6) — aucune US de contenu n'a besoin d'être rouverte
   pour ça, seuls les fichiers médias changent.
+
+---
+
+## 0bis. Contrainte technique — export 100 % statique, URLs SEO-friendly
+
+Contrainte transverse, valable pour **toutes** les US de code (rappelée en détail en
+§14.1 du PRD) :
+
+- `npm run build` doit produire un dossier `dist/` de **fichiers HTML/CSS/JS/assets
+  purs**, consultables **sans serveur applicatif ni runtime Node** — un simple serveur de
+  fichiers statiques suffit. Node n'intervient qu'au build et en CI, jamais en
+  production.
+- Aucun adaptateur SSR/serverless Astro (`@astrojs/vercel` en mode fonctions,
+  `@astrojs/netlify` en mode fonctions, etc.) ne doit être installé : `output: 'static'`
+  explicite dans `astro.config.mjs`.
+- Formulaires, newsletter et événements analytics restent des appels **côté client** vers
+  des services tiers — jamais une route serveur du site.
+- **URLs SEO-friendly partout** : lisibles, minuscules, mots séparés par des tirets, sans
+  paramètre ni extension technique, slash final (`/decouvrir/sillon-de-talbert/`, jamais
+  `/page.php?id=12` ni `/decouvrir/sillon-de-talbert.html`).
+- Toute US qui touche à l'hébergement (US-009) ou au routing (US-001, US-011, US-049,
+  US-061) doit être vérifiée contre cette contrainte avant d'être cochée.
 
 ---
 
@@ -83,9 +107,10 @@ la structure de dépôt cible (`src/components`, `src/layouts`, `src/content`, `
 pour construire toutes les pages du site.
 
 **Critères d'acceptation**
-- [ ] `npm run dev` et `npm run build` fonctionnent sans erreur sur un commit vide de contenu.
-- [ ] Arborescence conforme à §14.2 du PRD.
-- [ ] Tailwind configuré pour lire les design tokens en variables CSS (pas de couleurs en dur dans la config).
+- [x] `npm run dev` et `npm run build` fonctionnent sans erreur sur un commit vide de contenu.
+- [x] `output: 'static'` explicite dans `astro.config.mjs`, aucun adaptateur SSR/serverless installé — `npm run build` produit un `dist/` en HTML pur, servable sans runtime Node (voir [§0bis](#0bis-contrainte-technique--export-100--statique-urls-seo-friendly)).
+- [x] Arborescence conforme à §14.2 du PRD.
+- [x] Tailwind configuré pour lire les design tokens en variables CSS (pas de couleurs en dur dans la config).
 
 **Priorité** : Must · **Réf. PRD** : §14.1, §14.2
 
@@ -96,9 +121,9 @@ règles), **afin de** ne jamais dupliquer une donnée en dur dans une page (cont
 `CLAUDE.md` du dépôt).
 
 **Critères d'acceptation**
-- [ ] Schéma Zod validant la structure du JSON au build.
-- [ ] Toutes les données du tableau §1.1 du PRD sont présentes et typées.
-- [ ] Une page de test consomme `maison.json` et affiche au moins 3 champs, prouvant le circuit de données.
+- [x] Schéma Zod validant la structure du JSON au build.
+- [x] Toutes les données du tableau §1.1 du PRD sont présentes et typées.
+- [x] Une page de test consomme `maison.json` et affiche au moins 3 champs, prouvant le circuit de données.
 
 **Priorité** : Must · **Réf. PRD** : §14.3
 
@@ -110,7 +135,7 @@ poser le mécanisme technique qui portera les 4 palettes saisonnières du Lot 2.
 **Critères d'acceptation**
 - [ ] Tokens `--color-surface`, `--color-ink`, `--color-accent`, `--color-season-*` définis (§9.2 du PRD).
 - [ ] Changer l'attribut `data-season` change visuellement la page sans recharger.
-- [ ] Une seule saison (celle en cours) est peuplée à ce stade ; les 3 autres réutilisent temporairement les mêmes valeurs.
+- [x] Une seule saison (celle en cours) est peuplée à ce stade ; les 3 autres réutilisent temporairement les mêmes valeurs.
 
 **Priorité** : Must · **Réf. PRD** : §9.2, §6.4
 
@@ -120,8 +145,8 @@ poser le mécanisme technique qui portera les 4 palettes saisonnières du Lot 2.
 de titres, du header/footer et du balisage `BreadcrumbList`.
 
 **Critères d'acceptation**
-- [ ] Chaque layout expose des slots pour meta title/description, OG, canonical, JSON-LD.
-- [ ] `BreadcrumbList` généré automatiquement à partir de l'arborescence de la page.
+- [x] Chaque layout expose des slots pour meta title/description, OG, canonical, JSON-LD.
+- [x] `BreadcrumbList` généré automatiquement à partir de l'arborescence de la page.
 - [ ] Un seul `<h1>` possible par page (erreur de build sinon).
 
 **Priorité** : Must · **Réf. PRD** : §8, §11.3
@@ -132,8 +157,8 @@ tiroir (*drawer*) en mobile, **afin de** trouver n'importe quelle page en 3 clic
 depuis n'importe où sur le site.
 
 **Critères d'acceptation**
-- [ ] Navigation clavier complète, focus visible personnalisé.
-- [ ] Drawer mobile ≥ 44 px de zone tactile, fermeture au clavier (Échap) et au clic extérieur.
+- [x] Navigation clavier complète, focus visible personnalisé.
+- [x] Drawer mobile ≥ 44 px de zone tactile, fermeture au clavier (Échap) et au clic extérieur.
 - [ ] Emplacement réservé dans le header pour le futur sélecteur de saison (US-030) et le futur sélecteur de langue (US-064).
 
 **Priorité** : Must · **Réf. PRD** : §9.3, §9.4
@@ -144,9 +169,9 @@ polices tiers, **afin de** garantir la performance et la confidentialité du cha
 page.
 
 **Critères d'acceptation**
-- [ ] 2 familles maximum (`--font-display`, `--font-body`), WOFF2 auto-hébergées, sous-ensemble latin + latin-ext.
+- [x] 2 familles maximum (`--font-display`, `--font-body`), WOFF2 auto-hébergées, sous-ensemble latin + latin-ext.
 - [ ] `font-display: swap`, préchargement de la seule graisse critique.
-- [ ] Échelle typographique fluide en `clamp()`, 16 px → 20 px sur le corps de texte.
+- [x] Échelle typographique fluide en `clamp()`, 16 px → 20 px sur le corps de texte.
 
 **Priorité** : Must · **Réf. PRD** : §9.2
 
@@ -157,9 +182,9 @@ média qu'un placeholder, **afin de** ne jamais avoir à toucher au code de page
 visuel définitif remplace un placeholder.
 
 **Critères d'acceptation**
-- [ ] Le composant impose `width`/`height` et un `alt` non vide.
-- [ ] Dossier `public/medias/placeholder/` créé, avec au moins 6 images génériques libres de droits téléchargées en local (littoral, jardin, intérieur, poêle à bois).
-- [ ] Convention de nommage `placeholder-*` documentée dans `docs/README.md` ou un `CONTRIBUTING.md` court.
+- [x] Le composant impose `width`/`height` et un `alt` non vide.
+- [x] Dossier `public/medias/placeholder/` créé, avec au moins 6 images génériques libres de droits téléchargées en local (littoral, jardin, intérieur, poêle à bois).
+- [x] Convention de nommage `placeholder-*` documentée dans `docs/README.md` ou un `CONTRIBUTING.md` court.
 
 **Priorité** : Must · **Réf. PRD** : §6.5, §11.3 · voir [§0](#0-stratégie-visuels--placeholders-génériques-v0)
 
@@ -184,6 +209,7 @@ dès le premier lot.
 
 **Critères d'acceptation**
 - [ ] Déploiement automatique sur push `main`, preview sur chaque PR.
+- [ ] Plateforme utilisée en mode **statique pur** (pas de fonctions serverless/Edge Functions actives pour servir les pages) — voir [§0bis](#0bis-contrainte-technique--export-100--statique-urls-seo-friendly).
 - [ ] Nom de domaine tranché (Q1 du PRD §19) et DNS configuré, HTTPS actif.
 - [ ] Variables d'environnement (clés API météo/marées, etc.) gérées côté plateforme, jamais en dur dans le dépôt.
 
@@ -195,8 +221,8 @@ squelette de site déjà conforme WCAG 2.2 AA, **afin de** ne pas avoir à rattr
 l'accessibilité après coup sur des dizaines de pages.
 
 **Critères d'acceptation**
-- [ ] Skip link vers le contenu principal.
-- [ ] Contraste ≥ 4,5:1 vérifié sur les tokens de la saison en cours.
+- [x] Skip link vers le contenu principal.
+- [x] Contraste ≥ 4,5:1 vérifié sur les tokens de la saison en cours.
 - [ ] Un test VoiceOver ou NVDA passe sur le squelette (accueil vide + navigation).
 
 **Priorité** : Must · **Réf. PRD** : §9.4
@@ -209,7 +235,7 @@ réorganiser l'arborescence des routes au Lot 5.
 **Critères d'acceptation**
 - [ ] Routing i18n actif, `x-default` pointant sur FR.
 - [ ] Sélecteur de langue affiché uniquement si un contenu existe dans la langue cible (pas de lien vers du vide).
-- [ ] Aucune régression sur les URLs FR existantes.
+- [x] Aucune régression sur les URLs FR existantes.
 
 **Priorité** : Should · **Réf. PRD** : §13
 
@@ -219,7 +245,7 @@ en ligne, **afin de** valider le passage au Lot 1.
 
 **Critères d'acceptation**
 - [ ] Lighthouse mobile ≥ 95 sur la page d'accueil vide.
-- [ ] Une saison (celle en cours) est fonctionnelle de bout en bout.
+- [x] Une saison (celle en cours) est fonctionnelle de bout en bout.
 - [ ] CI verte sur `main`.
 
 **Priorité** : Must · **Réf. PRD** : §16 (Lot 0)
@@ -236,8 +262,8 @@ qui, **afin de** décider immédiatement si je continue ma visite.
 
 **Critères d'acceptation**
 - [ ] Hero plein écran avec image saisonnière (placeholder accepté), H1, accroche, CTA principal + secondaire ; LCP < 1,8 s.
-- [ ] Bloc « pitch en 3 lignes » extractible (candidat à l'encadré GEO du Lot 4).
-- [ ] Chiffres clés (8 voyageurs, 4 chambres, 2 SDB, jardin clos, 5 min de la mer, Superhost) issus de `maison.json`, jamais en dur.
+- [x] Bloc « pitch en 3 lignes » extractible (candidat à l'encadré GEO du Lot 4).
+- [x] Chiffres clés (8 voyageurs, 4 chambres, 2 SDB, jardin clos, 5 min de la mer, Superhost) issus de `maison.json`, jamais en dur.
 
 **Priorité** : Must · **Réf. PRD** : §8.1 (sections 1, 3, 4)
 
@@ -246,8 +272,8 @@ qui, **afin de** décider immédiatement si je continue ma visite.
 l'accueil, **afin de** me projeter avant de cliquer plus loin.
 
 **Critères d'acceptation**
-- [ ] Barre de contexte (saison en cours, météo du jour, marées, lever/coucher du soleil) — données réelles ou statiques temporaires si l'API météo/marées n'est pas encore branchée (US-032).
-- [ ] Grid asymétrique de 6 photos (placeholders acceptés) + lien vers la galerie.
+- [x] Barre de contexte (saison en cours, météo du jour, marées, lever/coucher du soleil) — données réelles ou statiques temporaires si l'API météo/marées n'est pas encore branchée (US-032).
+- [x] Grid asymétrique de 6 photos (placeholders acceptés) + lien vers la galerie.
 - [ ] Carte cliquable ou MapLibre légère avec au moins 3 points d'intérêt (version complète à 12 POI en US-048).
 
 **Priorité** : Must · **Réf. PRD** : §8.1 (sections 2, 5, 8)
@@ -259,7 +285,7 @@ moyen de rester en contact, **afin de** passer à l'action à mon rythme.
 **Critères d'acceptation**
 - [ ] Bloc « 5 raisons de venir » avec liens vers `/experiences/`.
 - [ ] 3 avis + note globale, balisés `AggregateRating` (avis réels uniquement — voir US-050).
-- [ ] Bandeau conversion sticky mobile vers les plateformes ; formulaire newsletter avec promesse claire (« 1 email par saison »).
+- [x] Bandeau conversion sticky mobile vers les plateformes ; formulaire newsletter avec promesse claire (« 1 email par saison »).
 
 **Priorité** : Must · **Réf. PRD** : §8.1 (sections 6, 7, 9, 10, 11)
 
@@ -269,10 +295,10 @@ les équipements, **afin de** vérifier qu'elle correspond exactement à mon bes
 réserver.
 
 **Critères d'acceptation**
-- [ ] Visite guidée pièce par pièce, plan schématique des deux niveaux (visuels placeholder acceptés).
-- [ ] Tableau d'équipements catégorisé (cuisine, chambres, extérieur, confort, sécurité, accessibilité) généré depuis `maison.json`.
-- [ ] Section « ce que la maison n'est pas » (pas d'animaux, pas de piscine, pas de vue mer panoramique).
-- [ ] Au moins 2 scénarios de configuration de couchages (2 familles / 4 couples / 1 famille + grands-parents).
+- [x] Visite guidée pièce par pièce, plan schématique des deux niveaux (visuels placeholder acceptés).
+- [x] Tableau d'équipements catégorisé (cuisine, chambres, extérieur, confort, sécurité, accessibilité) généré depuis `maison.json`.
+- [x] Section « ce que la maison n'est pas » (pas d'animaux, pas de piscine, pas de vue mer panoramique).
+- [x] Au moins 2 scénarios de configuration de couchages (2 familles / 4 couples / 1 famille + grands-parents).
 
 **Priorité** : Must · **Réf. PRD** : §8.2
 
@@ -282,8 +308,8 @@ par saison, **afin de** me faire une idée précise et complète du bien.
 
 **Critères d'acceptation**
 - [ ] Filtres par pièce et par saison fonctionnels sans rechargement de page.
-- [ ] Fonctionne avec un jeu de photos placeholder tant que le vrai shooting n'est pas livré.
-- [ ] Navigation clavier complète dans la lightbox/visionneuse.
+- [x] Fonctionne avec un jeu de photos placeholder tant que le vrai shooting n'est pas livré.
+- [x] Navigation clavier complète dans la lightbox/visionneuse.
 
 **Priorité** : Must · **Réf. PRD** : §7, §8.2
 
@@ -293,9 +319,9 @@ pratiques d'arrivée et de séjour au même endroit, **afin de** ne pas avoir à
 l'hôte pour des questions déjà répondues.
 
 **Critères d'acceptation**
-- [ ] Arrivée autonome (boîte à clés), horaires (15h/17h selon saison), règlement intérieur.
-- [ ] FAQ séjour couvrant au moins 8 questions récurrentes.
-- [ ] Toutes les données viennent de `maison.json`.
+- [x] Arrivée autonome (boîte à clés), horaires (15h/17h selon saison), règlement intérieur.
+- [x] FAQ séjour couvrant au moins 8 questions récurrentes.
+- [x] Toutes les données viennent de `maison.json`.
 
 **Priorité** : Must · **Réf. PRD** : §7, §8.2
 
@@ -305,11 +331,11 @@ avec tarifs indicatifs, disponibilités et liens vers les plateformes, **afin de
 en un minimum de clics.
 
 **Critères d'acceptation**
-- [ ] Grille tarifaire indicative par saison (fourchettes, pas de prix ferme).
+- [x] Grille tarifaire indicative par saison (fourchettes, pas de prix ferme).
 - [ ] 3 boutons plateformes avec liens UTM trackés, ouverture dans un nouvel onglet.
-- [ ] Conditions affichées : durée minimale, arrivée/départ, caution, ménage, taxe de séjour.
-- [ ] FAQ réservation (8–10 questions), balisée `FAQPage`.
-- [ ] Calendrier de disponibilité en lecture seule : peut être livré en placeholder statique si `fetch-ical.mjs` (US-020) n'est pas encore prêt, à condition d'un message explicite « disponibilités indicatives, nous confirmer par message ».
+- [x] Conditions affichées : durée minimale, arrivée/départ, caution, ménage, taxe de séjour.
+- [x] FAQ réservation (8–10 questions), balisée `FAQPage`.
+- [x] Calendrier de disponibilité en lecture seule : peut être livré en placeholder statique si `fetch-ical.mjs` (US-020) n'est pas encore prêt, à condition d'un message explicite « disponibilités indicatives, nous confirmer par message ».
 
 **Priorité** : Must · **Réf. PRD** : §8.3
 
@@ -330,9 +356,9 @@ en lecture seule de `/reserver/` sans backend.
 **afin de** obtenir une réponse directe de l'hôte.
 
 **Critères d'acceptation**
-- [ ] Formulaire Netlify Forms / Formspree + honeypot anti-spam, sans backend custom.
-- [ ] Validation accessible (erreurs annoncées au lecteur d'écran).
-- [ ] Événement analytics `envoi_contact` déclenché à l'envoi réussi.
+- [x] Formulaire Netlify Forms / Formspree + honeypot anti-spam, sans backend custom.
+- [x] Validation accessible (erreurs annoncées au lecteur d'écran).
+- [x] Événement analytics `envoi_contact` déclenché à l'envoi réussi.
 
 **Priorité** : Must · **Réf. PRD** : §7, §15.1
 
@@ -343,8 +369,8 @@ la conformité et la légitimité de l'offre.
 
 **Critères d'acceptation**
 - [ ] Mentions légales complètes (éditeur, hébergeur, directeur de publication).
-- [ ] Politique de confidentialité RGPD (base légale newsletter, absence de cookie tiers).
-- [ ] Numéro d'enregistrement affiché — **bloquant pour la mise en ligne réelle** si non obtenu (R9, Q5 du PRD) ; peut être livré avec un texte temporaire « en cours d'obtention » en environnement de préproduction uniquement.
+- [x] Politique de confidentialité RGPD (base légale newsletter, absence de cookie tiers).
+- [x] Numéro d'enregistrement affiché — **bloquant pour la mise en ligne réelle** si non obtenu (R9, Q5 du PRD) ; peut être livré avec un texte temporaire « en cours d'obtention » en environnement de préproduction uniquement.
 
 **Priorité** : Must · **Réf. PRD** : §15.2, §17 (R9), §19 (Q5)
 
@@ -354,8 +380,8 @@ structuré complet sur l'accueil et `/la-maison/`, **afin de** représenter fid�
 l'offre (capacité, aménités, localisation) sans avoir à l'extraire du texte libre.
 
 **Critères d'acceptation**
-- [ ] `LodgingBusiness` + `VacationRental` sur l'accueil et `/la-maison/`, alimentés par `maison.json`.
-- [ ] `amenityFeature`, `checkinTime`, `petsAllowed: false` présents.
+- [x] `LodgingBusiness` + `VacationRental` sur l'accueil et `/la-maison/`, alimentés par `maison.json`.
+- [x] `amenityFeature`, `checkinTime`, `petsAllowed: false` présents.
 - [ ] 0 erreur au test des résultats enrichis Google et au validateur Schema.org (intégré à la CI, US-008).
 
 **Priorité** : Must · **Réf. PRD** : §11.4
@@ -366,9 +392,9 @@ me propose une recherche et les pages principales, **afin de** ne pas quitter le
 immédiatement.
 
 **Critères d'acceptation**
-- [ ] Liens vers les 6 pages principales.
-- [ ] Champ de recherche ou suggestions contextuelles.
-- [ ] Statut HTTP 404 réellement renvoyé (pas un 200 déguisé).
+- [x] Liens vers les 6 pages principales.
+- [x] Champ de recherche ou suggestions contextuelles.
+- [x] Statut HTTP 404 réellement renvoyé (pas un 200 déguisé).
 
 **Priorité** : Should · **Réf. PRD** : §11.3
 
@@ -390,8 +416,8 @@ trop souvent.
 
 **Critères d'acceptation**
 - [ ] Buttondown ou Brevo (hébergement UE), double opt-in.
-- [ ] Promesse affichée : « Les 4 saisons de la Presqu'île » — 1 email par saison.
-- [ ] Formulaire accessible, présent sur l'accueil (US-015) et en footer global.
+- [x] Promesse affichée : « Les 4 saisons de la Presqu'île » — 1 email par saison.
+- [x] Formulaire accessible, présent sur l'accueil (US-015) et en footer global.
 
 **Priorité** : Should · **Réf. PRD** : §8.1, §14.1
 
@@ -433,8 +459,8 @@ saison affichée, **afin de** ressentir immédiatement l'ambiance du moment (pri
 
 **Critères d'acceptation**
 - [ ] 4 palettes définies selon §6.2 du PRD (couleurs, texture/grain).
-- [ ] Contraste ≥ 4,5:1 vérifié sur les 4 palettes, pas seulement celle par défaut.
-- [ ] Bascule visuelle immédiate au changement de `data-season`, sans flash de contenu.
+- [x] Contraste ≥ 4,5:1 vérifié sur les 4 palettes, pas seulement celle par défaut.
+- [x] Bascule visuelle immédiate au changement de `data-season`, sans flash de contenu.
 
 **Priorité** : Must · **Réf. PRD** : §6.2, §9.2
 
@@ -443,9 +469,9 @@ saison affichée, **afin de** ressentir immédiatement l'ambiance du moment (pri
 en cours, **afin de** me projeter sur une future période de séjour.
 
 **Critères d'acceptation**
-- [ ] Sélecteur persistant en header (« Voir la maison en… »), accessible au clavier.
-- [ ] Choix mémorisé (cookie/localStorage) et respecté aux visites suivantes.
-- [ ] Rappel explicite de la date du jour et lien permanent vers `/reserver/` (mitigation R6 du PRD).
+- [x] Sélecteur persistant en header (« Voir la maison en… »), accessible au clavier.
+- [x] Choix mémorisé (cookie/localStorage) et respecté aux visites suivantes.
+- [x] Rappel explicite de la date du jour et lien permanent vers `/reserver/` (mitigation R6 du PRD).
 
 **Priorité** : Must · **Réf. PRD** : §6.1, §17 (R6)
 
@@ -456,9 +482,9 @@ partagé, **afin de** générer des liens saisonniers sans dupliquer d'URL ni fr
 SEO.
 
 **Critères d'acceptation**
-- [ ] Règle de date par défaut correcte pour les 4 saisons (§6.2).
-- [ ] `?saison=hiver` force l'affichage sans changer l'URL canonique de la page.
-- [ ] Script client < 2 ko, actif uniquement si choix manuel ou build > 24 h (§6.4).
+- [x] Règle de date par défaut correcte pour les 4 saisons (§6.2).
+- [x] `?saison=hiver` force l'affichage sans changer l'URL canonique de la page.
+- [x] Script client < 2 ko, actif uniquement si choix manuel ou build > 24 h (§6.4).
 
 **Priorité** : Must · **Réf. PRD** : §6.1, §6.4
 
@@ -468,9 +494,9 @@ recalcule la saison, la météo, les marées et `dateModified`, **afin de** gara
 fraîcheur du site sans intervention manuelle.
 
 **Critères d'acceptation**
-- [ ] `build-season.mjs` et `fetch-tides.mjs` intégrés au pipeline de build.
+- [x] `build-season.mjs` et `fetch-tides.mjs` intégrés au pipeline de build.
 - [ ] Cron configuré côté Vercel/Netlify.
-- [ ] Échec de l'appel météo/marées ne bloque pas le build (dégradation gracieuse vers la dernière donnée connue).
+- [x] Échec de l'appel météo/marées ne bloque pas le build (dégradation gracieuse vers la dernière donnée connue).
 
 **Priorité** : Must · **Réf. PRD** : §6.4, §14.5
 
@@ -480,9 +506,9 @@ saison en cours, **afin de** comprendre ce que je peux faire concrètement si je
 maintenant.
 
 **Critères d'acceptation**
-- [ ] Contenu distinct pour chacune des 4 saisons (texte réel, visuels placeholder tolérés).
+- [x] Contenu distinct pour chacune des 4 saisons (texte réel, visuels placeholder tolérés).
 - [ ] Mis à jour au rebuild quotidien si une donnée datée change.
-- [ ] Présent sur l'accueil (déjà esquissé en US-015) et sur les pages `/saisons/[saison]/`.
+- [x] Présent sur l'accueil (déjà esquissé en US-015) et sur les pages `/saisons/[saison]/`.
 
 **Priorité** : Must · **Réf. PRD** : §8.1 (section 6), §6.3
 
@@ -493,7 +519,7 @@ utiles à un seul endroit.
 
 **Critères d'acceptation**
 - [ ] 1 500–2 500 mots par page, incluant météo moyenne réelle (tableau de données), 10 choses à faire, ouvert/fermé, tarifs, galerie de la saison, 3 témoignages.
-- [ ] Les 4 pages existent, même si 3 des 4 galeries sont en placeholder.
+- [x] Les 4 pages existent, même si 3 des 4 galeries sont en placeholder.
 - [ ] Balisage `FAQPage` et tableaux de faits (préparation GEO, Lot 4).
 
 **Priorité** : Must · **Réf. PRD** : §8.6
@@ -504,8 +530,8 @@ réordonne selon la saison affichée, **afin de** voir en premier les photos les
 pertinentes au moment où je consulte le site.
 
 **Critères d'acceptation**
-- [ ] Tri saisonnier appliqué sans masquer les autres photos (toutes restent accessibles, §6.3).
-- [ ] Fonctionne avec un mélange de vrais médias et de placeholders.
+- [x] Tri saisonnier appliqué sans masquer les autres photos (toutes restent accessibles, §6.3).
+- [x] Fonctionne avec un mélange de vrais médias et de placeholders.
 
 **Priorité** : Should · **Réf. PRD** : §6.3, §8.2
 
@@ -515,8 +541,8 @@ minute », « longs séjours »), **afin de** comprendre l'offre tarifaire perti
 période qui m'intéresse.
 
 **Critères d'acceptation**
-- [ ] Message variable selon la saison affichée par le sélecteur (US-030), pas seulement la date réelle.
-- [ ] Cohérent avec les fourchettes tarifaires de `/reserver/` (US-019).
+- [x] Message variable selon la saison affichée par le sélecteur (US-030), pas seulement la date réelle.
+- [x] Cohérent avec les fourchettes tarifaires de `/reserver/` (US-019).
 
 **Priorité** : Could · **Réf. PRD** : §6.3
 
@@ -537,8 +563,8 @@ fonctionnelles, **afin de** valider le concept central du site avant d'investir 
 contenu SEO du Lot 3.
 
 **Critères d'acceptation**
-- [ ] Les 4 saisons ont leurs tokens, leur page pilier et leur bloc « en ce moment » propres.
-- [ ] Le sélecteur fonctionne sans rechargement et sans flash de contenu.
+- [x] Les 4 saisons ont leurs tokens, leur page pilier et leur bloc « en ce moment » propres.
+- [x] Le sélecteur fonctionne sans rechargement et sans flash de contenu.
 - [ ] Écart entre visuels placeholder et visuels réels documenté (liste de suivi pour US-070).
 
 **Priorité** : Must · **Réf. PRD** : §16 (Lot 2), §18
@@ -698,7 +724,7 @@ respectent les règles techniques SEO (§11.3), **afin de** ne pas avoir à corr
 dizaines de pages a posteriori.
 
 **Critères d'acceptation**
-- [ ] URLs minuscules, tirets, slash final ; canonical auto-référentiel systématique.
+- [ ] URLs SEO-friendly (lisibles, minuscules, tirets, sans paramètre ni extension technique, slash final) ; canonical auto-référentiel systématique.
 - [ ] `sitemap-index.xml` régénéré au build, `lastmod` réel.
 - [ ] Images : AVIF + WebP + fallback, `srcset` 5 largeurs, `loading="lazy"` sauf LCP.
 - [ ] `robots.txt` référence les sitemaps.

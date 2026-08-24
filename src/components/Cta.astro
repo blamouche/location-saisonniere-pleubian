@@ -1,0 +1,36 @@
+---
+import { maison, lienAirbnb } from '@/data/maison';
+
+export interface Props {
+  /** Nom de campagne UTM, ex. "accueil-hero", "reserver-page". */
+  campagne: string;
+  class?: string;
+}
+
+const { campagne, class: className } = Astro.props;
+---
+
+<div class:list={['flex flex-wrap gap-3', className]}>
+  <a
+    href={lienAirbnb(campagne)}
+    target="_blank"
+    rel="noopener noreferrer nofollow"
+    data-analytics-event="sortie_airbnb"
+    class="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+  >
+    Voir sur Airbnb
+  </a>
+  {
+    maison.plateformes.booking.url && (
+      <a
+        href={maison.plateformes.booking.url}
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        data-analytics-event="sortie_booking"
+        class="rounded-md border border-accent px-5 py-3 text-sm font-semibold text-accent hover:bg-accent-soft"
+      >
+        Voir sur Booking
+      </a>
+    )
+  }
+</div>

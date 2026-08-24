@@ -1,0 +1,5 @@
+# Voir docs/PRD.md §11.3 (SEO technique) et §12.2.D (accueil des crawlers IA, Lot 4).
+User-agent: *
+Allow: /
+
+Sitemap: https://maison-odjoge.example/sitemap-index.xml

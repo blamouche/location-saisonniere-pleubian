@@ -1,0 +1,108 @@
+---
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Analytics from '@/components/Analytics.astro';
+import SeasonScript from '@/components/SeasonScript.astro';
+import { getSaisonCourante } from '@/data/saisons';
+
+export interface Crumb {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Breadcrumb visible + balisé BreadcrumbList (US-004). Page d'accueil : []. */
+  crumbs?: Crumb[];
+  /** Objet(s) JSON-LD additionnels (LodgingBusiness, FAQPage…) propres à la page. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  ogImage?: string;
+}
+
+const { title, description, crumbs = [], jsonLd, ogImage = '/medias/placeholder/placeholder-hero-ete-16x9.svg' } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const siteName = 'Maison Od Joge';
+const fullTitle = title === siteName ? title : `${title} · ${siteName}`;
+
+const saison = getSaisonCourante();
+// Horodatage du build (US-031/US-032) : permet au script anti-flash de recalculer
+// la saison côté client si le build a plus de 24h (dégradation gracieuse en
+// l'absence de rebuild quotidien réellement programmé — voir US-032).
+const builtAt = Date.now();
+
+const breadcrumbJsonLd =
+  crumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [{ label: 'Accueil', href: '/' }, ...crumbs].map((c, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: c.label,
+          item: new URL(c.href, Astro.site).toString(),
+        })),
+      }
+    : null;
+
+const jsonLdBlocks = [breadcrumbJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])].filter(Boolean);
+---
+
+<!doctype html>
+<html lang="fr" data-season={saison.id} data-built-at={builtAt}>
+  <head>
+    <meta charset="utf-8" />
+    <SeasonScript />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {jsonLdBlocks.map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />)}
+  </head>
+  <body class="min-h-screen bg-surface text-ink">
+    <a href="#contenu" class="skip-link">Aller au contenu principal</a>
+
+    <Header />
+
+    {
+      crumbs.length > 0 && (
+        <nav aria-label="Fil d'Ariane" class="mx-auto max-w-6xl px-4 pt-4 text-xs text-ink-muted sm:px-6">
+          <ol class="flex flex-wrap items-center gap-1">
+            <li><a href="/" class="hover:text-accent">Accueil</a></li>
+            {crumbs.map((c) => (
+              <>
+                <li aria-hidden="true">/</li>
+                <li><a href={c.href} class="hover:text-accent">{c.label}</a></li>
+              </>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+
+    <main id="contenu">
+      <slot />
+    </main>
+
+    <Footer />
+    <Analytics />
+  </body>
+</html>

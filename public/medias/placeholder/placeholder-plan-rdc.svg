@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-label="Plan — RDC — visuel provisoire">
+  <defs>
+    <linearGradient id="g" gradientTransform="rotate(67)">
+      <stop offset="0%" stop-color="#0b5f6b"/>
+      <stop offset="100%" stop-color="#12897a"/>
+    </linearGradient>
+    <pattern id="p" width="64" height="64" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="transparent"/>
+      <line x1="0" y1="0" x2="0" y2="64" stroke="#faf8f4" stroke-opacity="0.06" stroke-width="32"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1000" fill="url(#g)"/>
+  <rect width="1000" height="1000" fill="url(#p)"/>
+  <rect x="24" y="24" width="420" height="44" rx="8" fill="#0a2b2c" fill-opacity="0.55"/>
+  <text x="40" y="54" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" fill="#faf8f4" font-weight="600">PLACEHOLDER</text>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="ui-serif, Georgia, serif" font-size="50" fill="#faf8f4" fill-opacity="0.95">Plan — RDC</text>
+  <text x="50%" y="964" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" fill="#faf8f4" fill-opacity="0.75">Visuel générique — remplacé au shooting réel</text>
+</svg>

@@ -1,0 +1,31 @@
+---
+import { saisons } from '@/data/saisons';
+import { enCeMoment } from '@/data/en-ce-moment';
+
+export interface Props {
+  /** Niveau de titre à utiliser (la page ne doit avoir qu'un seul h1 — US-004). */
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { headingLevel = 'h2' } = Astro.props;
+const Titre = headingLevel;
+---
+
+<div data-en-ce-moment>
+  {
+    saisons.map((s) => (
+      <div data-season-panel={s.id}>
+        <Titre class="font-display text-2xl font-semibold">En ce moment sur la Presqu'île — {s.label.toLowerCase()}</Titre>
+        <p class="mt-1 text-sm text-ink-muted">{s.promesse} ({s.periode})</p>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {enCeMoment[s.id].map((sugg) => (
+            <li class="rounded-lg border border-border bg-surface p-4">
+              <p class="font-display font-semibold">{sugg.titre}</p>
+              <p class="mt-1 text-sm text-ink-muted">{sugg.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>

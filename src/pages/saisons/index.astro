@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { saisons } from '@/data/saisons';
+---
+
+<BaseLayout
+  title="Les 4 saisons de la Presqu'île sauvage"
+  description="Découvrez la Maison Od Joge et la Presqu'île sauvage au fil des 4 saisons : printemps, été, automne, hiver — activités, tarifs et galerie."
+  crumbs={[{ label: 'Saisons', href: '/saisons/' }]}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">Les 4 saisons de la Presqu'île sauvage</h1>
+      <p class="mt-3 max-w-2xl text-ink-muted">
+        Le site change de visage au fil de l'année — choisissez une saison pour découvrir la maison et le territoire tels qu'ils s'y vivent.
+      </p>
+    </header>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        saisons.map((s) => (
+          <a href={`/saisons/${s.id}/`} class="group overflow-hidden rounded-xl border border-border bg-surface">
+            <PlaceholderImage slug={`hero-${s.id}-16x9`} ratio="16x9" alt={`La Presqu'île en ${s.label.toLowerCase()} (visuel provisoire)`} class="h-48 w-full object-cover" />
+            <div class="p-5">
+              <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{s.periode}</p>
+              <p class="mt-1 font-display text-2xl font-semibold group-hover:text-accent">{s.label}</p>
+              <p class="mt-1 text-sm text-ink-muted">{s.promesse}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

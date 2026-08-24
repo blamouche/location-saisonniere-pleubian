@@ -11,3 +11,7 @@ dist/
 
 # Marqueur local de dernière synchronisation (propre à chaque machine)
 .last-sync
+
+# Générés au build par scripts/build-season.mjs et scripts/fetch-tides.mjs (US-032)
+src/data/build-meta.generated.json
+src/data/meteo-marees.generated.json
