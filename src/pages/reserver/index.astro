@@ -14,7 +14,7 @@ const saisonsLabels: Record<string, string> = {
 const faq = [
   { q: 'Quelle est la durée minimale de séjour ?', r: "À confirmer avec les hôtes — généralement plus courte hors haute saison." },
   { q: "Quelles sont les heures d'arrivée et de départ ?", r: `Arrivée à ${maison.horaires.arriveeBasseSaison} (basse saison) ou ${maison.horaires.arriveeHauteSaison} (haute saison), départ avant ${maison.horaires.depart} (à confirmer).` },
-  { q: 'Une caution est-elle demandée ?', r: 'Modalités de caution à préciser avant mise en ligne définitive du site.' },
+  { q: 'Une caution est-elle demandée ?', r: 'Modalités de caution fournies lors de la réservation.' },
   { q: 'Le ménage de fin de séjour est-il inclus dans le tarif ?', r: 'Oui, le ménage de fin de séjour est inclus.' },
   { q: 'La taxe de séjour est-elle incluse ?', r: 'Montant et mode de collecte à indiquer avant mise en ligne (obligation légale, PRD §15.2).' },
   { q: 'Comment réserver concrètement ?', r: "Via les boutons Airbnb / Booking ci-dessus, qui renvoient vers la plateforme de réservation officielle." },
@@ -82,8 +82,8 @@ const faqJsonLd = {
       <ul class="mt-4 space-y-2 text-sm text-ink-muted">
         <li>· Durée minimale de séjour : à confirmer</li>
         <li>· Arrivée {maison.horaires.arriveeBasseSaison} (basse saison) / {maison.horaires.arriveeHauteSaison} (haute saison) · Départ avant {maison.horaires.depart}</li>
-        <li>· Caution : à confirmer</li>
-        <li>· Ménage de fin de séjour : à confirmer</li>
+        <li>· Caution : modalités fournies lors de la réservation</li>
+        <li>· Ménage de fin de séjour : inclus</li>
         <li>· Taxe de séjour : montant à indiquer avant mise en ligne</li>
       </ul>
     </section>
