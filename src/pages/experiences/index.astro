@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { experiences } from '@/data/experiences';
+
+const piliers = ['Sport', 'Bien-être', 'Déconnexion', 'Culture'] as const;
+---
+
+<BaseLayout
+  title="Expériences"
+  description="5 raisons de venir à la Maison Od Joge : sport, bien-être, déconnexion, air pur et culture — 7 pages détaillées pour organiser votre séjour."
+  crumbs={[{ label: 'Expériences', href: '/experiences/' }]}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">Expériences</h1>
+      <p class="mt-3 max-w-2xl text-ink-muted">Ce que la localisation permet concrètement, organisé par centre d'intérêt.</p>
+    </header>
+
+    {
+      piliers.map((pilier) => {
+        const items = experiences.filter((e) => e.pilier === pilier);
+        if (items.length === 0) return null;
+        return (
+          <section class="mt-12">
+            <h2 class="font-display text-2xl font-semibold">{pilier}</h2>
+            <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((e) => (
+                <a href={`/experiences/${e.slug}/`} class="group overflow-hidden rounded-xl border border-border bg-surface">
+                  <PlaceholderImage slug={e.heroSlug} ratio="16x9" alt={`${e.titre} (visuel provisoire)`} class="h-36 w-full object-cover" />
+                  <div class="p-4">
+                    <p class="font-display font-semibold group-hover:text-accent">{e.titre}</p>
+                    <p class="mt-1 text-sm text-ink-muted">{e.promesse}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+</BaseLayout>

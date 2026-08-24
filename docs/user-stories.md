@@ -582,9 +582,9 @@ pratique, FAQ, liens connexes, CTA), **afin de** publier les 7 pages du pilier s
 recoder la structure à chaque fois.
 
 **Critères d'acceptation**
-- [ ] Les 8 blocs de §8.4 du PRD sont implémentés comme sections du gabarit.
-- [ ] `FAQPage` balisé automatiquement à partir du frontmatter de contenu.
-- [ ] Fonctionne avec un hero en placeholder.
+- [x] Les 8 blocs de §8.4 du PRD sont implémentés comme sections du gabarit.
+- [x] `FAQPage` balisé automatiquement à partir du frontmatter de contenu.
+- [x] Fonctionne avec un hero en placeholder.
 
 **Priorité** : Must · **Réf. PRD** : §8.4
 
@@ -597,13 +597,13 @@ choisir cette maison plutôt qu'une autre pour cette raison précise.
 
 | Page | Pilier | Statut |
 |---|---|---|
-| `/experiences/randonnee-gr34/` | Sport | [ ] |
-| `/experiences/velo-velomaritime/` | Sport | [ ] |
-| `/experiences/nautisme-kayak-voile/` | Sport | [ ] |
-| `/experiences/bien-etre-air-marin/` | Bien-être | [ ] |
-| `/experiences/deconnexion-slow/` | Déconnexion | [ ] |
-| `/experiences/teletravail-workation/` | Déconnexion | [ ] |
-| `/experiences/culture-patrimoine/` | Culture | [ ] |
+| `/experiences/randonnee-gr34/` | Sport | [x] |
+| `/experiences/velo-velomaritime/` | Sport | [x] |
+| `/experiences/nautisme-kayak-voile/` | Sport | [x] |
+| `/experiences/bien-etre-air-marin/` | Bien-être | [x] |
+| `/experiences/deconnexion-slow/` | Déconnexion | [x] |
+| `/experiences/teletravail-workation/` | Déconnexion | [x] |
+| `/experiences/culture-patrimoine/` | Culture | [x] |
 
 **Priorité** : Must · **Réf. PRD** : §7, §10.1, §10.4
 
@@ -614,9 +614,9 @@ l'extraction (résumé factuel encadré, corps rédigé, conseils d'initié, bal
 fiches du guide de manière cohérente.
 
 **Critères d'acceptation**
-- [ ] Résumé factuel en tête : Où · Temps depuis la maison · Durée de visite · Gratuit/payant · Meilleure saison · Accessible poussette/PMR.
-- [ ] `TouristAttraction`/`Place` + coordonnées GPS balisés.
-- [ ] Encart « à combiner avec » : 3 liens internes minimum.
+- [x] Résumé factuel en tête : Où · Temps depuis la maison · Durée de visite · Gratuit/payant · Meilleure saison · Accessible poussette/PMR.
+- [x] `TouristAttraction`/`Place` + coordonnées GPS balisés.
+- [x] Encart « à combiner avec » : 3 liens internes minimum.
 
 **Priorité** : Must · **Réf. PRD** : §8.5
 
@@ -647,9 +647,9 @@ voix d'hôte, **afin de** suivre la vie du territoire au-delà d'une simple fich
 d'annonce.
 
 **Critères d'acceptation**
-- [ ] Hub `/journal/` listant les articles triés par date, avec pagination désactivée tant que < 40 articles (§11.3).
-- [ ] Gabarit article avec `Article`/`BlogPosting` balisé (`datePublished`, `dateModified`, `author`).
-- [ ] Flux RSS/Atom généré (peut être livré ici ou reporté à US-058 du Lot 4).
+- [x] Hub `/journal/` listant les articles triés par date, avec pagination désactivée tant que < 40 articles (§11.3).
+- [x] Gabarit article avec `Article`/`BlogPosting` balisé (`datePublished`, `dateModified`, `author`).
+- [x] Flux RSS/Atom généré (peut être livré ici ou reporté à US-058 du Lot 4).
 
 **Priorité** : Must · **Réf. PRD** : §7, §8.6 (renvoi), §11.4
 
@@ -679,7 +679,7 @@ géographiquement mon futur séjour sans dépendre de Google Maps.
 
 **Critères d'acceptation**
 - [ ] MapLibre GL + tuiles OSM auto-hébergées ou statiques, pas d'embed Google.
-- [ ] 12 points d'intérêt reliés à leurs fiches `/decouvrir/` ou `/experiences/`.
+- [x] 12 points d'intérêt reliés à leurs fiches `/decouvrir/` ou `/experiences/`.
 - [ ] Temps de trajet affiché en minutes, vérifié porte-à-porte (jamais à vol d'oiseau).
 
 **Priorité** : Must · **Réf. PRD** : §8.1 (section 8)
@@ -689,7 +689,7 @@ géographiquement mon futur séjour sans dépendre de Google Maps.
 me rassurer avant de réserver.
 
 **Critères d'acceptation**
-- [ ] Uniquement des avis réels, sourcés et attribués (jamais de faux avis — risque juridique DGCCRF, §15.2).
+- [x] Uniquement des avis réels, sourcés et attribués (jamais de faux avis — risque juridique DGCCRF, §15.2).
 - [ ] `AggregateRating` + `Review` balisés.
 - [ ] Sauvegarde mensuelle des avis plateformes documentée (§14.5), même si le script d'automatisation est reporté au Lot 6.
 
@@ -701,9 +701,9 @@ entrant, ou si un pilier n'a pas au moins 6 pages de cluster reliées, **afin de
 garantir la robustesse du maillage interne dès que le nombre de pages augmente.
 
 **Critères d'acceptation**
-- [ ] Règles de §11.1 du PRD implémentées en script de vérification, branché sur la CI (US-008).
-- [ ] Rapport listant les pages orphelines et les piliers sous-liés.
-- [ ] Chaque page de niveau 3 (journal) pointe vers son pilier de niveau 1 avec une ancre exacte.
+- [x] Règles de §11.1 du PRD implémentées en script de vérification, branché sur la CI (US-008).
+- [x] Rapport listant les pages orphelines et les piliers sous-liés.
+- [x] Chaque page de niveau 3 (journal) pointe vers son pilier de niveau 1 avec une ancre exacte.
 
 **Priorité** : Must · **Réf. PRD** : §11.1
 
@@ -713,8 +713,8 @@ précise de la carte de mots-clés (§11.2 du PRD), **afin de** ne pas publier d
 sans intention de recherche claire.
 
 **Critères d'acceptation**
-- [ ] Chaque page publiée dans cet epic est associée à ≥ 1 requête de la carte de mots-clés, meta title/description écrits à la main en conséquence.
-- [ ] Aucune page ne cible la même requête principale qu'une autre (pas de cannibalisation).
+- [x] Chaque page publiée dans cet epic est associée à ≥ 1 requête de la carte de mots-clés, meta title/description écrits à la main en conséquence.
+- [x] Aucune page ne cible la même requête principale qu'une autre (pas de cannibalisation).
 
 **Priorité** : Should · **Réf. PRD** : §11.2
 
@@ -724,10 +724,10 @@ respectent les règles techniques SEO (§11.3), **afin de** ne pas avoir à corr
 dizaines de pages a posteriori.
 
 **Critères d'acceptation**
-- [ ] URLs SEO-friendly (lisibles, minuscules, tirets, sans paramètre ni extension technique, slash final) ; canonical auto-référentiel systématique.
-- [ ] `sitemap-index.xml` régénéré au build, `lastmod` réel.
+- [x] URLs SEO-friendly (lisibles, minuscules, tirets, sans paramètre ni extension technique, slash final) ; canonical auto-référentiel systématique.
+- [x] `sitemap-index.xml` régénéré au build, `lastmod` réel.
 - [ ] Images : AVIF + WebP + fallback, `srcset` 5 largeurs, `loading="lazy"` sauf LCP.
-- [ ] `robots.txt` référence les sitemaps.
+- [x] `robots.txt` référence les sitemaps.
 
 **Priorité** : Must · **Réf. PRD** : §11.3
 
@@ -737,9 +737,9 @@ suffisant pour commencer à générer du trafic organique, **afin de** passer à
 l'optimisation GEO.
 
 **Critères d'acceptation**
-- [ ] ≥ 25 pages indexables publiées et soumises au sitemap.
-- [ ] 0 page orpheline détectée par US-047.
-- [ ] 0 lien interne ou externe cassé (US-008).
+- [x] ≥ 25 pages indexables publiées et soumises au sitemap.
+- [x] 0 page orpheline détectée par US-047.
+- [x] 0 lien interne ou externe cassé (US-008).
 
 **Priorité** : Must · **Réf. PRD** : §16 (Lot 3), §18
 

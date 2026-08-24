@@ -7,6 +7,7 @@ import EnCeMoment from '@/components/EnCeMoment.astro';
 import { maison } from '@/data/maison';
 import { getSaisonCourante } from '@/data/saisons';
 import { lodgingBusinessJsonLd } from '@/lib/jsonld';
+import { pointsInteret } from '@/data/points-interet';
 
 const saison = getSaisonCourante();
 const canonical = new URL('/', Astro.site).toString();
@@ -29,18 +30,12 @@ const apercuMaison = [
   { slug: 'poele-a-bois', label: 'Le poêle à bois' },
 ];
 
-const pointsInteret = [
-  { nom: 'Sillon de Talbert', detail: 'Réserve naturelle, flèche de galets de 3,2 km', duree: '~10 min en voiture (à vérifier porte-à-porte)' },
-  { nom: 'Plage de Kermagen', detail: 'Plage familiale, cale de mise à l’eau', duree: 'À vérifier porte-à-porte' },
-  { nom: 'Tréguier', detail: 'Cathédrale Saint-Tugdual, cité de caractère', duree: '~15 km (à vérifier porte-à-porte)' },
-];
-
 const raisonsDeVenir = [
-  { titre: 'Sport', description: 'GR34, EuroVelo 4, kayak et voile à quelques minutes.' },
-  { titre: 'Bien-être', description: 'Air marin iodé, marche méditative, bains de mer.' },
-  { titre: 'Déconnexion', description: 'Silence, ciel étoilé, poêle à bois, rythme des marées.' },
-  { titre: 'Air pur', description: 'Le littoral breton, un argument respiratoire concret.' },
-  { titre: 'Culture', description: 'Tréguier, Beauport, whisky breton, pardons.' },
+  { titre: 'Sport', description: 'GR34, EuroVelo 4, kayak et voile à quelques minutes.', lien: '/experiences/randonnee-gr34/' },
+  { titre: 'Bien-être', description: 'Air marin iodé, marche méditative, bains de mer.', lien: '/experiences/bien-etre-air-marin/' },
+  { titre: 'Déconnexion', description: 'Silence, ciel étoilé, poêle à bois, rythme des marées.', lien: '/experiences/deconnexion-slow/' },
+  { titre: 'Air pur', description: 'Le littoral breton, un argument respiratoire concret.', lien: '/experiences/bien-etre-air-marin/' },
+  { titre: 'Culture', description: 'Tréguier, Beauport, whisky breton, distillerie.', lien: '/experiences/culture-patrimoine/' },
 ];
 ---
 
@@ -119,15 +114,15 @@ const raisonsDeVenir = [
     <!-- 7. Les 5 raisons de venir -->
     <section aria-labelledby="raisons-titre">
       <h2 id="raisons-titre" class="font-display text-2xl font-semibold">5 raisons de venir</h2>
-      <p class="mt-2 text-sm text-ink-muted">
-        Pages détaillées par thème (sport, bien-être, déconnexion, air pur, culture) publiées au Lot 3 — aperçu ci-dessous.
-      </p>
+      <p class="mt-2 text-sm text-ink-muted">Sport, bien-être, déconnexion, air pur, culture — cinq angles pour préparer un séjour.</p>
       <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {
           raisonsDeVenir.map((raison) => (
-            <li class="rounded-lg border border-border bg-surface p-4">
-              <p class="font-display font-semibold">{raison.titre}</p>
-              <p class="mt-1 text-sm text-ink-muted">{raison.description}</p>
+            <li>
+              <a href={raison.lien} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
+                <p class="font-display font-semibold">{raison.titre}</p>
+                <p class="mt-1 text-sm text-ink-muted">{raison.description}</p>
+              </a>
             </li>
           ))
         }
@@ -138,15 +133,17 @@ const raisonsDeVenir = [
     <section aria-labelledby="territoire-titre">
       <h2 id="territoire-titre" class="font-display text-2xl font-semibold">Le territoire, à quelques minutes</h2>
       <p class="mt-2 text-sm text-ink-muted">
-        Carte interactive complète (12 points d'intérêt) prévue au Lot 3 — aperçu de 3 lieux ci-dessous, distances à vérifier porte-à-porte avant publication définitive.
+        12 points d'intérêt du territoire — carte interactive MapLibre non encore implémentée (voir US-045) ; liste reliée aux fiches détaillées
+        en attendant. Temps de trajet à vérifier porte-à-porte avant publication définitive.
       </p>
-      <ul class="mt-6 grid gap-4 sm:grid-cols-3">
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {
           pointsInteret.map((poi) => (
-            <li class="rounded-lg border border-border bg-surface p-4">
-              <p class="font-display font-semibold">{poi.nom}</p>
-              <p class="mt-1 text-sm text-ink-muted">{poi.detail}</p>
-              <p class="mt-2 text-xs font-semibold text-accent">{poi.duree}</p>
+            <li>
+              <a href={poi.lien} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
+                <p class="text-xs font-semibold uppercase tracking-wide text-accent">{poi.categorie}</p>
+                <p class="mt-1 font-display font-semibold">{poi.nom}</p>
+              </a>
             </li>
           ))
         }

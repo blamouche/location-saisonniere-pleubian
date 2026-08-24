@@ -28,6 +28,9 @@ jobs:
       # Aucun lien interne cassé (US-008, US-047, US-050).
       - run: npm run check-links
 
+      # Aucune page orpheline, clusters conformes (US-047).
+      - run: npm run check-orphans
+
   # TODO (US-008, Lot 0/3) : budgets Lighthouse CI bloquants (§14.4 du PRD) et
   # validation Schema.org des blocs JSON-LD — à ajouter une fois qu'un environnement
   # de preview est disponible (nécessite l'hébergement tranché, US-009).

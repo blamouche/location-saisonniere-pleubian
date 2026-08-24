@@ -10,7 +10,16 @@ export default defineConfig({
   site: 'https://maison-odjoge.example',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // `lastmod` réel = date du build (US-049) : reflète l'horodatage effectif de
+      // génération de chaque page, cohérent avec le rebuild quotidien visé (US-032).
+      serialize(item) {
+        item.lastmod = new Date().toISOString();
+        return item;
+      },
+    }),
+  ],
   i18n: {
     defaultLocale: 'fr',
     locales: ['fr'],

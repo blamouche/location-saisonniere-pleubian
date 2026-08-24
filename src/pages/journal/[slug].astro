@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { experiences } from '@/data/experiences';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('journal');
+  return articles.map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+
+interface Props {
+  article: CollectionEntry<'journal'>;
+}
+
+const { article } = Astro.props as Props;
+const { Content } = await render(article);
+const canonical = new URL(`/journal/${article.id}/`, Astro.site).toString();
+// Ancre exacte vers le pilier de niveau 1 (§11.1 du PRD) : le titre réel de la page
+// cible, pas juste le nom générique du pilier éditorial.
+const pilierTitre = experiences.find((e) => `/experiences/${e.slug}/` === article.data.pilierPage)?.titre ?? article.data.pilier;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: article.data.titre,
+  description: article.data.description,
+  datePublished: article.data.datePublished.toISOString(),
+  dateModified: (article.data.dateModified ?? article.data.datePublished).toISOString(),
+  author: { '@type': 'Person', name: article.data.auteur },
+  url: canonical,
+};
+---
+
+<BaseLayout title={article.data.titre} description={article.data.description} crumbs={[{ label: 'Journal', href: '/journal/' }, { label: article.data.titre, href: `/journal/${article.id}/` }]} jsonLd={articleJsonLd}>
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <header>
+      <p class="text-xs font-semibold uppercase tracking-wide text-accent">{article.data.pilier}</p>
+      <h1 class="mt-2 font-display text-4xl font-semibold">{article.data.titre}</h1>
+      <p class="mt-3 text-sm text-ink-muted">
+        Par {article.data.auteur} · <time datetime={article.data.datePublished.toISOString()}>{article.data.datePublished.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
+      </p>
+    </header>
+
+    <div class="prose prose-neutral mt-10 max-w-none prose-headings:font-display prose-a:text-accent">
+      <Content />
+    </div>
+
+    <p class="mt-10 border-t border-border pt-4 text-xs text-ink-muted">
+      Pilier associé ({article.data.pilier}) : <a href={article.data.pilierPage} class="underline hover:text-accent">{pilierTitre}</a>
+    </p>
+  </article>
+</BaseLayout>

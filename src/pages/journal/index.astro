@@ -1,0 +1,39 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('journal')).sort((a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf());
+---
+
+<BaseLayout
+  title="Journal"
+  description="Le journal de la Maison Od Joge : des articles courts et originaux sur la Presqu'île sauvage, publiés au fil des saisons."
+  crumbs={[{ label: 'Journal', href: '/journal/' }]}
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">Journal</h1>
+      <p class="mt-3 text-ink-muted">
+        Des contenus éditoriaux datés, écrits à la première personne — pas un blog d'office de tourisme.
+        <a href="/journal/rss.xml" class="ml-1 underline hover:text-accent">Flux RSS</a>
+      </p>
+    </header>
+
+    <ul class="mt-10 space-y-6">
+      {
+        articles.map((article) => (
+          <li class="rounded-lg border border-border bg-surface p-5">
+            <p class="text-xs font-semibold uppercase tracking-wide text-accent">{article.data.pilier}</p>
+            <a href={`/journal/${article.id}/`} class="mt-1 block font-display text-xl font-semibold hover:text-accent">
+              {article.data.titre}
+            </a>
+            <p class="mt-2 text-sm text-ink-muted">{article.data.description}</p>
+            <time datetime={article.data.datePublished.toISOString()} class="mt-2 block text-xs text-ink-muted">
+              {article.data.datePublished.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </time>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>

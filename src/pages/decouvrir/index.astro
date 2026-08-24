@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { fichesLieux } from '@/data/decouvrir';
+---
+
+<BaseLayout
+  title="Découvrir la Presqu'île sauvage"
+  description="Le guide du territoire autour de la Maison Od Joge : Sillon de Talbert, Bréhat, Tréguier, Paimpol, Côte de Granit Rose et plus."
+  crumbs={[{ label: 'Découvrir', href: '/decouvrir/' }]}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">Découvrir la Presqu'île sauvage</h1>
+      <p class="mt-3 max-w-2xl text-ink-muted">Le guide du territoire — {fichesLieux.length} fiches de lieux, rédigées pour préparer un vrai séjour, pas pour remplir un portail.</p>
+    </header>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        fichesLieux.map((fiche) => (
+          <a href={`/decouvrir/${fiche.slug}/`} class="group overflow-hidden rounded-xl border border-border bg-surface">
+            <PlaceholderImage slug={fiche.heroSlug} ratio="4x5" alt={`${fiche.nom} (visuel provisoire)`} class="h-48 w-full object-cover" />
+            <div class="p-4">
+              <p class="font-display font-semibold group-hover:text-accent">{fiche.nom}</p>
+              <p class="mt-1 text-xs text-ink-muted">{fiche.resume.ou}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

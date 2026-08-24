@@ -1,0 +1,95 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { fichesLieux } from '@/data/decouvrir';
+import { experiences } from '@/data/experiences';
+
+export function getStaticPaths() {
+  return fichesLieux.map((f) => ({ params: { lieu: f.slug }, props: { fiche: f } }));
+}
+
+const { fiche } = Astro.props as { fiche: (typeof fichesLieux)[number] };
+const canonical = new URL(`/decouvrir/${fiche.slug}/`, Astro.site).toString();
+const liensCombiner = fiche.aCombinerAvec.map((slug) => fichesLieux.find((f) => f.slug === slug)).filter(Boolean) as typeof fichesLieux;
+const experienceLiee = experiences.find((e) => e.slug === fiche.experienceLiee);
+
+const placeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'Place'],
+  name: fiche.nom,
+  url: canonical,
+  geo: { '@type': 'GeoCoordinates', latitude: fiche.geo.latitude, longitude: fiche.geo.longitude },
+  isAccessibleForFree: fiche.resume.gratuitPayant.toLowerCase().startsWith('gratuit'),
+};
+---
+
+<BaseLayout
+  title={fiche.nom}
+  description={fiche.corps[0]}
+  crumbs={[{ label: 'Découvrir', href: '/decouvrir/' }, { label: fiche.nom, href: `/decouvrir/${fiche.slug}/` }]}
+  jsonLd={placeJsonLd}
+  ogImage={`/medias/placeholder/placeholder-${fiche.heroSlug}.svg`}
+>
+  <section class="relative">
+    <PlaceholderImage slug={fiche.heroSlug} ratio="16x9" alt={`${fiche.nom} (visuel provisoire)`} loading="eager" class="h-[40vh] min-h-[280px] w-full object-cover" />
+    <div class="absolute inset-0 flex items-end bg-gradient-to-t from-ink/70 via-ink/10 to-transparent">
+      <div class="mx-auto w-full max-w-3xl px-4 pb-8 text-white sm:px-6">
+        <h1 class="font-display text-4xl font-semibold sm:text-5xl">{fiche.nom}</h1>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-3xl space-y-12 px-4 py-14 sm:px-6">
+    <!-- Résumé factuel -->
+    <section aria-labelledby="resume-titre" class="rounded-lg border border-border bg-surface-alt p-5">
+      <h2 id="resume-titre" class="sr-only">Résumé factuel</h2>
+      <dl class="grid gap-4 sm:grid-cols-2">
+        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Où</dt><dd class="text-sm">{fiche.resume.ou}</dd></div>
+        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Durée de visite</dt><dd class="text-sm">{fiche.resume.dureeVisite}</dd></div>
+        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Gratuit ou payant</dt><dd class="text-sm">{fiche.resume.gratuitPayant}</dd></div>
+        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Meilleure saison</dt><dd class="text-sm">{fiche.resume.meilleureSaison}</dd></div>
+        <div class="sm:col-span-2"><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Accessible poussette / PMR</dt><dd class="text-sm">{fiche.resume.accessiblePMR}</dd></div>
+      </dl>
+      <p class="mt-3 text-xs text-ink-muted">Temps de trajet depuis la maison : à vérifier porte-à-porte avant publication définitive (convention du dépôt).</p>
+    </section>
+
+    <!-- Corps rédigé -->
+    <section aria-labelledby="corps-titre">
+      <h2 id="corps-titre" class="sr-only">Présentation</h2>
+      <div class="space-y-4 text-sm leading-relaxed">
+        {fiche.corps.map((p) => <p set:html={p.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')} />)}
+      </div>
+    </section>
+
+    <!-- Conseil pratique -->
+    <section aria-labelledby="conseil-titre" class="rounded-lg border border-dashed border-accent bg-accent-soft p-5">
+      <h2 id="conseil-titre" class="text-sm font-semibold uppercase tracking-wide text-ink-muted">Conseil pratique</h2>
+      <p class="mt-2 text-sm">{fiche.conseilPratique}</p>
+    </section>
+
+    <!-- À combiner avec -->
+    <section aria-labelledby="combiner-titre">
+      <h2 id="combiner-titre" class="font-display text-2xl font-semibold">À combiner avec</h2>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-3">
+        {
+          liensCombiner.map((lieu) => (
+            <li>
+              <a href={`/decouvrir/${lieu.slug}/`} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
+                {lieu.nom}
+              </a>
+            </li>
+          ))
+        }
+        {
+          experienceLiee && (
+            <li>
+              <a href={`/experiences/${experienceLiee.slug}/`} class="block rounded-lg border border-border bg-surface p-4 text-sm font-semibold hover:bg-surface-alt">
+                {experienceLiee.titre}
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

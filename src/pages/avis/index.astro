@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { maison, lienAirbnb } from '@/data/maison';
+---
+
+<BaseLayout
+  title="Avis voyageurs"
+  description={`Avis voyageurs sur ${maison.nom} — uniquement des avis réels et attribués, jamais de faux avis.`}
+  crumbs={[{ label: 'Avis', href: '/avis/' }]}
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">Avis voyageurs</h1>
+      <p class="mt-3 text-ink-muted">
+        Ce site n'affiche que des avis réels, sourcés et attribués. Publier un faux avis n'est pas seulement contraire à l'éthique du site — c'est
+        une pratique sanctionnée (DGCCRF, PRD §15.2). Nous préférons ne rien afficher plutôt que d'inventer.
+      </p>
+    </header>
+
+    <section aria-labelledby="statut-titre" class="mt-10 rounded-lg border border-dashed border-border p-6 text-center">
+      <h2 id="statut-titre" class="font-display text-xl font-semibold">Import en préparation</h2>
+      <p class="mt-2 text-sm text-ink-muted">
+        Les avis seront importés depuis les plateformes de réservation ({maison.hotes.map((h) => h.prenom).join(' & ')} — statut
+        {maison.superhost ? ' Superhost' : ''}), avec une sauvegarde mensuelle documentée (PRD §14.5). Le script d'automatisation complet est
+        prévu au Lot 6 (US-072) ; en attendant, consultez les avis directement sur la plateforme de réservation.
+      </p>
+      <a href={lienAirbnb('avis-page')} target="_blank" rel="noopener noreferrer nofollow" data-analytics-event="sortie_airbnb" class="mt-4 inline-block rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-90">
+        Voir les avis sur Airbnb
+      </a>
+    </section>
+  </div>
+</BaseLayout>
