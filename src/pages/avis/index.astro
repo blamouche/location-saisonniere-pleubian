@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { maison, lienAirbnb } from '@/data/maison';
+import Cta from '@/components/Cta.astro';
+import { maison } from '@/data/maison';
 ---
 
 <BaseLayout
@@ -24,9 +25,9 @@ import { maison, lienAirbnb } from '@/data/maison';
         {maison.superhost ? ' Superhost' : ''}), avec une sauvegarde mensuelle documentée (PRD §14.5). Le script d'automatisation complet est
         prévu au Lot 6 (US-072) ; en attendant, consultez les avis directement sur la plateforme de réservation.
       </p>
-      <a href={lienAirbnb('avis-page')} target="_blank" rel="noopener noreferrer nofollow" data-analytics-event="sortie_airbnb" class="mt-4 inline-block rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-90">
-        Voir les avis sur Airbnb
-      </a>
+      <div class="mt-4 flex justify-center">
+        <Cta campagne="avis-page" />
+      </div>
     </section>
   </div>
 </BaseLayout>

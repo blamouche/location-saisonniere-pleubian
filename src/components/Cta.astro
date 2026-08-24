@@ -5,32 +5,44 @@ export interface Props {
   /** Nom de campagne UTM, ex. "accueil-hero", "reserver-page". */
   campagne: string;
   class?: string;
+  /** 'default' : Airbnb plein + Booking outline, sur fond clair.
+   *  'on-accent' : les deux boutons en blanc, pour poser le CTA sur un fond `bg-accent`. */
+  variant?: 'default' | 'on-accent';
 }
 
-const { campagne, class: className } = Astro.props;
+const { campagne, class: className, variant = 'default' } = Astro.props;
+
+const airbnbClass =
+  variant === 'on-accent'
+    ? 'rounded-md bg-white px-5 py-3 text-sm font-semibold text-accent hover:opacity-90'
+    : 'rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-90';
+
+const bookingClass =
+  variant === 'on-accent'
+    ? 'rounded-md border border-white px-5 py-3 text-sm font-semibold text-white hover:bg-white/10'
+    : 'rounded-md border border-accent px-5 py-3 text-sm font-semibold text-accent hover:bg-accent-soft';
+
+const bookingDisabledClass =
+  variant === 'on-accent'
+    ? 'cursor-not-allowed rounded-md border border-white/50 px-5 py-3 text-sm font-semibold text-white/60'
+    : 'cursor-not-allowed rounded-md border border-border px-5 py-3 text-sm font-semibold text-ink-muted opacity-60';
 ---
 
 <div class:list={['flex flex-wrap gap-3', className]}>
-  <a
-    href={lienAirbnb(campagne)}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
-    data-analytics-event="sortie_airbnb"
-    class="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
-  >
+  <a href={lienAirbnb(campagne)} target="_blank" rel="noopener noreferrer nofollow" data-analytics-event="sortie_airbnb" class={airbnbClass}>
     Voir sur Airbnb
   </a>
   {
-    maison.plateformes.booking.url && (
-      <a
-        href={maison.plateformes.booking.url}
-        target="_blank"
-        rel="noopener noreferrer nofollow"
-        data-analytics-event="sortie_booking"
-        class="rounded-md border border-accent px-5 py-3 text-sm font-semibold text-accent hover:bg-accent-soft"
-      >
+    maison.plateformes.booking.url ? (
+      <a href={maison.plateformes.booking.url} target="_blank" rel="noopener noreferrer nofollow" data-analytics-event="sortie_booking" class={bookingClass}>
         Voir sur Booking
       </a>
+    ) : (
+      // Lien Booking pas encore renseigné (maison.plateformes.booking.url, PRD §19
+      // Q3) : bouton visible mais non cliquable plutôt qu'un lien inventé ou cassé.
+      <span role="button" aria-disabled="true" title="Lien Booking à venir" class={bookingDisabledClass}>
+        Voir sur Booking <span class="text-xs">(bientôt)</span>
+      </span>
     )
   }
 </div>

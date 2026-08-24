@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
-import { maison, lienAirbnb } from '@/data/maison';
+import Cta from '@/components/Cta.astro';
+import { maison } from '@/data/maison';
 import { experiences } from '@/data/experiences';
 import { fichesLieux } from '@/data/decouvrir';
 import { buildDate } from '@/lib/build-date';
@@ -155,15 +156,7 @@ const touristTripJsonLd = {
       <h2 class="font-display text-2xl font-semibold">Envie d'en profiter depuis la maison ?</h2>
       <p class="mt-2 text-white/90">{maison.nom} — {maison.capacite.voyageurs} personnes, à {maison.distances.mer.duree} de la mer.</p>
       <div class="mt-6 flex justify-center">
-        <a
-          href={lienAirbnb(`experience-${experience.slug}`)}
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          data-analytics-event="sortie_airbnb"
-          class="rounded-md bg-white px-5 py-3 text-sm font-semibold text-accent hover:opacity-90"
-        >
-          Voir sur Airbnb
-        </a>
+        <Cta campagne={`experience-${experience.slug}`} variant="on-accent" />
       </div>
     </section>
   </div>
