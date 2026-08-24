@@ -9,6 +9,7 @@ point d'entrée général et le workflow multi-machines.
 | [`SEO-strategy.md`](./SEO-strategy.md) | Étude et stratégie SEO/GEO détaillée — audit du PRD, analyse concurrentielle, mots-clés, roadmap SEO/GEO et recommandations. |
 | [`user-stories.md`](./user-stories.md) | Backlog de développement — User Stories organisées par lot de la roadmap (§16 du PRD), avec critères d'acceptation. |
 | [`geo-baseline.md`](./geo-baseline.md) | Tableau de suivi des 15 prompts de test GEO (US-060) — à remplir dès la mise en ligne réelle. |
+| [`visuels-a-fournir.md`](./visuels-a-fournir.md) | Liste des 31 visuels réels attendus, un par placeholder actuellement en ligne, avec formats et priorités. |
 
 ## Convention
 

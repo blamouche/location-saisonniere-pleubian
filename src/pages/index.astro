@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import FactBox from '@/components/FactBox.astro';
 import Cta from '@/components/Cta.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import HeroImage from '@/components/HeroImage.astro';
 import EnCeMoment from '@/components/EnCeMoment.astro';
 import { maison } from '@/data/maison';
 import { getSaisonCourante } from '@/data/saisons';
@@ -46,10 +47,9 @@ const raisonsDeVenir = [
 >
   <!-- 1. Hero -->
   <section class="relative">
-    <PlaceholderImage
-      slug="hero-ete-16x9"
-      ratio="16x9"
-      alt={`${maison.nom} vue de l'extérieur, saison ${saison.label.toLowerCase()} (visuel provisoire, remplacé au shooting réel)`}
+    <HeroImage
+      saison={saison.id}
+      alt={`Ambiance ${saison.label.toLowerCase()} sur la Presqu'île sauvage`}
       loading="eager"
       class="h-[70vh] min-h-[420px] w-full object-cover"
     />

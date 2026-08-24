@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import HeroImage from '@/components/HeroImage.astro';
 import Cta from '@/components/Cta.astro';
 import { saisons, getSaison, type SaisonId } from '@/data/saisons';
 import { dixChoses } from '@/data/dix-choses';
 import { enCeMoment } from '@/data/en-ce-moment';
 import { maison } from '@/data/maison';
 import { buildDate } from '@/lib/build-date';
+import { heroImages } from '@/data/real-images';
 
 export function getStaticPaths() {
   return saisons.map((s) => ({ params: { saison: s.id }, props: { saisonId: s.id } }));
@@ -56,14 +58,13 @@ const faqJsonLd = {
   description={`${saison.promesse} — que faire, tarifs indicatifs et galerie de la Maison Od Joge à Pleubian pour la saison ${saison.label.toLowerCase()}.`}
   crumbs={[{ label: 'Saisons', href: '/saisons/' }, { label: saison.label, href: `/saisons/${saison.id}/` }]}
   jsonLd={faqJsonLd}
-  ogImage={`/medias/placeholder/placeholder-hero-${saison.id === 'ete' ? 'ete' : saison.id}-16x9.svg`}
+  ogImage={heroImages[saison.id]?.src.src ?? `/medias/placeholder/placeholder-hero-${saison.id}-16x9.svg`}
 >
   <!-- Hero -->
   <section class="relative">
-    <PlaceholderImage
-      slug={`hero-${saison.id}-16x9`}
-      ratio="16x9"
-      alt={`La Presqu'île sauvage en ${saison.label.toLowerCase()} (visuel provisoire)`}
+    <HeroImage
+      saison={saison.id}
+      alt={`La Presqu'île sauvage en ${saison.label.toLowerCase()}`}
       loading="eager"
       class="h-[50vh] min-h-[320px] w-full object-cover"
     />

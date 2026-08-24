@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { heroImages } from '@/data/real-images';
+import type { SaisonId } from '@/data/saisons';
+
+/**
+ * Hero saisonnier : bascule automatiquement entre le vrai visuel (US-070, quand il
+ * existe dans `src/data/real-images.ts`) et le placeholder générique, sans qu'aucune
+ * page appelante n'ait à changer (contrat posé par PlaceholderImage — US-007).
+ * Le vrai visuel passe par `astro:assets` : AVIF + `srcset` responsive (US-049).
+ */
+export interface Props {
+  saison: SaisonId;
+  alt: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+  /** Largeurs générées + `sizes` — par défaut calibrées pour un hero plein écran.
+   * Réduire pour une vignette (ex. carte du hub `/saisons/`) afin de ne pas générer
+   * des variantes AVIF inutilement lourdes. */
+  widths?: number[];
+  sizes?: string;
+}
+
+const { saison, alt, loading = 'lazy', class: className, widths = [640, 960, 1280, 1600, 1920], sizes = '100vw' } = Astro.props;
+const real = heroImages[saison];
+---
+
+{
+  real ? (
+    <figure class="relative m-0">
+      <Image src={real.src} alt={alt} loading={loading} class={className} widths={widths} sizes={sizes} format="avif" />
+      <figcaption class="absolute bottom-1 right-2 rounded bg-ink/50 px-2 py-0.5 text-[10px] text-white/90">{real.credit}</figcaption>
+    </figure>
+  ) : (
+    <PlaceholderImage slug={`hero-${saison}-16x9`} ratio="16x9" alt={`${alt} (visuel provisoire)`} loading={loading} class={className} />
+  )
+}

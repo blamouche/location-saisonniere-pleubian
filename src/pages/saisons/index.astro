@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import HeroImage from '@/components/HeroImage.astro';
 import { saisons } from '@/data/saisons';
 ---
 
@@ -21,7 +21,13 @@ import { saisons } from '@/data/saisons';
       {
         saisons.map((s) => (
           <a href={`/saisons/${s.id}/`} class="group overflow-hidden rounded-xl border border-border bg-surface">
-            <PlaceholderImage slug={`hero-${s.id}-16x9`} ratio="16x9" alt={`La Presqu'île en ${s.label.toLowerCase()} (visuel provisoire)`} class="h-48 w-full object-cover" />
+            <HeroImage
+              saison={s.id}
+              alt={`La Presqu'île en ${s.label.toLowerCase()}`}
+              class="h-48 w-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
             <div class="p-5">
               <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{s.periode}</p>
               <p class="mt-1 font-display text-2xl font-semibold group-hover:text-accent">{s.label}</p>
