@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import Analytics from '@/components/Analytics.astro';
 import SeasonScript from '@/components/SeasonScript.astro';
 import { getSaisonCourante } from '@/data/saisons';
+import { buildDate, formatDateFR } from '@/lib/build-date';
 
 export interface Crumb {
   label: string;
@@ -82,21 +83,20 @@ const jsonLdBlocks = [breadcrumbJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : jso
 
     <Header />
 
-    {
-      crumbs.length > 0 && (
-        <nav aria-label="Fil d'Ariane" class="mx-auto max-w-6xl px-4 pt-4 text-xs text-ink-muted sm:px-6">
-          <ol class="flex flex-wrap items-center gap-1">
-            <li><a href="/" class="hover:text-accent">Accueil</a></li>
-            {crumbs.map((c) => (
-              <>
-                <li aria-hidden="true">/</li>
-                <li><a href={c.href} class="hover:text-accent">{c.label}</a></li>
-              </>
-            ))}
-          </ol>
-        </nav>
-      )
-    }
+    <nav aria-label="Fil d'Ariane" class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 pt-4 text-xs text-ink-muted sm:px-6">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-accent">Accueil</a></li>
+        {crumbs.map((c) => (
+          <>
+            <li aria-hidden="true">/</li>
+            <li><a href={c.href} class="hover:text-accent">{c.label}</a></li>
+          </>
+        ))}
+      </ol>
+      {/* Fraîcheur datée (US-059, PRD §12.2.C) : visible sur toutes les pages de
+          contenu, recalculée à chaque build. */}
+      <p>Mis à jour le {formatDateFR(buildDate)}</p>
+    </nav>
 
     <main id="contenu">
       <slot />

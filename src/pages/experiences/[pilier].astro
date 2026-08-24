@@ -4,6 +4,7 @@ import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import { maison, lienAirbnb } from '@/data/maison';
 import { experiences } from '@/data/experiences';
 import { fichesLieux } from '@/data/decouvrir';
+import { buildDate } from '@/lib/build-date';
 
 export function getStaticPaths() {
   return experiences.map((e) => ({ params: { pilier: e.slug }, props: { experience: e } }));
@@ -30,6 +31,7 @@ const touristTripJsonLd = {
   description: experience.promesse,
   url: canonical,
   itinerary: experience.propositions.map((p) => ({ '@type': 'TouristAttraction', name: p.titre })),
+  dateModified: buildDate.toISOString(),
 };
 ---
 
@@ -52,18 +54,24 @@ const touristTripJsonLd = {
   </section>
 
   <div class="mx-auto max-w-3xl space-y-14 px-4 py-14 sm:px-6">
+    <!-- L'essentiel (US-051, GEO) : résumé autonome de 40-60 mots, citable hors contexte. -->
+    <section aria-labelledby="essentiel-titre" class="rounded-lg border border-border bg-surface-alt p-5">
+      <h2 id="essentiel-titre" class="text-xs font-semibold uppercase tracking-wide text-ink-muted">L'essentiel</h2>
+      <p class="mt-2 text-sm">{experience.essentiel}</p>
+    </section>
+
     <!-- 2. Promesse -->
     <p class="font-display text-xl leading-snug">{experience.promesse}</p>
 
     <!-- 3. Depuis la maison -->
     <section aria-labelledby="depuis-titre" class="rounded-lg border border-border bg-surface-alt p-5">
-      <h2 id="depuis-titre" class="text-sm font-semibold uppercase tracking-wide text-ink-muted">Depuis la maison</h2>
+      <h2 id="depuis-titre" class="font-display text-xl font-semibold">Comment accéder à {experience.titre.toLowerCase()} depuis la maison ?</h2>
       <p class="mt-2 text-sm">{experience.depuisLaMaison}</p>
     </section>
 
     <!-- 4. Propositions concrètes -->
     <section aria-labelledby="propositions-titre">
-      <h2 id="propositions-titre" class="font-display text-2xl font-semibold">Propositions concrètes</h2>
+      <h2 id="propositions-titre" class="font-display text-2xl font-semibold">Que faire concrètement ?</h2>
       <div class="mt-6 overflow-x-auto">
         <table class="w-full min-w-[560px] border-collapse text-sm">
           <thead>
@@ -94,7 +102,7 @@ const touristTripJsonLd = {
 
     <!-- 5. Encadré pratique -->
     <section aria-labelledby="pratique-titre" class="rounded-lg border border-border bg-surface p-5">
-      <h2 id="pratique-titre" class="font-display text-xl font-semibold">Encadré pratique</h2>
+      <h2 id="pratique-titre" class="font-display text-xl font-semibold">Quel matériel et quelles réservations prévoir ?</h2>
       <dl class="mt-3 space-y-3 text-sm">
         <div>
           <dt class="font-semibold">Matériel</dt>

@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import { fichesLieux } from '@/data/decouvrir';
 import { experiences } from '@/data/experiences';
+import { buildDate } from '@/lib/build-date';
 
 export function getStaticPaths() {
   return fichesLieux.map((f) => ({ params: { lieu: f.slug }, props: { fiche: f } }));
@@ -20,6 +21,10 @@ const placeJsonLd = {
   url: canonical,
   geo: { '@type': 'GeoCoordinates', latitude: fiche.geo.latitude, longitude: fiche.geo.longitude },
   isAccessibleForFree: fiche.resume.gratuitPayant.toLowerCase().startsWith('gratuit'),
+  dateModified: buildDate.toISOString(),
+  // Alignement Wikidata (US-057) : uniquement les QID vérifiés via l'API Wikidata,
+  // jamais un identifiant deviné.
+  ...(fiche.wikidata ? { sameAs: fiche.wikidata.map((qid) => `https://www.wikidata.org/wiki/${qid}`) } : {}),
 };
 ---
 
@@ -40,36 +45,46 @@ const placeJsonLd = {
   </section>
 
   <div class="mx-auto max-w-3xl space-y-12 px-4 py-14 sm:px-6">
-    <!-- Résumé factuel -->
-    <section aria-labelledby="resume-titre" class="rounded-lg border border-border bg-surface-alt p-5">
+    <!-- L'essentiel (US-051, GEO) : résumé autonome de 40-60 mots, citable hors contexte. -->
+    <section aria-labelledby="essentiel-titre" class="rounded-lg border border-border bg-surface-alt p-5">
+      <h2 id="essentiel-titre" class="text-xs font-semibold uppercase tracking-wide text-ink-muted">L'essentiel</h2>
+      <p class="mt-2 text-sm">{fiche.essentiel}</p>
+    </section>
+
+    <!-- Résumé factuel, en tableau (US-052) -->
+    <section aria-labelledby="resume-titre">
       <h2 id="resume-titre" class="sr-only">Résumé factuel</h2>
-      <dl class="grid gap-4 sm:grid-cols-2">
-        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Où</dt><dd class="text-sm">{fiche.resume.ou}</dd></div>
-        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Durée de visite</dt><dd class="text-sm">{fiche.resume.dureeVisite}</dd></div>
-        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Gratuit ou payant</dt><dd class="text-sm">{fiche.resume.gratuitPayant}</dd></div>
-        <div><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Meilleure saison</dt><dd class="text-sm">{fiche.resume.meilleureSaison}</dd></div>
-        <div class="sm:col-span-2"><dt class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Accessible poussette / PMR</dt><dd class="text-sm">{fiche.resume.accessiblePMR}</dd></div>
-      </dl>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="w-full text-sm">
+          <tbody>
+            <tr class="border-b border-border"><th scope="row" class="w-1/3 bg-surface-alt p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-muted">Où</th><td class="p-3">{fiche.resume.ou}</td></tr>
+            <tr class="border-b border-border"><th scope="row" class="bg-surface-alt p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-muted">Durée de visite</th><td class="p-3">{fiche.resume.dureeVisite}</td></tr>
+            <tr class="border-b border-border"><th scope="row" class="bg-surface-alt p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-muted">Gratuit ou payant</th><td class="p-3">{fiche.resume.gratuitPayant}</td></tr>
+            <tr class="border-b border-border"><th scope="row" class="bg-surface-alt p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-muted">Meilleure saison</th><td class="p-3">{fiche.resume.meilleureSaison}</td></tr>
+            <tr><th scope="row" class="bg-surface-alt p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-muted">Accessible poussette / PMR</th><td class="p-3">{fiche.resume.accessiblePMR}</td></tr>
+          </tbody>
+        </table>
+      </div>
       <p class="mt-3 text-xs text-ink-muted">Temps de trajet depuis la maison : à vérifier porte-à-porte avant publication définitive (convention du dépôt).</p>
     </section>
 
     <!-- Corps rédigé -->
     <section aria-labelledby="corps-titre">
-      <h2 id="corps-titre" class="sr-only">Présentation</h2>
-      <div class="space-y-4 text-sm leading-relaxed">
+      <h2 id="corps-titre" class="font-display text-2xl font-semibold">Pourquoi visiter {fiche.nom} ?</h2>
+      <div class="mt-4 space-y-4 text-sm leading-relaxed">
         {fiche.corps.map((p) => <p set:html={p.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')} />)}
       </div>
     </section>
 
     <!-- Conseil pratique -->
     <section aria-labelledby="conseil-titre" class="rounded-lg border border-dashed border-accent bg-accent-soft p-5">
-      <h2 id="conseil-titre" class="text-sm font-semibold uppercase tracking-wide text-ink-muted">Conseil pratique</h2>
+      <h2 id="conseil-titre" class="font-display text-xl font-semibold">Quel est le meilleur conseil pour visiter {fiche.nom} ?</h2>
       <p class="mt-2 text-sm">{fiche.conseilPratique}</p>
     </section>
 
     <!-- À combiner avec -->
     <section aria-labelledby="combiner-titre">
-      <h2 id="combiner-titre" class="font-display text-2xl font-semibold">À combiner avec</h2>
+      <h2 id="combiner-titre" class="font-display text-2xl font-semibold">Que voir à proximité de {fiche.nom} ?</h2>
       <ul class="mt-4 grid gap-3 sm:grid-cols-3">
         {
           liensCombiner.map((lieu) => (

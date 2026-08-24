@@ -757,8 +757,8 @@ principale, **afin de** pouvoir citer la page sans avoir à interpréter le rest
 contenu.
 
 **Critères d'acceptation**
-- [ ] Encadré présent sur toutes les pages `/decouvrir/`, `/experiences/`, `/saisons/`.
-- [ ] Rédigé pour être compréhensible hors contexte (pas de « ici », « ce lieu » sans antécédent).
+- [x] Encadré présent sur toutes les pages `/decouvrir/`, `/experiences/`, `/saisons/`.
+- [x] Rédigé pour être compréhensible hors contexte (pas de « ici », « ce lieu » sans antécédent).
 
 **Priorité** : Must · **Réf. PRD** : §12.2.A
 
@@ -768,8 +768,8 @@ vraies questions suivies d'une réponse directe, et des données présentées en
 plutôt qu'en prose, **afin de** extraire l'information de façon fiable.
 
 **Critères d'acceptation**
-- [ ] Au moins 3 sous-titres en question par page de contenu long (`/saisons/`, `/decouvrir/`, `/experiences/`).
-- [ ] Toute donnée chiffrée (distance, durée, tarif, température, horaire) présentée en tableau quand c'est possible.
+- [x] Au moins 3 sous-titres en question par page de contenu long (`/saisons/`, `/decouvrir/`, `/experiences/`).
+- [x] Toute donnée chiffrée (distance, durée, tarif, température, horaire) présentée en tableau quand c'est possible.
 
 **Priorité** : Should · **Réf. PRD** : §12.2.A
 
@@ -779,8 +779,8 @@ présentant le site et indexant toutes les pages avec une description, **afin de
 comprendre rapidement la structure et le contenu du site sans le crawler intégralement.
 
 **Critères d'acceptation**
-- [ ] Fichier généré au build (pas maintenu à la main), à partir des frontmatters de contenu.
-- [ ] Une ligne de description par page publiée.
+- [x] Fichier généré au build (pas maintenu à la main), à partir des frontmatters de contenu.
+- [x] Une ligne de description par page publiée.
 
 **Priorité** : Must · **Réf. PRD** : §12.2.D
 
@@ -790,8 +790,8 @@ essentiel du site en markdown brut, **afin de** disposer du contenu complet en u
 fichier facilement ingérable.
 
 **Critères d'acceptation**
-- [ ] Généré au build, contenu synchronisé avec les pages publiées (pas de dérive).
-- [ ] Taille surveillée (pas de doublons entre langues tant que le multilingue n'est pas actif).
+- [x] Généré au build, contenu synchronisé avec les pages publiées (pas de dérive).
+- [x] Taille surveillée (pas de doublons entre langues tant que le multilingue n'est pas actif).
 
 **Priorité** : Should · **Réf. PRD** : §12.2.D
 
@@ -801,8 +801,8 @@ en complément de la version HTML, **afin de** lire le contenu structuré sans b
 mise en page.
 
 **Critères d'acceptation**
-- [ ] Chaque page de contenu expose sa version `.md` à l'URL `+ index.md`.
-- [ ] Déclarée dans le sitemap.
+- [x] Chaque page de contenu expose sa version `.md` à l'URL `+ index.md`.
+- [x] Déclarée dans le sitemap.
 
 **Priorité** : Should · **Réf. PRD** : §12.2.D
 
@@ -812,8 +812,8 @@ les faits structurés du bien sous licence ouverte, **afin de** disposer d'une s
 factuelle fiable et machine-readable.
 
 **Critères d'acceptation**
-- [ ] Généré directement depuis `maison.json` (pas de re-saisie).
-- [ ] Licence ouverte explicite dans le fichier.
+- [x] Généré directement depuis `maison.json` (pas de re-saisie).
+- [x] Licence ouverte explicite dans le fichier.
 
 **Priorité** : Should · **Réf. PRD** : §12.2.C, §14.3
 
@@ -824,8 +824,8 @@ entre elles, avec un identifiant Wikidata en `sameAs`, **afin de** ancrer le sit
 graphe de connaissances vérifiable.
 
 **Critères d'acceptation**
-- [ ] Liste d'entités de §12.2.B présente et reliée dans au moins 80 % des pages `/decouvrir/`.
-- [ ] `sameAs` Wikidata ajouté au JSON-LD des lieux qui ont une entrée Wikidata.
+- [x] Liste d'entités de §12.2.B présente et reliée dans au moins 80 % des pages `/decouvrir/`.
+- [x] `sameAs` Wikidata ajouté au JSON-LD des lieux qui ont une entrée Wikidata.
 
 **Priorité** : Could · **Réf. PRD** : §12.2.B
 
@@ -835,7 +835,7 @@ IA légitimes (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot), **afin
 assumer la stratégie « on veut être ingéré et cité ».
 
 **Critères d'acceptation**
-- [ ] `robots.txt` liste ces user-agents en autorisé, référence les sitemaps et `llms.txt`.
+- [x] `robots.txt` liste ces user-agents en autorisé, référence les sitemaps et `llms.txt`.
 - [ ] Vérifié après chaque changement de structure d'URL.
 
 **Priorité** : Must · **Réf. PRD** : §11.3, §12.2.D
@@ -846,7 +846,7 @@ balisée `dateModified` sur chaque page, avec des données chiffrées attribuée
 **afin de** évaluer la fiabilité de l'information avant de la citer.
 
 **Critères d'acceptation**
-- [ ] Bloc visible sur toutes les pages de contenu, mis à jour au rebuild quotidien si le contenu change.
+- [x] Bloc visible sur toutes les pages de contenu, mis à jour au rebuild quotidien si le contenu change.
 - [ ] Toute statistique cite sa source et sa date (ex. « Selon Météo-France 1991–2020 »).
 
 **Priorité** : Must · **Réf. PRD** : §12.2.C

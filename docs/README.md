@@ -8,6 +8,7 @@ point d'entrée général et le workflow multi-machines.
 | [`PRD.md`](./PRD.md) | Product Requirements Document — vision, personas, expérience multi-saisons, arborescence, design system, stratégie SEO/GEO, spécifications techniques, roadmap, critères d'acceptation. **À lire avant toute décision produit.** |
 | [`SEO-strategy.md`](./SEO-strategy.md) | Étude et stratégie SEO/GEO détaillée — audit du PRD, analyse concurrentielle, mots-clés, roadmap SEO/GEO et recommandations. |
 | [`user-stories.md`](./user-stories.md) | Backlog de développement — User Stories organisées par lot de la roadmap (§16 du PRD), avec critères d'acceptation. |
+| [`geo-baseline.md`](./geo-baseline.md) | Tableau de suivi des 15 prompts de test GEO (US-060) — à remplir dès la mise en ligne réelle. |
 
 ## Convention
 

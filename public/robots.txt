@@ -1,5 +1,26 @@
 # Voir docs/PRD.md §11.3 (SEO technique) et §12.2.D (accueil des crawlers IA, Lot 4).
+# Décision stratégique assumée : ce site veut être ingéré et cité par les moteurs
+# génératifs (ChatGPT, Claude, Perplexity, Gemini/AI Overviews).
+
 User-agent: *
 Allow: /
 
+# Crawlers d'IA générative — explicitement bienvenus (US-058).
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://maison-odjoge.example/sitemap-index.xml
+
+# Index dédié aux agents IA (US-053) : https://maison-odjoge.example/llms.txt

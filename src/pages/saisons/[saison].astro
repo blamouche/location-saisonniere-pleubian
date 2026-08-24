@@ -6,6 +6,7 @@ import { saisons, getSaison, type SaisonId } from '@/data/saisons';
 import { dixChoses } from '@/data/dix-choses';
 import { enCeMoment } from '@/data/en-ce-moment';
 import { maison } from '@/data/maison';
+import { buildDate } from '@/lib/build-date';
 
 export function getStaticPaths() {
   return saisons.map((s) => ({ params: { saison: s.id }, props: { saisonId: s.id } }));
@@ -46,6 +47,7 @@ const faqJsonLd = {
     name: item.q,
     acceptedAnswer: { '@type': 'Answer', text: item.r },
   })),
+  dateModified: buildDate.toISOString(),
 };
 ---
 
@@ -87,7 +89,7 @@ const faqJsonLd = {
 
     <!-- Météo -->
     <section aria-labelledby="meteo-titre">
-      <h2 id="meteo-titre" class="font-display text-2xl font-semibold">Météo moyenne en {saison.label.toLowerCase()}</h2>
+      <h2 id="meteo-titre" class="font-display text-2xl font-semibold">Quel temps fait-il en {saison.label.toLowerCase()} sur la Presqu'île sauvage ?</h2>
       <p class="mt-2 rounded-md border border-dashed border-border p-4 text-sm text-ink-muted">
         Données moyennes Météo-France (1991–2020) à intégrer avant publication définitive — voir US-032 (rebuild quotidien) et la contrainte de
         factualité datée du PRD §12.2.C. Aucun chiffre inventé n'est affiché ici en attendant.
@@ -111,7 +113,7 @@ const faqJsonLd = {
 
     <!-- 10 choses à faire -->
     <section aria-labelledby="dix-titre">
-      <h2 id="dix-titre" class="font-display text-2xl font-semibold">10 choses à faire</h2>
+      <h2 id="dix-titre" class="font-display text-2xl font-semibold">Que faire en {saison.label.toLowerCase()} sur la Presqu'île sauvage ?</h2>
       <ol class="mt-6 space-y-3">
         {
           dixChoses[saison.id].map((item, i) => (
@@ -135,7 +137,7 @@ const faqJsonLd = {
 
     <!-- Tarifs -->
     <section aria-labelledby="tarifs-titre">
-      <h2 id="tarifs-titre" class="font-display text-2xl font-semibold">Tarifs indicatifs</h2>
+      <h2 id="tarifs-titre" class="font-display text-2xl font-semibold">Combien coûte un séjour en {saison.label.toLowerCase()} ?</h2>
       <p class="mt-2 text-sm text-ink-muted">{tarif ?? maison.tarifs.noteTodo}</p>
       <div class="mt-4">
         <Cta campagne={`saison-${saison.id}`} />

@@ -1,6 +1,8 @@
 export interface FicheLieu {
   slug: string;
   nom: string;
+  /** Encadré « L'essentiel » (US-051) : 40-60 mots, autonome hors contexte. */
+  essentiel: string;
   resume: {
     ou: string;
     dureeVisite: string;
@@ -14,6 +16,8 @@ export interface FicheLieu {
   aCombinerAvec: string[];
   /** Page /experiences/ la plus pertinente, ajoutée à l'encart "à combiner avec" (≥ 3 liens au total). */
   experienceLiee: string;
+  /** Identifiants Wikidata (QID) vérifiés via l'API wbsearchentities (US-057). */
+  wikidata?: string[];
   heroSlug: string;
 }
 
@@ -27,6 +31,8 @@ export const fichesLieux: FicheLieu[] = [
   {
     slug: 'sillon-de-talbert',
     nom: 'Le Sillon de Talbert',
+    essentiel:
+      'Le Sillon de Talbert est une flèche de galets de 3,2 km à Pleubian (Côtes-d\'Armor), classée réserve naturelle régionale, qui s\'avance dans la mer entre les estuaires du Trieux et du Jaudy. Accessible gratuitement toute l\'année, le Sillon de Talbert est partiellement submersible aux grandes marées : vérifier l\'horaire de marée avant la visite.',
     resume: {
       ou: "Pleubian, entre les estuaires du Trieux et du Jaudy",
       dureeVisite: '1h à 1h30 aller-retour',
@@ -43,11 +49,14 @@ export const fichesLieux: FicheLieu[] = [
     conseilPratique: 'Vérifier l’horaire de marée avant de partir — le sillon change complètement d’aspect entre marée haute et marée basse.',
     aCombinerAvec: ['presquile-sauvage', 'plages-pleubian'],
     experienceLiee: 'randonnee-gr34',
+    wikidata: ['Q3483905'],
     heroSlug: 'saison-ete-1',
   },
   {
     slug: 'presquile-sauvage',
     nom: 'La Presqu\'île sauvage',
+    essentiel:
+      'La Presqu\'île sauvage désigne le territoire littoral de la commune de Pleubian, entre les estuaires du Trieux et du Jaudy, dans les Côtes-d\'Armor. Peu urbanisée, la Presqu\'île sauvage est dominée par la lande, les criques et le granit, et se découvre principalement à pied via le GR34, le sentier des douaniers qui longe tout le littoral.',
     resume: {
       ou: 'Presqu\'île de Lézardrieux, Côtes-d\'Armor',
       dureeVisite: 'Plusieurs jours pour en faire le tour',
@@ -69,6 +78,8 @@ export const fichesLieux: FicheLieu[] = [
   {
     slug: 'plages-pleubian',
     nom: 'Les plages de Pleubian',
+    essentiel:
+      'Pleubian, sur la Presqu\'île sauvage (Côtes-d\'Armor), compte plusieurs plages et criques : la plage de Kermagen, familiale et équipée d\'une cale de mise à l\'eau, ainsi que les criques plus discrètes de Port-la-Chaîne, Port-Béni et Pors Rand. L\'accès aux plages de Pleubian est gratuit toute l\'année.',
     resume: {
       ou: 'Pleubian et ses environs',
       dureeVisite: 'Une demi-journée',
@@ -89,6 +100,8 @@ export const fichesLieux: FicheLieu[] = [
   {
     slug: 'ile-de-brehat',
     nom: 'Île de Bréhat',
+    essentiel:
+      'L\'île de Bréhat est un archipel breton sans voiture, situé au large de la Presqu\'île de Lézardrieux (Côtes-d\'Armor), accessible en bateau depuis la Pointe de l\'Arcouest. L\'île de Bréhat est connue pour son climat doux, ses jardins fleuris et son granit rose, et se visite idéalement du printemps à l\'automne.',
     resume: {
       ou: "Archipel de Bréhat, embarquement à la Pointe de l'Arcouest",
       dureeVisite: 'Une journée',
@@ -104,11 +117,14 @@ export const fichesLieux: FicheLieu[] = [
     conseilPratique: 'Réserver la traversée en haute saison — les départs peuvent afficher complet.',
     aCombinerAvec: ['cote-de-granit-rose', 'presquile-sauvage'],
     experienceLiee: 'nautisme-kayak-voile',
+    wikidata: ['Q2083316'],
     heroSlug: 'saison-ete-3',
   },
   {
     slug: 'treguier',
     nom: 'Tréguier',
+    essentiel:
+      'Tréguier est une cité de caractère du Trégor (Côtes-d\'Armor), connue pour sa cathédrale gothique Saint-Tugdual et son tissu médiéval de maisons à pans de bois. Tréguier est aussi la ville natale de l\'écrivain Ernest Renan, dont la maison natale se visite. La cité de Tréguier se découvre entièrement à pied.',
     resume: {
       ou: 'Tréguier, Côtes-d\'Armor',
       dureeVisite: 'Une demi-journée à une journée',
@@ -124,11 +140,14 @@ export const fichesLieux: FicheLieu[] = [
     conseilPratique: 'Voir l’itinéraire complet à pied dans le journal : Tréguier en une journée.',
     aCombinerAvec: ['paimpol-beauport', 'presquile-sauvage'],
     experienceLiee: 'culture-patrimoine',
+    wikidata: ['Q235297'],
     heroSlug: 'saison-printemps-2',
   },
   {
     slug: 'paimpol-beauport',
     nom: 'Paimpol & l\'Abbaye de Beauport',
+    essentiel:
+      'Paimpol est un port breton historique des Côtes-d\'Armor, marqué par la pêche à la morue en Islande au XIXe siècle. À proximité de Paimpol, l\'Abbaye de Beauport est un site cistercien en ruines partiellement restaurées, dans un cadre naturel préservé en bord d\'estuaire. Les deux sites se combinent sur une même sortie.',
     resume: {
       ou: 'Paimpol, Côtes-d\'Armor (via Lézardrieux)',
       dureeVisite: 'Une demi-journée à une journée',
@@ -144,11 +163,14 @@ export const fichesLieux: FicheLieu[] = [
     conseilPratique: 'Combiner Paimpol et l’Abbaye de Beauport sur la même sortie — les deux sites sont proches l’un de l’autre.',
     aCombinerAvec: ['treguier', 'ile-de-brehat'],
     experienceLiee: 'culture-patrimoine',
+    wikidata: ['Q322453', 'Q333837'],
     heroSlug: 'saison-automne-2',
   },
   {
     slug: 'cote-de-granit-rose',
     nom: 'La Côte de Granit Rose',
+    essentiel:
+      'La Côte de Granit Rose regroupe les communes de Ploumanac\'h, Perros-Guirec et Trégastel, dans les Côtes-d\'Armor, célèbres pour leurs formations rocheuses roses sculptées par l\'érosion. Le sentier des douaniers (GR34) longe la Côte de Granit Rose et permet de découvrir les rochers à pied, près du phare de Ploumanac\'h.',
     resume: {
       ou: 'Ploumanac\'h, Perros-Guirec, Trégastel',
       dureeVisite: 'Une journée',
@@ -164,11 +186,14 @@ export const fichesLieux: FicheLieu[] = [
     conseilPratique: 'La lumière du matin ou de fin de journée met le mieux en valeur la couleur rose du granit.',
     aCombinerAvec: ['ile-de-brehat', 'presquile-sauvage'],
     experienceLiee: 'randonnee-gr34',
+    wikidata: ['Q1150945'],
     heroSlug: 'saison-printemps-3',
   },
   {
     slug: 'ou-manger-boire',
     nom: 'Où manger et boire',
+    essentiel:
+      'Cette page recense les adresses pour manger et boire autour de Pleubian (Côtes-d\'Armor). Par souci d\'honnêteté, seules les adresses réellement testées y figurent : à ce stade, uniquement la distillerie Glann ar Mor, à Pleubian, qui produit du whisky breton et se visite. D\'autres adresses seront ajoutées au fil des tests.',
     resume: {
       ou: 'Pleubian et environs',
       dureeVisite: '—',
