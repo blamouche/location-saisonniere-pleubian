@@ -304,4 +304,44 @@ export const experiences: Experience[] = [
     decouvrirLies: ['treguier', 'paimpol-beauport', 'presquile-sauvage'],
     heroSlug: 'saison-automne-2',
   },
+  {
+    slug: 'gastronomie',
+    pilier: 'Culture',
+    titre: 'Gastronomie & dégustations locales',
+    essentiel:
+      "Autour de Pleubian, deux adresses gourmandes du Trégor valent le détour : l'Auberge du Trieux à Lézardrieux, restaurant Maître Restaurateur porté par Maudez Le Corre (4,6/5 sur environ 590 avis), et la Brasserie artisanale Philomenn à Tréguier, une ancienne gare reconvertie en brasserie de bières locales, ouverte à la dégustation et à la visite d'avril à septembre.",
+    promesse:
+      "Deux adresses gourmandes du Trégor à quelques minutes de la maison : la table soignée de l'Auberge du Trieux à Lézardrieux, et la brasserie artisanale Philomenn à Tréguier, installée dans une ancienne gare au bord du Jaudy.",
+    depuisLaMaison: 'Lézardrieux et Tréguier sont à quelques minutes de voiture de Pleubian — distances exactes à vérifier porte-à-porte avant publication.',
+    propositions: [
+      {
+        titre: "Dîner à l'Auberge du Trieux (Lézardrieux)",
+        duree: '1h30 à 2h (repas)',
+        difficulte: 'Aucune',
+        saisonIdeale: "Toute l'année (fermé le mercredi)",
+        cout: 'Sur réservation, voir la carte',
+        source: 'https://www.presquile-de-lezardrieux.com/index.php?codepage=3511',
+      },
+      {
+        titre: 'Dégustation & visite à la Brasserie Philomenn (Tréguier)',
+        duree: '1h (visite + dégustation)',
+        difficulte: 'Aucune',
+        saisonIdeale: 'Avril à septembre pour le tap room',
+        cout: 'Voir tarifs sur le site',
+        source: 'https://philomenn.fr/',
+      },
+    ],
+    encadrePratique: {
+      materiel: ['Aucun matériel spécifique'],
+      reservations: 'Réservation recommandée pour l’Auberge du Trieux ; visite libre ou guidée pour Philomenn selon les jours.',
+      prestataires: 'Auberge du Trieux (Lézardrieux, Maître Restaurateur) et Brasserie Philomenn (Tréguier) — entités réelles, sources ci-dessous.',
+    },
+    faq: [
+      { q: 'Faut-il réserver à l’Auberge du Trieux ?', r: 'Réservation recommandée — le restaurant est fermé le mercredi.' },
+      { q: 'Peut-on visiter la Brasserie Philomenn ?', r: 'Oui, dégustations et visites sont proposées, avec un tap room ouvert d’avril à septembre.' },
+      { q: 'Ces adresses sont-elles loin de la maison ?', r: 'Lézardrieux et Tréguier sont proches de Pleubian — distances exactes à vérifier porte-à-porte avant publication.' },
+    ],
+    decouvrirLies: ['treguier', 'presquile-sauvage'],
+    heroSlug: 'saison-automne-1',
+  },
 ];
