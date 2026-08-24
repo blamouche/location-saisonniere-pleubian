@@ -604,7 +604,7 @@ Créer des pages qui répondent littéralement à des prompts fréquents :
 
 ```
 /
-├── PRD.md
+├── docs/                 # PRD, stratégie SEO/GEO, user stories
 ├── README.md
 ├── src/
 │   ├── components/       # Hero, SeasonSwitcher, Gallery, FactBox, Map, Cta…
