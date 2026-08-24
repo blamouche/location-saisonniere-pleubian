@@ -4,8 +4,11 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Analytics from '@/components/Analytics.astro';
 import SeasonScript from '@/components/SeasonScript.astro';
+import LanguageBanner from '@/components/LanguageBanner.astro';
 import { getSaisonCourante } from '@/data/saisons';
-import { buildDate, formatDateFR } from '@/lib/build-date';
+import { buildDate, formatDateLocale } from '@/lib/build-date';
+import { locales, localeTags, homePath, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/dictionary';
 
 export interface Crumb {
   label: string;
@@ -20,13 +23,20 @@ export interface Props {
   /** Objet(s) JSON-LD additionnels (LodgingBusiness, FAQPage…) propres à la page. */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   ogImage?: string;
+  /** Langue de la page (Lot 5, US-061) — FR par défaut, non préfixé. */
+  locale?: Locale;
+  /** Correspondances de cette page dans les autres langues, pour le hreflang
+   * réciproque et le sélecteur de langue (US-061/US-064). Une langue absente de cet
+   * objet = pas encore traduite : aucun lien n'est généré vers elle. */
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { title, description, crumbs = [], jsonLd, ogImage = '/medias/placeholder/placeholder-hero-ete-16x9.svg' } = Astro.props;
+const { title, description, crumbs = [], jsonLd, ogImage = '/medias/placeholder/placeholder-hero-ete-16x9.svg', locale = 'fr', alternates = {} } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const siteName = 'Maison Od Joge';
 const fullTitle = title === siteName ? title : `${title} · ${siteName}`;
+const dict = t(locale);
 
 const saison = getSaisonCourante();
 // Horodatage du build (US-031/US-032) : permet au script anti-flash de recalculer
@@ -39,7 +49,7 @@ const breadcrumbJsonLd =
     ? {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
-        itemListElement: [{ label: 'Accueil', href: '/' }, ...crumbs].map((c, i) => ({
+        itemListElement: [{ label: dict.breadcrumb.accueil, href: homePath(locale) }, ...crumbs].map((c, i) => ({
           '@type': 'ListItem',
           position: i + 1,
           name: c.label,
@@ -49,10 +59,24 @@ const breadcrumbJsonLd =
     : null;
 
 const jsonLdBlocks = [breadcrumbJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])].filter(Boolean);
+
+// hreflang réciproque (US-061) : la page courante + toutes ses traductions connues,
+// plus x-default → FR (langue de référence du site, PRD §13).
+const hreflangAlternates: { lang: string; href: string }[] = [
+  { lang: localeTags[locale], href: canonical },
+  ...locales
+    .filter((l) => l !== locale && alternates[l])
+    .map((l) => ({ lang: localeTags[l], href: new URL(alternates[l]!, Astro.site).toString() })),
+];
+if (alternates.fr || locale === 'fr') {
+  hreflangAlternates.push({ lang: 'x-default', href: locale === 'fr' ? canonical : new URL(alternates.fr!, Astro.site).toString() });
+}
+
+const ogLocaleMap: Record<Locale, string> = { fr: 'fr_FR', en: 'en_GB', de: 'de_DE' };
 ---
 
 <!doctype html>
-<html lang="fr" data-season={saison.id} data-built-at={builtAt}>
+<html lang={locale} data-season={saison.id} data-built-at={builtAt}>
   <head>
     <meta charset="utf-8" />
     <SeasonScript />
@@ -62,13 +86,15 @@ const jsonLdBlocks = [breadcrumbJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : jso
     <link rel="canonical" href={canonical} />
     <meta name="robots" content="index, follow" />
 
+    {hreflangAlternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={ogLocaleMap[locale]} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
@@ -79,13 +105,14 @@ const jsonLdBlocks = [breadcrumbJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : jso
     {jsonLdBlocks.map((block) => <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />)}
   </head>
   <body class="min-h-screen bg-surface text-ink">
-    <a href="#contenu" class="skip-link">Aller au contenu principal</a>
+    <a href="#contenu" class="skip-link">{dict.skipLink}</a>
 
-    <Header />
+    <Header locale={locale} alternates={alternates} />
+    <LanguageBanner locale={locale} alternates={alternates} />
 
     <nav aria-label="Fil d'Ariane" class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 pt-4 text-xs text-ink-muted sm:px-6">
       <ol class="flex flex-wrap items-center gap-1">
-        <li><a href="/" class="hover:text-accent">Accueil</a></li>
+        <li><a href={homePath(locale)} class="hover:text-accent">{dict.breadcrumb.accueil}</a></li>
         {crumbs.map((c) => (
           <>
             <li aria-hidden="true">/</li>
@@ -95,14 +122,14 @@ const jsonLdBlocks = [breadcrumbJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : jso
       </ol>
       {/* Fraîcheur datée (US-059, PRD §12.2.C) : visible sur toutes les pages de
           contenu, recalculée à chaque build. */}
-      <p>Mis à jour le {formatDateFR(buildDate)}</p>
+      <p>{dict.misAJourLe} {formatDateLocale(buildDate, locale)}</p>
     </nav>
 
     <main id="contenu">
       <slot />
     </main>
 
-    <Footer />
+    <Footer locale={locale} />
     <Analytics />
   </body>
 </html>

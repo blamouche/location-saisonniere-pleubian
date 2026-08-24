@@ -1,0 +1,149 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { saisons } from '@/data/saisons';
+import { galerieContent } from '@/i18n/pages/galerie';
+import { sectionPath, sectionSlug, saisonLabels, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const dict = galerieContent[locale];
+
+const photosSaisons = saisons.flatMap((s) =>
+  [1, 2, 3].map((n) => ({
+    slug: `saison-${s.id}-${n}`,
+    titre: dict.territoireEnSaison(saisonLabels[s.id][locale], n),
+    categorie: 'saison' as const,
+    saison: s.id,
+  }))
+);
+
+const photos = [...dict.photosMaison, ...photosSaisons];
+---
+
+<BaseLayout
+  title={dict.titre}
+  description={dict.metaDescription}
+  crumbs={[{ label: dict.titre, href: `${sectionPath('la-maison', locale)}${sectionSlug('galerie', locale)}/` }]}
+  locale={locale}
+  alternates={alternates}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">{dict.titre}</h1>
+      <p class="mt-3 max-w-2xl text-ink-muted">{dict.intro}</p>
+    </header>
+
+    <div role="group" aria-label={dict.filtrerParPiece} class="mt-8 flex flex-wrap gap-2" id="filtres">
+      <button type="button" class="filtre-btn" data-filtre="tout" aria-pressed="true">{dict.filtreTout}</button>
+      {
+        Object.entries(dict.categories).map(([key, label]) => (
+          <button type="button" class="filtre-btn" data-filtre={key} aria-pressed="false">
+            {label}
+          </button>
+        ))
+      }
+    </div>
+
+    <ul id="galerie-grid" class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        photos.map((photo, i) => (
+          <li data-categorie={photo.categorie} data-saison={'saison' in photo ? photo.saison : undefined}>
+            <button type="button" class="block w-full overflow-hidden rounded-lg border border-border" data-ouvre-lightbox={i} aria-label={photo.titre}>
+              <img
+                src={`/medias/placeholder/placeholder-${photo.slug}.svg`}
+                width="1000"
+                height="1250"
+                alt={photo.titre}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/5] w-full object-cover"
+              />
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <dialog id="lightbox" class="max-w-3xl rounded-lg border border-border bg-surface p-0 backdrop:bg-ink/70">
+    <div class="flex items-center justify-between border-b border-border p-3">
+      <p id="lightbox-titre" class="font-semibold"></p>
+      <button type="button" id="lightbox-fermer" class="rounded-md border border-border px-3 py-1 text-sm">{dict.fermer}</button>
+    </div>
+    <img id="lightbox-image" src="" alt="" class="max-h-[70vh] w-full object-contain" />
+    <div class="flex justify-between p-3">
+      <button type="button" id="lightbox-precedent" class="rounded-md border border-border px-4 py-2 text-sm">{dict.precedente}</button>
+      <button type="button" id="lightbox-suivant" class="rounded-md border border-border px-4 py-2 text-sm">{dict.suivante}</button>
+    </div>
+  </dialog>
+</BaseLayout>
+
+<style>
+  .filtre-btn {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.875rem;
+  }
+  .filtre-btn[aria-pressed='true'] {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+  }
+</style>
+
+<script is:inline define:vars={{ photos }}>
+  const grid = document.getElementById('galerie-grid');
+  const boutons = Array.from(document.querySelectorAll('.filtre-btn'));
+
+  boutons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      boutons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      const filtre = btn.dataset.filtre;
+      grid?.querySelectorAll('li').forEach((li) => {
+        const match = filtre === 'tout' || li.dataset.categorie === filtre;
+        li.style.display = match ? '' : 'none';
+      });
+    });
+  });
+
+  // Lightbox accessible via <dialog> natif (focus trap + Échap gérés par le navigateur).
+  const dialog = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-image');
+  const titre = document.getElementById('lightbox-titre');
+  let index = 0;
+
+  function ouvrir(i) {
+    index = i;
+    const photo = photos[index];
+    img.src = `/medias/placeholder/placeholder-${photo.slug}.svg`;
+    img.alt = photo.titre;
+    titre.textContent = photo.titre;
+    dialog.showModal();
+  }
+
+  document.querySelectorAll('[data-ouvre-lightbox]').forEach((btn) => {
+    btn.addEventListener('click', () => ouvrir(Number(btn.dataset.ouvreLightbox)));
+  });
+
+  document.getElementById('lightbox-fermer')?.addEventListener('click', () => dialog.close());
+  document.getElementById('lightbox-precedent')?.addEventListener('click', () => ouvrir((index - 1 + photos.length) % photos.length));
+  document.getElementById('lightbox-suivant')?.addEventListener('click', () => ouvrir((index + 1) % photos.length));
+
+  // Tri saisonnier (US-035) : les photos du territoire correspondant à la saison
+  // affichée passent en tête de grille — aucune photo n'est jamais masquée.
+  function trierParSaison() {
+    const courante = document.documentElement.getAttribute('data-season');
+    grid?.querySelectorAll('li').forEach((li) => {
+      const s = li.dataset.saison;
+      li.style.order = s && s === courante ? '-1' : '0';
+    });
+  }
+  trierParSaison();
+  new MutationObserver(trierParSaison).observe(document.documentElement, { attributes: true, attributeFilter: ['data-season'] });
+</script>

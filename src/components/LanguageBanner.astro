@@ -1,0 +1,82 @@
+---
+import { locales, localeLabels, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/dictionary';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+
+// Un seul bandeau par autre langue disponible pour la page courante (US-064 :
+// suggestion discrète, jamais de redirection automatique).
+const suggestions = locales
+  .filter((l) => l !== locale && alternates[l])
+  .map((l) => ({ locale: l, href: alternates[l]!, label: localeLabels[l], text: t(l).languageBanner.text(localeLabels[l]), action: t(l).languageBanner.action, dismiss: t(l).languageBanner.dismiss }));
+---
+
+{
+  suggestions.length > 0 && (
+    <div id="language-banner" data-language-banner hidden class="border-b border-border bg-surface-alt">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2 text-sm sm:px-6">
+        <p data-language-banner-text />
+        <div class="flex items-center gap-3">
+          <a data-language-banner-link href="#" class="font-semibold text-accent hover:underline" />
+          <button type="button" data-language-banner-dismiss class="text-ink-muted hover:text-ink" aria-label="Dismiss">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  suggestions.length > 0 && (
+    <script is:inline type="application/json" id="language-banner-data" set:html={JSON.stringify(suggestions)} />
+  )
+}
+
+<script>
+  // Détecte la langue du navigateur côté client (pas de fingerprinting serveur) et
+  // propose — sans jamais rediriger — la version traduite quand elle existe.
+  const dataEl = document.getElementById('language-banner-data');
+  if (dataEl) {
+    try {
+      const suggestions = JSON.parse(dataEl.textContent || '[]') as Array<{
+        locale: string;
+        href: string;
+        label: string;
+        text: string;
+        action: string;
+        dismiss: string;
+      }>;
+      const navLang = (navigator.language || '').slice(0, 2).toLowerCase();
+      const match = suggestions.find((s) => s.locale === navLang);
+      const dismissedKey = match ? `lang-banner-dismissed-${match.locale}` : null;
+      if (match && dismissedKey && !localStorage.getItem(dismissedKey)) {
+        const banner = document.getElementById('language-banner');
+        const textEl = banner?.querySelector('[data-language-banner-text]');
+        const linkEl = banner?.querySelector<HTMLAnchorElement>('[data-language-banner-link]');
+        const dismissBtn = banner?.querySelector('[data-language-banner-dismiss]');
+        if (textEl) textEl.textContent = match.text;
+        if (linkEl) {
+          linkEl.textContent = match.action;
+          linkEl.href = match.href;
+        }
+        banner?.removeAttribute('hidden');
+        dismissBtn?.addEventListener('click', () => {
+          banner?.setAttribute('hidden', '');
+          try {
+            localStorage.setItem(dismissedKey, '1');
+          } catch {
+            /* localStorage indisponible : le bandeau réapparaîtra au prochain chargement, sans gravité. */
+          }
+        });
+      }
+    } catch {
+      /* Données malformées : on n'affiche simplement pas le bandeau. */
+    }
+  }
+</script>

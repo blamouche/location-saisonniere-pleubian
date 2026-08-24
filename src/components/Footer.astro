@@ -1,6 +1,14 @@
 ---
 import { maison } from '@/data/maison';
+import { sectionPath, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/dictionary';
 
+export interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'fr' } = Astro.props;
+const dict = t(locale);
 const annee = new Date().getFullYear();
 ---
 
@@ -11,44 +19,46 @@ const annee = new Date().getFullYear();
       <p class="mt-2 text-sm text-ink-muted">
         {maison.adresse.lieuDit}, {maison.adresse.commune} ({maison.adresse.codePostal}) — {maison.adresse.territoire}
       </p>
-      <p class="mt-2 text-sm text-ink-muted">Accueil par {maison.hotes.map((h) => h.prenom).join(' & ')}{maison.superhost && ' · Superhost'}</p>
+      <p class="mt-2 text-sm text-ink-muted">
+        {dict.footer.accueilPar} {maison.hotes.map((h) => h.prenom).join(' & ')}{maison.superhost && ' · Superhost'}
+      </p>
     </div>
 
     <nav aria-label="Liens utiles" class="text-sm">
-      <p class="font-semibold">Liens utiles</p>
+      <p class="font-semibold">{dict.footer.liensUtiles}</p>
       <ul class="mt-2 space-y-1">
-        <li><a href="/la-maison/" class="hover:text-accent">La maison</a></li>
-        <li><a href="/experiences/" class="hover:text-accent">Expériences</a></li>
-        <li><a href="/decouvrir/" class="hover:text-accent">Découvrir</a></li>
-        <li><a href="/journal/" class="hover:text-accent">Journal</a></li>
-        <li><a href="/avis/" class="hover:text-accent">Avis voyageurs</a></li>
-        <li><a href="/reserver/" class="hover:text-accent">Réserver</a></li>
-        <li><a href="/contact/" class="hover:text-accent">Contact</a></li>
-        <li><a href="/legal/" class="hover:text-accent">Mentions légales &amp; confidentialité</a></li>
+        <li><a href={sectionPath('la-maison', locale)} class="hover:text-accent">{dict.nav.laMaison}</a></li>
+        {locale === 'fr' && <li><a href={sectionPath('experiences', locale)} class="hover:text-accent">{dict.nav.experiences}</a></li>}
+        {locale === 'fr' && <li><a href={sectionPath('decouvrir', locale)} class="hover:text-accent">{dict.nav.decouvrir}</a></li>}
+        {locale === 'fr' && <li><a href={sectionPath('journal', locale)} class="hover:text-accent">{dict.nav.journal}</a></li>}
+        {locale === 'fr' && <li><a href={sectionPath('avis', locale)} class="hover:text-accent">{dict.footer.avis}</a></li>}
+        <li><a href={sectionPath('reserver', locale)} class="hover:text-accent">{dict.nav.reserver}</a></li>
+        <li><a href={sectionPath('contact', locale)} class="hover:text-accent">{dict.nav.contact}</a></li>
+        <li><a href={sectionPath('legal', locale)} class="hover:text-accent">{dict.footer.legal}</a></li>
       </ul>
     </nav>
 
     <div>
-      <p class="font-semibold">Les 4 saisons de la Presqu'île</p>
-      <p class="mt-2 text-sm text-ink-muted">Un email par saison, jamais plus. Pas de spam, désinscription en un clic.</p>
+      <p class="font-semibold">{dict.footer.newsletterTitre}</p>
+      <p class="mt-2 text-sm text-ink-muted">{dict.footer.newsletterTexte}</p>
       <!--
         US-026 : UI prête, intégration Buttondown/Brevo réelle à brancher (clé API,
         double opt-in) — voir docs/user-stories.md US-026. Le formulaire est
         fonctionnel côté HTML mais n'envoie nulle part tant que l'action n'est pas
         renseignée.
       -->
-      <form class="mt-3 flex gap-2" data-newsletter-form>
-        <label for="footer-newsletter-email" class="sr-only">Adresse email</label>
+      <form class="mt-3 flex gap-2" data-newsletter-form data-newsletter-status-text={dict.footer.newsletterStatut}>
+        <label for="footer-newsletter-email" class="sr-only">Email</label>
         <input
           id="footer-newsletter-email"
           type="email"
           name="email"
           required
-          placeholder="vous@exemple.com"
+          placeholder={dict.footer.newsletterPlaceholder}
           class="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm"
         />
         <button type="submit" class="shrink-0 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
-          S'inscrire
+          {dict.footer.newsletterBouton}
         </button>
       </form>
       <p class="mt-2 text-xs text-ink-muted" data-newsletter-status role="status"></p>
@@ -56,7 +66,7 @@ const annee = new Date().getFullYear();
   </div>
 
   <div class="border-t border-border px-4 py-4 text-center text-xs text-ink-muted sm:px-6">
-    © {annee} {maison.nom} · <a href="/legal/" class="underline hover:text-accent">Mentions légales</a>
+    © {annee} {maison.nom} · <a href={sectionPath('legal', locale)} class="underline hover:text-accent">{dict.footer.mentionsLegales}</a>
   </div>
 </footer>
 
@@ -69,7 +79,7 @@ const annee = new Date().getFullYear();
     // TODO US-026 : brancher Buttondown/Brevo (double opt-in RGPD). En attendant,
     // on ne prétend pas avoir inscrit l'email.
     if (status) {
-      status.textContent = "Inscription bientôt disponible — l'intégration newsletter arrive prochainement.";
+      status.textContent = form.dataset.newsletterStatusText ?? '';
     }
     window.dispatchEvent(new CustomEvent('analytics', { detail: { event: 'inscription_newsletter_tentative' } }));
   });

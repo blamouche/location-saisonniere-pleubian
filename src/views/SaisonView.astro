@@ -1,0 +1,184 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import HeroImage from '@/components/HeroImage.astro';
+import Cta from '@/components/Cta.astro';
+import { saisons, getSaison, type SaisonId } from '@/data/saisons';
+import { dixChoses } from '@/data/dix-choses';
+import { enCeMoment } from '@/data/en-ce-moment';
+import { maison } from '@/data/maison';
+import { buildDate } from '@/lib/build-date';
+import { heroImages } from '@/data/real-images';
+import { saisonContent, saisonsIndexContent } from '@/i18n/pages/saisons';
+import { entryPath, sectionPath, sectionSlug, saisonSlugs, saisonLabels, saisonPromesses, saisonPeriodes, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  saisonId: SaisonId;
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { saisonId, locale, alternates } = Astro.props;
+const saison = getSaison(saisonId);
+const dict = saisonContent[locale];
+const saisonLabel = saisonLabels[saison.id][locale];
+const saisonPeriode = saisonPeriodes[saison.id][locale];
+const saisonPromesse = saisonPromesses[saison.id][locale];
+const tarif = maison.tarifs.parSaison[saison.id];
+
+const faq = dict.faq(saisonLabel, tarif);
+const dixChosesSaison = dixChoses[locale][saison.id];
+const enCeMomentSaison = enCeMoment[locale][saison.id];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.r },
+  })),
+  dateModified: buildDate.toISOString(),
+};
+---
+
+<BaseLayout
+  title={dict.titrePage(saisonLabel)}
+  description={dict.metaDescription(saisonPromesse, saisonLabel)}
+  crumbs={[
+    { label: saisonsIndexContent[locale].titre, href: sectionPath('saisons', locale) },
+    { label: saisonLabel, href: entryPath('saisons', saisonSlugs, saison.id, locale) },
+  ]}
+  jsonLd={faqJsonLd}
+  ogImage={heroImages[saison.id]?.src.src ?? `/medias/placeholder/placeholder-hero-${saison.id}-16x9.svg`}
+  locale={locale}
+  alternates={alternates}
+>
+  <!-- Hero -->
+  <section class="relative">
+    <HeroImage
+      saison={saison.id}
+      alt={dict.titrePage(saisonLabel)}
+      loading="eager"
+      class="h-[50vh] min-h-[320px] w-full object-cover"
+    />
+    <div class="absolute inset-0 flex items-end bg-gradient-to-t from-ink/70 via-ink/10 to-transparent">
+      <div class="mx-auto w-full max-w-6xl px-4 pb-8 text-white sm:px-6">
+        <p class="text-sm font-semibold uppercase tracking-wide text-white/80">{saisonPeriode}</p>
+        <h1 class="mt-2 font-display text-4xl font-semibold sm:text-5xl">{dict.titrePage(saisonLabel)}</h1>
+        <p class="mt-3 max-w-xl text-white/90">{saisonPromesse}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-3xl space-y-16 px-4 py-16 sm:px-6">
+    <!-- Encadré "L'essentiel" (prépa GEO Lot 4) -->
+    <section aria-labelledby="essentiel-titre" class="rounded-lg border border-border bg-surface-alt p-5">
+      <h2 id="essentiel-titre" class="text-sm font-semibold uppercase tracking-wide text-ink-muted">{dict.essentielTitre}</h2>
+      <p class="mt-2 text-sm">{dict.essentielTexte(saisonLabel, saisonPeriode, dixChosesSaison.length, maison.distances.mer.duree)}</p>
+    </section>
+
+    <!-- Météo -->
+    <section aria-labelledby="meteo-titre">
+      <h2 id="meteo-titre" class="font-display text-2xl font-semibold">{dict.meteoTitre(saisonLabel)}</h2>
+      <p class="mt-2 rounded-md border border-dashed border-border p-4 text-sm text-ink-muted">{dict.meteoTexte}</p>
+    </section>
+
+    <!-- En ce moment (version courte, propre à cette saison — US-033) -->
+    <section aria-labelledby="moment-titre">
+      <h2 id="moment-titre" class="font-display text-2xl font-semibold">{dict.momentTitre}</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          enCeMomentSaison.slice(0, 4).map((sugg) => (
+            <li class="rounded-lg border border-border bg-surface p-4">
+              <p class="font-display font-semibold">{sugg.titre}</p>
+              <p class="mt-1 text-sm text-ink-muted">{sugg.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- 10 choses à faire -->
+    <section aria-labelledby="dix-titre">
+      <h2 id="dix-titre" class="font-display text-2xl font-semibold">{dict.dixTitre(saisonLabel)}</h2>
+      <ol class="mt-6 space-y-3">
+        {
+          dixChosesSaison.map((item, i) => (
+            <li class="flex gap-3 rounded-lg border border-border bg-surface p-3 text-sm">
+              <span class="font-display font-semibold text-accent">{i + 1}</span>
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Ouvert / fermé -->
+    <section aria-labelledby="ouvert-titre">
+      <h2 id="ouvert-titre" class="font-display text-2xl font-semibold">{dict.ouvertTitre}</h2>
+      <p class="mt-2 rounded-md border border-dashed border-border p-4 text-sm text-ink-muted">{dict.ouvertTexte}</p>
+    </section>
+
+    <!-- Tarifs -->
+    <section aria-labelledby="tarifs-titre">
+      <h2 id="tarifs-titre" class="font-display text-2xl font-semibold">{dict.tarifsTitre(saisonLabel)}</h2>
+      <p class="mt-2 text-sm text-ink-muted">{tarif ?? dict.tarifsAVenir}</p>
+      <div class="mt-4">
+        <Cta campagne={`saison-${saison.id}`} locale={locale} />
+      </div>
+    </section>
+
+    <!-- Galerie de la saison -->
+    <section aria-labelledby="galerie-titre">
+      <h2 id="galerie-titre" class="font-display text-2xl font-semibold">{dict.galerieTitre(saisonLabel)}</h2>
+      <div class="mt-6 grid grid-cols-3 gap-3">
+        {
+          [1, 2, 3].map((n) => (
+            <PlaceholderImage slug={`saison-${saison.id}-${n}`} ratio="4x5" alt={`${dict.galerieTitre(saisonLabel)} — ${n}`} class="w-full rounded-lg object-cover" />
+          ))
+        }
+      </div>
+      <a href={`${sectionPath('la-maison', locale)}${sectionSlug('galerie', locale)}/`} class="mt-3 inline-block text-sm font-semibold text-accent hover:underline">{dict.voirGalerie}</a>
+    </section>
+
+    <!-- Témoignages -->
+    <section aria-labelledby="temoignages-titre" class="rounded-lg border border-dashed border-border p-6 text-center">
+      <h2 id="temoignages-titre" class="font-display text-xl font-semibold">{dict.temoignagesTitre}</h2>
+      <p class="mt-2 text-sm text-ink-muted">{dict.temoignagesTexte}</p>
+    </section>
+
+    <!-- FAQ -->
+    <section aria-labelledby="faq-titre">
+      <h2 id="faq-titre" class="font-display text-2xl font-semibold">{dict.faqTitre}</h2>
+      <div class="mt-4 divide-y divide-border rounded-lg border border-border">
+        {
+          faq.map((item) => (
+            <details class="group p-4">
+              <summary class="cursor-pointer list-none font-semibold marker:content-none">{item.q}</summary>
+              <p class="mt-2 text-sm text-ink-muted">{item.r}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Autres saisons -->
+    <nav aria-label={dict.autresSaisonsTitre} class="border-t border-border pt-8">
+      <p class="text-sm font-semibold">{dict.autresSaisonsTitre}</p>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          saisons
+            .filter((s) => s.id !== saison.id)
+            .map((s) => (
+              <li>
+                <a href={entryPath('saisons', saisonSlugs, s.id, locale)} class="rounded-md border border-border px-4 py-2 text-sm font-semibold hover:bg-surface-alt">
+                  {saisonLabels[s.id][locale]}
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+  </div>
+</BaseLayout>

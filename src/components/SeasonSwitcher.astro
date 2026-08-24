@@ -1,18 +1,24 @@
 ---
 import { saisons, getSaisonCourante } from '@/data/saisons';
+import { saisonLabels, saisonPeriodes, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/dictionary';
+import { formatDateLocale } from '@/lib/build-date';
 
 export interface Props {
   /** Suffixe d'id, nécessaire si le composant est utilisé plusieurs fois sur une
    * même page (desktop + drawer mobile) pour éviter les id dupliqués. */
   idSuffix?: string;
+  locale?: Locale;
 }
 
-const { idSuffix = 'desktop' } = Astro.props;
+const { idSuffix = 'desktop', locale = 'fr' } = Astro.props;
 const menuId = `season-switcher-menu-${idSuffix}`;
 const toggleId = `season-switcher-toggle-${idSuffix}`;
+const dict = t(locale).seasonSwitcher;
+const label = (id: string) => saisonLabels[id]?.[locale] ?? id;
 
 const reelle = getSaisonCourante();
-const aujourdhui = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const aujourdhui = formatDateLocale(new Date(), locale);
 ---
 
 <div class="relative" data-season-switcher>
@@ -25,7 +31,7 @@ const aujourdhui = new Date().toLocaleDateString('fr-FR', { day: 'numeric', mont
     aria-controls={menuId}
     class="flex items-center gap-1 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-surface-alt"
   >
-    Voir la maison en <span data-season-switcher-label class="font-semibold">{reelle.label}</span>
+    {dict.intro} <span data-season-switcher-label class="font-semibold">{label(reelle.id)}</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
   </button>
 
@@ -42,18 +48,18 @@ const aujourdhui = new Date().toLocaleDateString('fr-FR', { day: 'numeric', mont
               class="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm hover:bg-surface-alt"
             >
               <span>
-                <span class="font-semibold">{s.label}</span>
-                <span class="block text-xs text-ink-muted">{s.periode}</span>
+                <span class="font-semibold">{label(s.id)}</span>
+                <span class="block text-xs text-ink-muted">{saisonPeriodes[s.id][locale]}</span>
               </span>
-              {s.id === reelle.id && <span class="text-xs font-semibold text-accent">Actuelle</span>}
+              {s.id === reelle.id && <span class="text-xs font-semibold text-accent">{dict.current}</span>}
             </button>
           </li>
         ))
       }
     </ul>
     <p class="mt-2 border-t border-border px-3 pt-2 text-xs text-ink-muted">
-      Nous sommes le {aujourdhui} ({reelle.label.toLowerCase()}). Explorer une autre saison ne change pas les disponibilités réelles —
-      <a href="/reserver/" class="underline hover:text-accent">vérifier le calendrier</a>.
+      {dict.today(aujourdhui, label(reelle.id).toLowerCase())}
+      <a href={locale === 'fr' ? '/reserver/' : `/${locale}/${locale === 'en' ? 'book' : 'buchen'}/`} class="underline hover:text-accent">{dict.checkCalendar}</a>.
     </p>
   </div>
 </div>

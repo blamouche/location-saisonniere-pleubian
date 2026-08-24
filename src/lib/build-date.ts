@@ -9,3 +9,9 @@ export const buildDate = new Date();
 export function formatDateFR(date: Date): string {
   return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 }
+
+/** Formatage de date localisé (US-065) — un seul format par langue, pas de bascule impérial/métrique caché. */
+export function formatDateLocale(date: Date, locale: 'fr' | 'en' | 'de'): string {
+  const tags: Record<typeof locale, string> = { fr: 'fr-FR', en: 'en-GB', de: 'de-DE' };
+  return date.toLocaleDateString(tags[locale], { day: 'numeric', month: 'long', year: 'numeric' });
+}

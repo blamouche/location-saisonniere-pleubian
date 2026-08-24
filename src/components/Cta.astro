@@ -1,5 +1,7 @@
 ---
 import { maison, lienAirbnb } from '@/data/maison';
+import { t } from '@/i18n/dictionary';
+import type { Locale } from '@/i18n/locales';
 
 export interface Props {
   /** Nom de campagne UTM, ex. "accueil-hero", "reserver-page". */
@@ -8,9 +10,11 @@ export interface Props {
   /** 'default' : Airbnb plein + Booking outline, sur fond clair.
    *  'on-accent' : les deux boutons en blanc, pour poser le CTA sur un fond `bg-accent`. */
   variant?: 'default' | 'on-accent';
+  locale?: Locale;
 }
 
-const { campagne, class: className, variant = 'default' } = Astro.props;
+const { campagne, class: className, variant = 'default', locale = 'fr' } = Astro.props;
+const dict = t(locale).cta;
 
 const airbnbClass =
   variant === 'on-accent'
@@ -30,18 +34,18 @@ const bookingDisabledClass =
 
 <div class:list={['flex flex-wrap gap-3', className]}>
   <a href={lienAirbnb(campagne)} target="_blank" rel="noopener noreferrer nofollow" data-analytics-event="sortie_airbnb" class={airbnbClass}>
-    Voir sur Airbnb
+    {dict.voirAirbnb}
   </a>
   {
     maison.plateformes.booking.url ? (
       <a href={maison.plateformes.booking.url} target="_blank" rel="noopener noreferrer nofollow" data-analytics-event="sortie_booking" class={bookingClass}>
-        Voir sur Booking
+        {dict.voirBooking}
       </a>
     ) : (
       // Lien Booking pas encore renseigné (maison.plateformes.booking.url, PRD §19
       // Q3) : bouton visible mais non cliquable plutôt qu'un lien inventé ou cassé.
       <span role="button" aria-disabled="true" title="Lien Booking à venir" class={bookingDisabledClass}>
-        Voir sur Booking <span class="text-xs">(bientôt)</span>
+        {dict.voirBooking} <span class="text-xs">{dict.bientot}</span>
       </span>
     )
   }

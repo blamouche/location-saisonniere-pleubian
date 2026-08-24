@@ -1,0 +1,43 @@
+---
+import { locales, localeLabels, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/dictionary';
+
+export interface Props {
+  locale: Locale;
+  /** Correspondances de la page courante par langue — seules les langues où une
+   * traduction existe réellement sont proposées (US-064 : « jamais de lien vers du
+   * vide »). */
+  alternates: Partial<Record<Locale, string>>;
+  idSuffix?: string;
+}
+
+const { locale, alternates, idSuffix = 'desktop' } = Astro.props;
+const dict = t(locale).languageSwitcher;
+---
+
+<div class="flex items-center gap-1 text-sm font-medium" role="group" aria-label={dict.label} id={`lang-switcher-${idSuffix}`}>
+  {
+    locales.map((l, i) => {
+      const href = alternates[l];
+      const isCurrent = l === locale;
+      return (
+        <>
+          {i > 0 && <span aria-hidden="true" class="text-ink-muted">·</span>}
+          {isCurrent ? (
+            <span aria-current="true" class="font-semibold text-accent">
+              {l.toUpperCase()}
+            </span>
+          ) : href ? (
+            <a href={href} hreflang={l} class="text-ink-muted hover:text-accent">
+              {l.toUpperCase()}
+            </a>
+          ) : (
+            <span class="cursor-not-allowed text-ink-muted/40" title={localeLabels[l]}>
+              {l.toUpperCase()}
+            </span>
+          )}
+        </>
+      );
+    })
+  }
+</div>

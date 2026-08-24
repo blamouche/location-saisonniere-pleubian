@@ -1,16 +1,29 @@
 ---
 import { maison } from '@/data/maison';
 import SeasonSwitcher from '@/components/SeasonSwitcher.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import { homePath, sectionPath, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/dictionary';
 
+export interface Props {
+  locale?: Locale;
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+const { locale = 'fr', alternates = {} } = Astro.props;
+const dict = t(locale).nav;
+
+// Expériences/Découvrir : encore FR uniquement (Lot 5 en cours, US-062/063) — masqués
+// en EN/DE plutôt que de pointer vers du contenu inexistant (US-064).
 const nav = [
-  { href: '/', label: 'Accueil' },
-  { href: '/la-maison/', label: 'La maison' },
-  { href: '/experiences/', label: 'Expériences' },
-  { href: '/decouvrir/', label: 'Découvrir' },
-  { href: '/saisons/', label: 'Saisons' },
-  { href: '/journal/', label: 'Journal' },
-  { href: '/reserver/', label: 'Réserver' },
-  { href: '/contact/', label: 'Contact' },
+  { href: homePath(locale), label: dict.accueil },
+  { href: sectionPath('la-maison', locale), label: dict.laMaison },
+  ...(locale === 'fr' ? [{ href: sectionPath('experiences', locale), label: dict.experiences }] : []),
+  ...(locale === 'fr' ? [{ href: sectionPath('decouvrir', locale), label: dict.decouvrir }] : []),
+  { href: sectionPath('saisons', locale), label: dict.saisons },
+  ...(locale === 'fr' ? [{ href: sectionPath('journal', locale), label: dict.journal }] : []),
+  { href: sectionPath('reserver', locale), label: dict.reserver },
+  { href: sectionPath('contact', locale), label: dict.contact },
 ];
 
 const current = new URL(Astro.request.url).pathname;
@@ -18,7 +31,7 @@ const current = new URL(Astro.request.url).pathname;
 
 <header class="border-b border-border bg-surface/95 backdrop-blur sticky top-0 z-40">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-    <a href="/" class="font-display text-lg font-semibold tracking-tight">
+    <a href={homePath(locale)} class="font-display text-lg font-semibold tracking-tight">
       {maison.nom}
     </a>
 
@@ -29,7 +42,7 @@ const current = new URL(Astro.request.url).pathname;
       aria-expanded="false"
       aria-controls="primary-nav"
     >
-      <span class="sr-only">Ouvrir le menu</span>
+      <span class="sr-only">{dict.ouvrirMenu}</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M4 6h16M4 12h16M4 18h16" />
       </svg>
@@ -47,12 +60,13 @@ const current = new URL(Astro.request.url).pathname;
           </a>
         ))
       }
-      <SeasonSwitcher />
+      <SeasonSwitcher locale={locale} />
+      <LanguageSwitcher locale={locale} alternates={alternates} />
       <a
-        href="/reserver/"
+        href={sectionPath('reserver', locale)}
         class="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
       >
-        Vérifier les disponibilités
+        {dict.ctaDisponibilites}
       </a>
     </nav>
   </div>
@@ -68,10 +82,13 @@ const current = new URL(Astro.request.url).pathname;
         ))
       }
       <div class="mt-2">
-        <SeasonSwitcher idSuffix="mobile" />
+        <SeasonSwitcher idSuffix="mobile" locale={locale} />
       </div>
-      <a href="/reserver/" class="mt-2 rounded-md bg-accent px-3 py-3 text-center text-base font-semibold text-white">
-        Vérifier les disponibilités
+      <div class="mt-2">
+        <LanguageSwitcher idSuffix="mobile" locale={locale} alternates={alternates} />
+      </div>
+      <a href={sectionPath('reserver', locale)} class="mt-2 rounded-md bg-accent px-3 py-3 text-center text-base font-semibold text-white">
+        {dict.ctaDisponibilites}
       </a>
     </nav>
   </div>

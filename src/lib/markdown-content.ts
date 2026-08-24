@@ -99,11 +99,11 @@ export function saisonMarkdown(saison: Saison, url: string): string {
 
 ## L'essentiel
 
-${saison.promesse} En ${saison.label.toLowerCase()} (${saison.periode}), la Presqu'île sauvage de Pleubian propose ${dixChoses[saison.id].length} activités principales autour du Sillon de Talbert et du GR34. La Maison Od Joge (${maison.capacite.voyageurs} personnes, poêle à bois, jardin clos) sert de camp de base à ${maison.distances.mer.duree} de la mer.
+${saison.promesse} En ${saison.label.toLowerCase()} (${saison.periode}), la Presqu'île sauvage de Pleubian propose ${dixChoses.fr[saison.id].length} activités principales autour du Sillon de Talbert et du GR34. La Maison Od Joge (${maison.capacite.voyageurs} personnes, poêle à bois, jardin clos) sert de camp de base à ${maison.distances.mer.duree} de la mer.
 
 ## 10 choses à faire
 
-${dixChoses[saison.id].map((item, i) => `${i + 1}. ${item}`).join('\n')}
+${dixChoses.fr[saison.id].map((item, i) => `${i + 1}. ${item}`).join('\n')}
 
 ## Tarifs indicatifs
 

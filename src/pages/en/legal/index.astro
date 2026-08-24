@@ -1,0 +1,7 @@
+---
+import LegalView from '@/views/LegalView.astro';
+
+const alternates = { fr: '/legal/', de: '/de/impressum/' };
+---
+
+<LegalView locale="en" alternates={alternates} />

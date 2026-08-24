@@ -1,0 +1,249 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FactBox from '@/components/FactBox.astro';
+import Cta from '@/components/Cta.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import HeroImage from '@/components/HeroImage.astro';
+import EnCeMoment from '@/components/EnCeMoment.astro';
+import { Image } from 'astro:assets';
+import { maison } from '@/data/maison';
+import { getSaisonCourante } from '@/data/saisons';
+import { lodgingBusinessJsonLd } from '@/lib/jsonld';
+import { pointsInteret } from '@/data/points-interet';
+import { lireMaree } from '@/lib/maree';
+import { experienceHeroImages } from '@/data/real-images';
+import { homeContent } from '@/i18n/pages/home';
+import { entryPath, homePath, sectionPath, sectionSlug, experienceSlugs, decouvrirSlugs, saisonLabels, saisonPeriodes, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const dict = homeContent[locale];
+const festivalHero = experienceHeroImages['festival-chant-de-marin'];
+
+const saison = getSaisonCourante();
+const saisonLabel = saisonLabels[saison.id][locale];
+const saisonPeriode = saisonPeriodes[saison.id][locale];
+const maree = lireMaree();
+const canonical = new URL(homePath(locale), Astro.site).toString();
+
+const chiffresCles = [
+  { label: dict.chiffres.voyageurs, value: `${maison.capacite.voyageurs}` },
+  { label: dict.chiffres.chambres, value: `${maison.capacite.chambres}` },
+  { label: dict.chiffres.sallesDeBain, value: `${maison.capacite.sallesDeBain}` },
+  { label: dict.chiffres.jardin, value: dict.chiffres.jardinValue },
+  { label: dict.chiffres.merAPied, value: maison.distances.mer.duree },
+  { label: dict.chiffres.statut, value: maison.superhost ? dict.chiffres.superhost : dict.chiffres.hote },
+];
+---
+
+<BaseLayout
+  title={maison.nom}
+  description={dict.metaDescription(dict.heroTitle, maison.capacite.voyageurs, maison.adresse.commune, maison.adresse.codePostal)}
+  jsonLd={lodgingBusinessJsonLd(canonical)}
+  locale={locale}
+  alternates={alternates}
+>
+  <!-- 1. Hero -->
+  <section class="relative">
+    <HeroImage
+      saison={saison.id}
+      alt={`${saisonLabel} — Presqu'île sauvage`}
+      loading="eager"
+      class="h-[70vh] min-h-[420px] w-full object-cover"
+    />
+    <div class="absolute inset-0 flex items-end bg-gradient-to-t from-ink/70 via-ink/10 to-transparent">
+      <div class="mx-auto w-full max-w-6xl px-4 pb-10 text-white sm:px-6">
+        <p class="text-sm font-semibold uppercase tracking-wide text-white/80">{dict.heroKicker(saisonLabel, maison.adresse.commune, maison.adresse.departement)}</p>
+        <h1 class="mt-2 font-display text-4xl font-semibold sm:text-5xl">{dict.heroTitle}</h1>
+        <p class="mt-3 max-w-xl text-white/90">
+          {dict.heroPitch(maison.capacite.voyageurs, maison.adresse.commune, maison.adresse.lieuDit, maison.distances.mer.duree)}
+        </p>
+        <div class="mt-6">
+          <Cta campagne="accueil-hero" locale={locale} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Barre de contexte -->
+  <section class="bg-surface-alt">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm text-ink-muted sm:px-6">
+      <span><strong class="text-ink">{dict.saisonAffichee}</strong> {saisonLabel} ({saisonPeriode})</span>
+      <span aria-hidden="true">·</span>
+      {
+        (() => {
+          const jour = maree.donnees?.jours[0];
+          if (maree.statut === 'indisponible' || !jour) {
+            return <span>{dict.mareesIndisponibles}</span>;
+          }
+          const pleinesMer = jour.evenements.filter((e) => e.type === 'pleine_mer');
+          const bassesMer = jour.evenements.filter((e) => e.type === 'basse_mer');
+          const coeffs = pleinesMer.map((e) => e.coefficient).filter((c): c is number => c !== null);
+          return (
+            <span>
+              <strong class="text-ink">{dict.mareesLabel}</strong> ({jour.date}) : {dict.pleineMer} {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · {dict.basseMer}{' '}
+              {bassesMer.map((e) => e.heure).join(' & ')}
+              {coeffs.length > 0 && <> · {dict.coeff} {coeffs.join('/')}</>}
+              {maree.statut === 'perime' && ` (${dict.donneePrecedente})`}
+              {maree.source && (
+                <>
+                  {' '}
+                  — <a href={maree.source} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">{dict.sourceShom}</a>
+                </>
+              )}
+            </span>
+          );
+        })()
+      }
+    </div>
+  </section>
+
+  {
+    /* Bloc événement : Festival du Chant de Marin 2027 — FR uniquement pour
+       l'instant, tant que la page expérience correspondante n'est pas traduite
+       (US-064 : jamais de lien vers du contenu inexistant). */
+    locale === 'fr' && (
+      <section>
+        <a href={entryPath('experiences', experienceSlugs, 'festival-chant-de-marin', locale)} class="mx-auto grid max-w-6xl gap-0 sm:grid-cols-2 hover:opacity-95">
+          {
+            festivalHero ? (
+              <Image
+                src={festivalHero.src}
+                alt={dict.festivalTitre}
+                loading="lazy"
+                class="h-56 w-full object-cover sm:h-full"
+                widths={[480, 768, 1024]}
+                sizes="(min-width: 640px) 50vw, 100vw"
+                format="avif"
+              />
+            ) : (
+              <div class="h-56 w-full bg-surface-alt sm:h-full" />
+            )
+          }
+          <div class="flex flex-col justify-center gap-2 px-4 py-6 sm:px-8 sm:py-8">
+            <p class="text-xs font-semibold uppercase tracking-wide text-accent">{dict.festivalKicker}</p>
+            <strong class="font-display text-xl sm:text-2xl">{dict.festivalTitre}</strong>
+            <p class="text-ink-muted">{dict.festivalDetails}</p>
+            <span class="mt-3 inline-block w-fit shrink-0 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white">{dict.festivalCta}</span>
+          </div>
+        </a>
+      </section>
+    )
+  }
+
+  <div class="mx-auto max-w-6xl space-y-20 px-4 py-16 sm:px-6">
+    <!-- 3. Pitch en 3 lignes -->
+    <section aria-labelledby="pitch-titre">
+      <h2 id="pitch-titre" class="sr-only">{dict.chiffresTitre}</h2>
+      <p class="max-w-3xl font-display text-xl leading-snug sm:text-2xl">
+        {dict.pitchTexte(maison.nom, maison.capacite.voyageurs, maison.adresse.commune, maison.adresse.codePostal)}
+      </p>
+    </section>
+
+    <!-- 4. Chiffres clés -->
+    <section aria-labelledby="chiffres-titre">
+      <h2 id="chiffres-titre" class="font-display text-2xl font-semibold">{dict.chiffresTitre}</h2>
+      <FactBox facts={chiffresCles} class="mt-6" />
+    </section>
+
+    <!-- 5. Aperçu de la maison -->
+    <section aria-labelledby="apercu-titre">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 id="apercu-titre" class="font-display text-2xl font-semibold">{dict.apercuTitre}</h2>
+        <a href={`${sectionPath('la-maison', locale)}${sectionSlug('galerie', locale)}/`} class="text-sm font-semibold text-accent hover:underline">{dict.apercuGalerie}</a>
+      </div>
+      <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {
+          dict.apercuPhotos.map((photo) => (
+            <PlaceholderImage slug={photo.slug} ratio="4x5" alt={photo.label} class="w-full rounded-lg object-cover" />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 6. En ce moment à Pleubian (cœur du multi-saisons, US-033) -->
+    <section>
+      <EnCeMoment locale={locale} />
+    </section>
+
+    <!-- 7. Les 5 raisons de venir -->
+    <section aria-labelledby="raisons-titre">
+      <h2 id="raisons-titre" class="font-display text-2xl font-semibold">{dict.raisonsTitre}</h2>
+      <p class="mt-2 text-sm text-ink-muted">{dict.raisonsIntro}</p>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          dict.raisons.map((raison) =>
+            locale === 'fr' ? (
+              <li>
+                <a href={entryPath('experiences', experienceSlugs, raison.frSlug, locale)} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
+                  <p class="font-display font-semibold">{raison.titre}</p>
+                  <p class="mt-1 text-sm text-ink-muted">{raison.description}</p>
+                </a>
+              </li>
+            ) : (
+              // Pages `/experiences/` pas encore traduites (US-062/063 en cours) :
+              // carte informative non cliquable plutôt qu'un lien mort (US-064).
+              <li class="rounded-lg border border-border bg-surface p-4">
+                <p class="font-display font-semibold">{raison.titre}</p>
+                <p class="mt-1 text-sm text-ink-muted">{raison.description}</p>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </section>
+
+    <!-- 8. Le territoire -->
+    <section aria-labelledby="territoire-titre">
+      <h2 id="territoire-titre" class="font-display text-2xl font-semibold">{dict.territoireTitre}</h2>
+      <p class="mt-2 text-sm text-ink-muted">{dict.territoireIntro}</p>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          pointsInteret.map((poi) =>
+            locale === 'fr' ? (
+              <li>
+                <a href={entryPath(poi.section, poi.section === 'experiences' ? experienceSlugs : decouvrirSlugs, poi.frSlug, locale)} class="block rounded-lg border border-border bg-surface p-4 hover:bg-surface-alt">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-accent">{poi.categorie[locale]}</p>
+                  <p class="mt-1 font-display font-semibold">{poi.nom[locale]}</p>
+                </a>
+              </li>
+            ) : (
+              // Fiches `/decouvrir/` et `/experiences/` pas encore traduites : carte
+              // informative non cliquable plutôt qu'un lien mort (US-064).
+              <li class="rounded-lg border border-border bg-surface p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-accent">{poi.categorie[locale]}</p>
+                <p class="mt-1 font-display font-semibold">{poi.nom[locale]}</p>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </section>
+
+    <!-- 9. Avis -->
+    <section aria-labelledby="avis-titre" class="rounded-lg border border-dashed border-border p-6 text-center">
+      <h2 id="avis-titre" class="font-display text-2xl font-semibold">{dict.avisTitre}</h2>
+      <p class="mt-2 text-sm text-ink-muted">{dict.avisTexte}</p>
+    </section>
+
+    <!-- 10. Bandeau conversion -->
+    <section aria-labelledby="conversion-titre" class="rounded-xl bg-accent px-6 py-10 text-center text-white">
+      <h2 id="conversion-titre" class="font-display text-2xl font-semibold">{dict.conversionTitre}</h2>
+      <p class="mt-2 text-white/90">{dict.conversionTexte}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href={sectionPath('reserver', locale)} class="rounded-md bg-white px-5 py-3 text-sm font-semibold text-accent hover:opacity-90">{dict.conversionBouton}</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bandeau conversion sticky mobile -->
+  <div class="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface p-3 shadow-lg md:hidden">
+    <a href={sectionPath('reserver', locale)} data-analytics-event="cta_reserver_clic" class="block w-full rounded-md bg-accent py-3 text-center text-sm font-semibold text-white">
+      {dict.reserverSticky}
+    </a>
+  </div>
+</BaseLayout>

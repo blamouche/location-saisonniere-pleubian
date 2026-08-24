@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroImage from '@/components/HeroImage.astro';
+import { saisons } from '@/data/saisons';
+import { saisonsIndexContent } from '@/i18n/pages/saisons';
+import { entryPath, sectionPath, saisonSlugs, saisonLabels, saisonPromesses, saisonPeriodes, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const dict = saisonsIndexContent[locale];
+---
+
+<BaseLayout
+  title={dict.titre}
+  description={dict.metaDescription}
+  crumbs={[{ label: dict.titre, href: sectionPath('saisons', locale) }]}
+  locale={locale}
+  alternates={alternates}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">{dict.titre}</h1>
+      <p class="mt-3 max-w-2xl text-ink-muted">{dict.intro}</p>
+    </header>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        saisons.map((s) => (
+          <a href={entryPath('saisons', saisonSlugs, s.id, locale)} class="group overflow-hidden rounded-xl border border-border bg-surface">
+            <HeroImage
+              saison={s.id}
+              alt={`${saisonLabels[s.id][locale]} — Presqu'île sauvage`}
+              class="h-48 w-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
+            <div class="p-5">
+              <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{saisonPeriodes[s.id][locale]}</p>
+              <p class="mt-1 font-display text-2xl font-semibold group-hover:text-accent">{saisonLabels[s.id][locale]}</p>
+              <p class="mt-1 text-sm text-ink-muted">{saisonPromesses[s.id][locale]}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

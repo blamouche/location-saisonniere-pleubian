@@ -1,0 +1,104 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { maison } from '@/data/maison';
+import { contactContent } from '@/i18n/pages/contact';
+import { sectionPath, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const dict = contactContent[locale];
+const prenoms = maison.hotes.map((h) => h.prenom).join(' & ');
+---
+
+<BaseLayout
+  title={dict.titre}
+  description={dict.metaDescription(maison.nom, prenoms)}
+  crumbs={[{ label: dict.titre, href: sectionPath('contact', locale) }]}
+  locale={locale}
+  alternates={alternates}
+>
+  <div class="mx-auto max-w-xl px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">{dict.titre}</h1>
+      <p class="mt-3 text-ink-muted">{dict.intro(prenoms)}</p>
+    </header>
+
+    <!--
+      Formulaire au format Netlify Forms (détection statique via `data-netlify` +
+      champ caché `form-name`) + honeypot anti-spam (US-021). Fonctionne tel quel si
+      le site est hébergé sur Netlify (US-009) ; à adapter vers Formspree si
+      l'hébergement final est Vercel.
+    -->
+    <form
+      name={`contact-${locale}`}
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="societe"
+      class="mt-8 space-y-5"
+      novalidate
+      id="contact-form"
+    >
+      <input type="hidden" name="form-name" value={`contact-${locale}`} />
+      <p class="hidden">
+        <label>{dict.honeypotLabel} <input name="societe" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      <div>
+        <label for="nom" class="block text-sm font-semibold">{dict.labelNom}</label>
+        <input id="nom" name="nom" type="text" required autocomplete="name" class="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2" aria-describedby="nom-erreur" />
+        <p id="nom-erreur" class="mt-1 text-sm text-red-700" role="alert" hidden>{dict.erreurNom}</p>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-semibold">{dict.labelEmail}</label>
+        <input id="email" name="email" type="email" required autocomplete="email" class="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2" aria-describedby="email-erreur" />
+        <p id="email-erreur" class="mt-1 text-sm text-red-700" role="alert" hidden>{dict.erreurEmail}</p>
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-semibold">{dict.labelMessage}</label>
+        <textarea id="message" name="message" rows="6" required class="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2" aria-describedby="message-erreur"></textarea>
+        <p id="message-erreur" class="mt-1 text-sm text-red-700" role="alert" hidden>{dict.erreurMessage}</p>
+      </div>
+
+      <button type="submit" class="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-90">{dict.envoyer}</button>
+
+      <p id="contact-status" class="text-sm" role="status" data-generic-error={dict.erreurGenerique}></p>
+    </form>
+
+    <p class="mt-8 text-sm text-ink-muted">
+      {dict.ecrireDirectement} <a href={`mailto:${maison.contact.email}`} class="underline hover:text-accent">{maison.contact.email}</a>
+      {maison.contact.noteTodo && <span class="block text-xs">({maison.contact.noteTodo})</span>}
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('contact-status');
+
+  form?.addEventListener('submit', (event) => {
+    let valide = true;
+    (['nom', 'email', 'message'] as const).forEach((champ) => {
+      const input = form.elements.namedItem(champ) as HTMLInputElement | HTMLTextAreaElement | null;
+      const erreur = document.getElementById(`${champ}-erreur`);
+      const ok = champ === 'email' ? !!input?.value.includes('@') : !!input?.value.trim();
+      erreur?.toggleAttribute('hidden', ok);
+      if (!ok) valide = false;
+    });
+
+    if (!valide) {
+      event.preventDefault();
+      if (status) status.textContent = status.dataset.genericError ?? '';
+      return;
+    }
+
+    window.dispatchEvent(new CustomEvent('analytics', { detail: { event: 'envoi_contact' } }));
+    // La soumission réelle est déléguée au navigateur (POST natif vers Netlify Forms
+    // une fois le site déployé — voir commentaire dans le template).
+  });
+</script>

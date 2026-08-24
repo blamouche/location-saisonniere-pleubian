@@ -869,6 +869,21 @@ d'une baseline avant de pouvoir mesurer le progrès du GEO.
 
 > **Livrable de lot** : site trilingue.
 
+> **État d'avancement (premier incrément)** : infrastructure i18n complète (routing
+> Astro natif FR racine / EN `/en/` / DE `/de/`, slugs traduits par section et par
+> fiche dans `src/i18n/locales.ts`, hreflang réciproque + `x-default` sur chaque
+> page, sélecteur de langue avec bandeau de suggestion navigateur non intrusif,
+> formats de date localisés). Traduit et vérifié en EN/DE : accueil, la maison
+> (+ galerie + infos pratiques), réserver, les 4 pages saisons + hub, contact,
+> mentions légales. **Pas encore traduit** : les 11 pages `/experiences/` et les 8
+> fiches `/decouvrir/` — leurs slugs sont déjà réservés dans `src/i18n/locales.ts`
+> (ex. `en/discover/talbert-spit/`) mais les pages elles-mêmes n'existent pas
+> encore ; les liens vers ce contenu sont masqués en EN/DE (US-064) plutôt que
+> cassés. 0 lien cassé, 0 page orpheline, `astro check` 0 erreur sur les 66 pages
+> actuelles (build + check-links + check-orphans + astro check tous verts).
+
+
+
 ### US-061 — hreflang et structure d'URL multilingue
 **En tant que** développeur, **je veux** finaliser le routing i18n commencé en US-011
 avec des slugs traduits et un `hreflang` réciproque complet, **afin de** ne jamais
@@ -909,8 +924,8 @@ une suggestion discrète plutôt qu'une redirection automatique, **afin de** ne 
 imposé une langue et ne pas nuire à l'indexation.
 
 **Critères d'acceptation**
-- [ ] Bandeau de suggestion basé sur la langue du navigateur, jamais de redirection automatique.
-- [ ] Le sélecteur conserve la page courante lors du changement de langue.
+- [x] Bandeau de suggestion basé sur la langue du navigateur, jamais de redirection automatique.
+- [x] Le sélecteur conserve la page courante lors du changement de langue.
 
 **Priorité** : Must · **Réf. PRD** : §13
 
@@ -941,7 +956,7 @@ fonctionnel en FR/EN/DE, **afin de** ouvrir le trafic international.
 
 **Critères d'acceptation**
 - [ ] `hreflang` réciproque validé sur les 3 langues, 0 erreur en Search Console.
-- [ ] Aucune page affichée en FR par erreur sur une URL EN/DE.
+- [x] Aucune page affichée en FR par erreur sur une URL EN/DE (pour le périmètre déjà traduit — voir note d'avancement en tête d'épic).
 - [ ] Sitemaps par langue soumis.
 
 **Priorité** : Must · **Réf. PRD** : §16 (Lot 5), §18

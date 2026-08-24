@@ -1,0 +1,101 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlaceholderImage from '@/components/PlaceholderImage.astro';
+import { maison } from '@/data/maison';
+import { lodgingBusinessJsonLd } from '@/lib/jsonld';
+import { laMaisonContent, translateItem, equipementItems, scenarioItems, cePasCestItems } from '@/i18n/pages/la-maison';
+import { sectionPath, sectionSlug, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const dict = laMaisonContent[locale];
+const canonical = new URL(sectionPath('la-maison', locale), Astro.site).toString();
+---
+
+<BaseLayout
+  title={dict.titre}
+  description={dict.metaDescription(maison.nom, maison.capacite.chambres, maison.capacite.sallesDeBain, maison.capacite.voyageurs)}
+  crumbs={[{ label: dict.titre, href: sectionPath('la-maison', locale) }]}
+  jsonLd={lodgingBusinessJsonLd(canonical)}
+  locale={locale}
+  alternates={alternates}
+>
+  <div class="mx-auto max-w-6xl space-y-16 px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">{dict.titre}</h1>
+      <p class="mt-3 max-w-2xl text-ink-muted">
+        {dict.statLine(maison.capacite.voyageurs, maison.capacite.chambres, maison.capacite.couchages, maison.capacite.couchagesConvertible, maison.capacite.sallesDeBain, maison.capacite.wcSepare)}
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={`${sectionPath('la-maison', locale)}${sectionSlug('galerie', locale)}/`} class="rounded-md border border-accent px-4 py-2 text-sm font-semibold text-accent hover:bg-accent-soft">{dict.voirGalerie}</a>
+        <a href={`${sectionPath('la-maison', locale)}${sectionSlug('pratique', locale)}/`} class="rounded-md border border-border px-4 py-2 text-sm font-semibold hover:bg-surface-alt">{dict.infosPratiques}</a>
+      </div>
+    </header>
+
+    <!-- Visite pièce par pièce -->
+    <section aria-labelledby="visite-titre">
+      <h2 id="visite-titre" class="font-display text-2xl font-semibold">{dict.visiteTitre}</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          dict.pieces.map((piece) => (
+            <figure class="overflow-hidden rounded-lg border border-border bg-surface">
+              <PlaceholderImage slug={piece.slug} ratio="4x5" alt={piece.titre} class="w-full object-cover" />
+              <figcaption class="p-3">
+                <p class="font-semibold">{piece.titre}</p>
+                <p class="mt-1 text-sm text-ink-muted">{piece.description}</p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Scénarios de couchage -->
+    <section aria-labelledby="couchage-titre">
+      <h2 id="couchage-titre" class="font-display text-2xl font-semibold">{dict.couchageTitre}</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-3">
+        {
+          maison.scenariosCouchage.map((scenario) => (
+            <li class="rounded-lg border border-border bg-surface p-4 text-sm">{translateItem(scenario, scenarioItems, locale)}</li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Équipements -->
+    <section aria-labelledby="equipements-titre">
+      <h2 id="equipements-titre" class="font-display text-2xl font-semibold">{dict.equipementsTitre}</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          Object.entries(maison.equipements).map(([categorie, items]) => (
+            <div class="rounded-lg border border-border bg-surface p-4">
+              <p class="font-display font-semibold">{dict.equipementsLabels[categorie] ?? categorie}</p>
+              <ul class="mt-2 space-y-1 text-sm text-ink-muted">
+                {items.map((item) => (
+                  <li>· {translateItem(item, equipementItems, locale)}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Ce que la maison n'est pas -->
+    <section aria-labelledby="honnetete-titre" class="rounded-lg border border-dashed border-border p-6">
+      <h2 id="honnetete-titre" class="font-display text-xl font-semibold">{dict.honneteteTitre}</h2>
+      <p class="mt-2 text-sm text-ink-muted">{dict.honneteteIntro}</p>
+      <ul class="mt-3 space-y-1 text-sm">
+        {
+          maison.cePasCest.map((item) => (
+            <li>· {translateItem(item, cePasCestItems, locale)}</li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

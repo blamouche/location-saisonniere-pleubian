@@ -42,9 +42,12 @@ export default defineConfig({
       },
     }),
   ],
+  // Lot 5 (US-061) : FR à la racine (langue par défaut, non préfixée), EN sous
+  // `/en/`, DE sous `/de/`. Les slugs traduits par section/fiche vivent dans
+  // `src/i18n/locales.ts`, pas dans ce routing natif (qui ne gère que le préfixe).
   i18n: {
     defaultLocale: 'fr',
-    locales: ['fr'],
+    locales: ['fr', 'en', 'de'],
     routing: {
       prefixDefaultLocale: false,
     },

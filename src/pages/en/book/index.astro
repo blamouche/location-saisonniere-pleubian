@@ -1,0 +1,7 @@
+---
+import ReserverView from '@/views/ReserverView.astro';
+
+const alternates = { fr: '/reserver/', de: '/de/buchen/' };
+---
+
+<ReserverView locale="en" alternates={alternates} />

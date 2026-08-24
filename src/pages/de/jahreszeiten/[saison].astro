@@ -1,0 +1,24 @@
+---
+import SaisonView from '@/views/SaisonView.astro';
+import { saisons, type SaisonId } from '@/data/saisons';
+import { saisonSlugs } from '@/i18n/locales';
+
+export function getStaticPaths() {
+  return saisons.map((s) => ({
+    params: { saison: saisonSlugs[s.id].de },
+    props: {
+      saisonId: s.id,
+      alternates: { fr: `/saisons/${s.id}/`, en: `/en/seasons/${saisonSlugs[s.id].en}/` },
+    },
+  }));
+}
+
+interface Props {
+  saisonId: SaisonId;
+  alternates: Partial<Record<'fr' | 'en', string>>;
+}
+
+const { saisonId, alternates } = Astro.props as Props;
+---
+
+<SaisonView saisonId={saisonId} locale="de" alternates={alternates} />

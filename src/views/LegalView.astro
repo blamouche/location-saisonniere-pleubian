@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { maison } from '@/data/maison';
+import { legalContent } from '@/i18n/pages/legal';
+import { sectionPath, type Locale } from '@/i18n/locales';
+
+export interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const dict = legalContent[locale];
+const prenoms = maison.hotes.map((h) => h.prenom).join(' & ');
+---
+
+<BaseLayout
+  title={dict.titre}
+  description={dict.metaDescription}
+  crumbs={[{ label: dict.titre, href: sectionPath('legal', locale) }]}
+  locale={locale}
+  alternates={alternates}
+>
+  <div class="mx-auto max-w-3xl space-y-16 px-4 py-12 sm:px-6">
+    <header>
+      <h1 class="font-display text-4xl font-semibold">{dict.titre}</h1>
+      <p class="mt-3 text-sm font-semibold text-amber-700">{dict.avertissement}</p>
+    </header>
+
+    <section aria-labelledby="mentions-titre">
+      <h2 id="mentions-titre" class="font-display text-2xl font-semibold">{dict.mentionsTitre}</h2>
+      <dl class="mt-4 divide-y divide-border rounded-lg border border-border text-sm">
+        <div class="flex justify-between gap-4 p-4"><dt class="font-semibold">{dict.editeur}</dt><dd class="text-ink-muted">{dict.editeurValue(prenoms)}</dd></div>
+        <div class="flex justify-between gap-4 p-4"><dt class="font-semibold">{dict.directeur}</dt><dd class="text-ink-muted">{dict.directeurValue}</dd></div>
+        <div class="flex justify-between gap-4 p-4"><dt class="font-semibold">{dict.hebergeur}</dt><dd class="text-ink-muted">{dict.hebergeurValue}</dd></div>
+        <div class="flex justify-between gap-4 p-4"><dt class="font-semibold">{dict.numeroEnregistrement}</dt><dd class="text-ink-muted">{maison.reglementation.numeroEnregistrementMeubleTourisme ?? dict.numeroEnregistrementFallback}</dd></div>
+        <div class="flex justify-between gap-4 p-4"><dt class="font-semibold">{dict.contact}</dt><dd class="text-ink-muted">{maison.contact.email}</dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="confidentialite-titre">
+      <h2 id="confidentialite-titre" class="font-display text-2xl font-semibold">{dict.confidentialiteTitre}</h2>
+      <div class="mt-4 space-y-3 text-sm text-ink-muted">
+        {dict.confidentialite.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <section aria-labelledby="cookies-titre">
+      <h2 id="cookies-titre" class="font-display text-2xl font-semibold">{dict.cookiesTitre}</h2>
+      <p class="mt-4 text-sm text-ink-muted">{dict.cookiesTexte}</p>
+    </section>
+  </div>
+</BaseLayout>
