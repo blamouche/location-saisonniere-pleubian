@@ -12,6 +12,10 @@ dist/
 # Marqueur local de dernière synchronisation (propre à chaque machine)
 .last-sync
 
-# Générés au build par scripts/build-season.mjs et scripts/fetch-tides.mjs (US-032)
+# Généré au build par scripts/build-season.mjs (US-032) — recalculé à chaque build,
+# ne vaut pas la peine d'être suivi en git.
 src/data/build-meta.generated.json
-src/data/meteo-marees.generated.json
+
+# src/data/meteo-marees.generated.json N'EST PAS ignoré : rafraîchi quotidiennement
+# par .github/workflows/fetch-tides.yml et committé, pour que la donnée survive même
+# tant qu'aucun hébergement avec rebuild programmé n'est branché (US-009).

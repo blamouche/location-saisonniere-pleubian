@@ -9,8 +9,10 @@ import { maison } from '@/data/maison';
 import { getSaisonCourante } from '@/data/saisons';
 import { lodgingBusinessJsonLd } from '@/lib/jsonld';
 import { pointsInteret } from '@/data/points-interet';
+import { lireMaree } from '@/lib/maree';
 
 const saison = getSaisonCourante();
+const maree = lireMaree();
 const canonical = new URL('/', Astro.site).toString();
 
 const chiffresCles = [
@@ -72,7 +74,24 @@ const raisonsDeVenir = [
     <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm text-ink-muted sm:px-6">
       <span><strong class="text-ink">Saison affichée :</strong> {saison.label} ({saison.periode})</span>
       <span aria-hidden="true">·</span>
-      <span>Météo &amp; marées du jour : <em>bientôt disponibles</em> — pipeline de récupération en place (rebuild quotidien, dégradation gracieuse), API à connecter (US-032)</span>
+      {
+        maree.statut !== 'indisponible' && maree.donnees ? (
+          <span>
+            <strong class="text-ink">Marées à Pleubian</strong> ({maree.donnees.aujourdhui.date ?? "aujourd'hui"}) : pleine mer {maree.donnees.aujourdhui.matin.pleineMer.heure} ({maree.donnees.aujourdhui.matin.pleineMer.hauteur}) &amp;{' '}
+            {maree.donnees.aujourdhui.apresMidi.pleineMer.heure} ({maree.donnees.aujourdhui.apresMidi.pleineMer.hauteur}) · basse mer {maree.donnees.aujourdhui.matin.basseMer.heure} &amp; {maree.donnees.aujourdhui.apresMidi.basseMer.heure} · coeff.{' '}
+            {maree.donnees.aujourdhui.matin.coefficient}/{maree.donnees.aujourdhui.apresMidi.coefficient}
+            {maree.statut === 'perime' && ' (donnée d’une précédente mise à jour)'}
+            {maree.source && (
+              <>
+                {' '}
+                — <a href={maree.source} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">source</a>
+              </>
+            )}
+          </span>
+        ) : (
+          <span>Marées du jour : <em>indisponibles</em> pour ce build — météo à connecter (US-032)</span>
+        )
+      }
     </div>
   </section>
 

@@ -1,0 +1,285 @@
+{
+  "statut": "ok",
+  "misAJour": "2026-08-24T12:02:02.167Z",
+  "source": "https://www.horaire-maree.fr/maree/Pleubian/",
+  "donnees": {
+    "port": "Pleubian",
+    "aujourdhui": {
+      "date": "lundi 24 août 2026",
+      "matin": {
+        "coefficient": 39,
+        "basseMer": {
+          "heure": "11h18",
+          "hauteur": "4,22 m"
+        },
+        "pleineMer": {
+          "heure": "05h01",
+          "hauteur": "7,06 m"
+        }
+      },
+      "apresMidi": {
+        "coefficient": 44,
+        "basseMer": {
+          "heure": "23h51",
+          "hauteur": "3,79 m"
+        },
+        "pleineMer": {
+          "heure": "17h27",
+          "hauteur": "7,43 m"
+        }
+      }
+    },
+    "dixProchainsJours": [
+      {
+        "date": "Demain Mardi 25 août",
+        "matin": {
+          "coefficient": 50,
+          "basseMer": {
+            "heure": "12h09",
+            "hauteur": "3,66 m"
+          },
+          "pleineMer": {
+            "heure": "05h58",
+            "hauteur": "7,58 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 56,
+          "basseMer": {
+            "heure": null,
+            "hauteur": null
+          },
+          "pleineMer": {
+            "heure": "18h16",
+            "hauteur": "8,00 m"
+          }
+        }
+      },
+      {
+        "date": "Mercredi 26 août",
+        "matin": {
+          "coefficient": 62,
+          "basseMer": {
+            "heure": "00h34",
+            "hauteur": "3,18 m"
+          },
+          "pleineMer": {
+            "heure": "06h40",
+            "hauteur": "8,14 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 68,
+          "basseMer": {
+            "heure": "12h49",
+            "hauteur": "3,08 m"
+          },
+          "pleineMer": {
+            "heure": "18h53",
+            "hauteur": "8,58 m"
+          }
+        }
+      },
+      {
+        "date": "Jeudi 27 août",
+        "matin": {
+          "coefficient": 74,
+          "basseMer": {
+            "heure": "01h09",
+            "hauteur": "2,60 m"
+          },
+          "pleineMer": {
+            "heure": "07h14",
+            "hauteur": "8,68 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 79,
+          "basseMer": {
+            "heure": "13h22",
+            "hauteur": "2,53 m"
+          },
+          "pleineMer": {
+            "heure": "19h27",
+            "hauteur": "9,10 m"
+          }
+        }
+      },
+      {
+        "date": "Vendredi 28 août",
+        "matin": {
+          "coefficient": 83,
+          "basseMer": {
+            "heure": "01h42",
+            "hauteur": "2,09 m"
+          },
+          "pleineMer": {
+            "heure": "07h46",
+            "hauteur": "9,14 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 87,
+          "basseMer": {
+            "heure": "13h54",
+            "hauteur": "2,07 m"
+          },
+          "pleineMer": {
+            "heure": "19h58",
+            "hauteur": "9,53 m"
+          }
+        }
+      },
+      {
+        "date": "Samedi 29 août",
+        "matin": {
+          "coefficient": 90,
+          "basseMer": {
+            "heure": "02h13",
+            "hauteur": "1,69 m"
+          },
+          "pleineMer": {
+            "heure": "08h16",
+            "hauteur": "9,50 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 92,
+          "basseMer": {
+            "heure": "14h26",
+            "hauteur": "1,72 m"
+          },
+          "pleineMer": {
+            "heure": "20h29",
+            "hauteur": "9,83 m"
+          }
+        }
+      },
+      {
+        "date": "Dimanche 30 août",
+        "matin": {
+          "coefficient": 94,
+          "basseMer": {
+            "heure": "02h45",
+            "hauteur": "1,43 m"
+          },
+          "pleineMer": {
+            "heure": "08h47",
+            "hauteur": "9,72 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 94,
+          "basseMer": {
+            "heure": "14h59",
+            "hauteur": "1,52 m"
+          },
+          "pleineMer": {
+            "heure": "21h00",
+            "hauteur": "9,98 m"
+          }
+        }
+      },
+      {
+        "date": "Lundi 31 août",
+        "matin": {
+          "coefficient": 94,
+          "basseMer": {
+            "heure": "03h18",
+            "hauteur": "1,35 m"
+          },
+          "pleineMer": {
+            "heure": "09h18",
+            "hauteur": "9,79 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 93,
+          "basseMer": {
+            "heure": "15h32",
+            "hauteur": "1,49 m"
+          },
+          "pleineMer": {
+            "heure": "21h33",
+            "hauteur": "9,95 m"
+          }
+        }
+      },
+      {
+        "date": "Mardi  1 septembre",
+        "matin": {
+          "coefficient": 90,
+          "basseMer": {
+            "heure": "03h52",
+            "hauteur": "1,47 m"
+          },
+          "pleineMer": {
+            "heure": "09h51",
+            "hauteur": "9,68 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 87,
+          "basseMer": {
+            "heure": "16h07",
+            "hauteur": "1,66 m"
+          },
+          "pleineMer": {
+            "heure": "22h07",
+            "hauteur": "9,71 m"
+          }
+        }
+      },
+      {
+        "date": "Mercredi  2 septembre",
+        "matin": {
+          "coefficient": 83,
+          "basseMer": {
+            "heure": "04h28",
+            "hauteur": "1,79 m"
+          },
+          "pleineMer": {
+            "heure": "10h27",
+            "hauteur": "9,39 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 77,
+          "basseMer": {
+            "heure": "16h46",
+            "hauteur": "2,01 m"
+          },
+          "pleineMer": {
+            "heure": "22h47",
+            "hauteur": "9,28 m"
+          }
+        }
+      },
+      {
+        "date": "Jeudi  3 septembre",
+        "matin": {
+          "coefficient": 72,
+          "basseMer": {
+            "heure": "05h08",
+            "hauteur": "2,29 m"
+          },
+          "pleineMer": {
+            "heure": "11h08",
+            "hauteur": "8,92 m"
+          }
+        },
+        "apresMidi": {
+          "coefficient": 65,
+          "basseMer": {
+            "heure": "17h31",
+            "hauteur": "2,54 m"
+          },
+          "pleineMer": {
+            "heure": "23h33",
+            "hauteur": "8,68 m"
+          }
+        }
+      }
+    ]
+  }
+}

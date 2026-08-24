@@ -1,0 +1,45 @@
+name: Rafraîchir les marées
+
+# Récupère quotidiennement les horaires de marée de Pleubian (US-032, PRD §14.5) et
+# committe le résultat — voir scripts/fetch-tides.mjs pour la source et la clause
+# d'usage du site scrapé (horaire-maree.fr).
+#
+# Tant qu'aucun hébergement n'est branché avec rebuild automatique (US-009), ce
+# commit est ce qui garde `src/data/meteo-marees.generated.json` à jour ; le
+# prochain déploiement (manuel ou automatique) embarquera alors la donnée fraîche.
+
+on:
+  schedule:
+    # 05h00 UTC, comme le rebuild quotidien visé au PRD §14.5.
+    - cron: '0 5 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-tides:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run fetch-tides
+
+      - name: Commit si la donnée a changé
+        run: |
+          if git diff --quiet -- src/data/meteo-marees.generated.json; then
+            echo "Aucun changement de marée à committer."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/meteo-marees.generated.json
+          git commit -m "marees: mise a jour quotidienne (horaire-maree.fr)"
+          git push
