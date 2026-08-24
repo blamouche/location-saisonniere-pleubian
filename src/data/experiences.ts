@@ -4,6 +4,8 @@ export interface Proposition {
   difficulte: string;
   saisonIdeale: string;
   cout: string;
+  /** Source externe vérifiée (office de tourisme, mairie…) pour l'itinéraire. */
+  source?: string;
 }
 
 export interface Experience {
@@ -36,11 +38,46 @@ export const experiences: Experience[] = [
     promesse: "Le sentier des douaniers longe l'intégralité du littoral de la Presqu'île sauvage. Depuis la maison, cinq boucles balisées permettent de le découvrir sans voiture, de 3,2 à 13,6 km.",
     depuisLaMaison: "Le GR34 passe à proximité de Pleubian — départ à pied possible pour plusieurs boucles (distance exacte à vérifier porte-à-porte).",
     propositions: [
-      { titre: 'Boucle du Sillon de Talbert', duree: '~1h (estimée)', difficulte: 'Facile, plat', saisonIdeale: "Toute l'année, selon marée", cout: 'Gratuit' },
-      { titre: 'Circuit des Phares (8,6 km)', duree: '~2h10 (estimée)', difficulte: 'Facile à modéré', saisonIdeale: 'Printemps, automne', cout: 'Gratuit' },
-      { titre: 'Circuit de Port-Béni (8,7 km)', duree: '~2h10 (estimée)', difficulte: 'Facile à modéré', saisonIdeale: 'Toute saison', cout: 'Gratuit' },
-      { titre: 'Circuit de Brestan (8,8 km)', duree: '~2h15 (estimée)', difficulte: 'Facile à modéré', saisonIdeale: 'Toute saison', cout: 'Gratuit' },
-      { titre: 'Circuit de Port-la-Chaîne (13,6 km)', duree: '~3h30 (estimée)', difficulte: 'Modéré', saisonIdeale: 'Printemps, automne', cout: 'Gratuit' },
+      {
+        titre: 'Boucle du Sillon de Talbert',
+        duree: '~1h (estimée)',
+        difficulte: 'Facile, plat',
+        saisonIdeale: "Toute l'année, selon marée",
+        cout: 'Gratuit',
+        source: 'https://www.cotesdarmor.com/fr/fiche/itineraires-touristiques/boucle-du-sillon-de-talbert-pleubian_TFOITIBRE022V50QNZJ/',
+      },
+      {
+        titre: 'Circuit des Phares (8,6 km)',
+        duree: '~2h10 (estimée)',
+        difficulte: 'Facile à modéré',
+        saisonIdeale: 'Printemps, automne',
+        cout: 'Gratuit',
+        source: 'https://www.mairie-pleubian.fr/decouvrir/circuit-des-phares',
+      },
+      {
+        titre: 'Circuit de Port-Béni (8,7 km)',
+        duree: '~2h10 (estimée)',
+        difficulte: 'Facile à modéré',
+        saisonIdeale: 'Toute saison',
+        cout: 'Gratuit',
+        source: 'https://www.mairie-pleubian.fr/decouvrir/randonnee-port-beni-en-boucle-depuis-pleubian',
+      },
+      {
+        titre: 'Circuit de Brestan (8,8 km)',
+        duree: '~2h15 (estimée)',
+        difficulte: 'Facile à modéré',
+        saisonIdeale: 'Toute saison',
+        cout: 'Gratuit',
+        source: 'https://www.mairie-pleubian.fr/decouvrir/circuit-de-brestan',
+      },
+      {
+        titre: 'Circuit de Port-la-Chaîne (13,6 km)',
+        duree: '~3h30 (estimée)',
+        difficulte: 'Modéré',
+        saisonIdeale: 'Printemps, automne',
+        cout: 'Gratuit',
+        source: 'https://www.presquile-de-lezardrieux.com/circuit-de-port-la-chaine',
+      },
     ],
     encadrePratique: {
       materiel: ['Chaussures de marche', 'Coupe-vent (le vent côtier est constant)', 'Eau'],
@@ -106,6 +143,62 @@ export const experiences: Experience[] = [
     ],
     decouvrirLies: ['ile-de-brehat', 'plages-pleubian', 'presquile-sauvage'],
     heroSlug: 'saison-ete-2',
+  },
+  {
+    slug: 'accrobranche',
+    pilier: 'Sport',
+    titre: 'Accrobranche à Pleumeur-Bodou',
+    essentiel:
+      "L'accrobranche Vivons Perchés, à Pleumeur-Bodou (Côtes-d'Armor, près du Radôme), propose 4 parcours dans les arbres, du plus accessible (Mini Forêt, dès 2 ans) au plus vertigineux (Grande Forêt, jusqu'à 17 m de haut avec vue mer). Vivons Perchés est ouvert du lundi au samedi, réservation recommandée.",
+    promesse:
+      "Vivons Perchés, à Pleumeur-Bodou, propose 4 parcours accrobranche dans les arbres, du tout-petit dès 2 ans jusqu'aux sensations fortes à 17 m de haut avec vue sur la mer.",
+    depuisLaMaison: 'Le parc est situé à Pleumeur-Bodou, sur la Côte de Granit Rose — distance et temps de trajet exacts depuis la maison à vérifier porte-à-porte avant publication.',
+    propositions: [
+      {
+        titre: 'Mini Forêt',
+        duree: '1h',
+        difficulte: 'Très facile (dès 2 ans, 80 cm de haut max)',
+        saisonIdeale: "Toute l'année (ouvert du lundi au samedi)",
+        cout: 'Voir tarifs sur le site',
+        source: 'https://www.vivons-perches.bzh/accrobranche/',
+      },
+      {
+        titre: 'Parcours Découverte (3 parcours)',
+        duree: '1h',
+        difficulte: 'Facile (dès 4 ans et 1 m, jusqu’à 5 m de haut)',
+        saisonIdeale: "Toute l'année",
+        cout: 'Voir tarifs sur le site',
+        source: 'https://www.vivons-perches.bzh/accrobranche/',
+      },
+      {
+        titre: 'Moyenne Forêt (5 parcours)',
+        duree: '2h',
+        difficulte: 'Modéré (dès 7 ans et 1,15 m, jusqu’à 8 m de haut)',
+        saisonIdeale: "Toute l'année",
+        cout: 'Voir tarifs sur le site',
+        source: 'https://www.vivons-perches.bzh/accrobranche/',
+      },
+      {
+        titre: 'Grande Forêt (5 parcours, dont saut de Tarzan et Skyfall)',
+        duree: '2h30',
+        difficulte: 'Sportif (dès 10 ans et 1,40 m, jusqu’à 17 m de haut)',
+        saisonIdeale: "Toute l'année",
+        cout: 'Voir tarifs sur le site',
+        source: 'https://www.vivons-perches.bzh/accrobranche/',
+      },
+    ],
+    encadrePratique: {
+      materiel: ['Chaussures fermées', 'Tenue confortable, pas de vêtements amples'],
+      reservations: 'Réservation recommandée en ligne sur le site de Vivons Perchés.',
+      prestataires: 'Vivons Perchés, Pleumeur-Bodou (entité réelle, source ci-dessous).',
+    },
+    faq: [
+      { q: 'À partir de quel âge peut-on faire de l’accrobranche à Vivons Perchés ?', r: 'Dès 2 ans sur la Mini Forêt (80 cm de haut maximum) ; l’accès aux parcours plus hauts dépend ensuite de l’âge et de la taille de l’enfant.' },
+      { q: 'Faut-il réserver à l’avance ?', r: 'Réservation recommandée, en ligne sur le site de Vivons Perchés.' },
+      { q: 'Quels sont les horaires d’ouverture ?', r: 'Le parc est ouvert du lundi au samedi — horaires précis à vérifier sur le site avant de s’y rendre.' },
+    ],
+    decouvrirLies: ['cote-de-granit-rose', 'presquile-sauvage'],
+    heroSlug: 'saison-printemps-3',
   },
   {
     slug: 'bien-etre-air-marin',

@@ -81,7 +81,8 @@ const touristTripJsonLd = {
               <th class="py-2 pr-4">Durée</th>
               <th class="py-2 pr-4">Difficulté</th>
               <th class="py-2 pr-4">Saison idéale</th>
-              <th class="py-2">Coût</th>
+              <th class="py-2 pr-4">Coût</th>
+              <th class="py-2">Source</th>
             </tr>
           </thead>
           <tbody>
@@ -92,7 +93,16 @@ const touristTripJsonLd = {
                   <td class="py-2 pr-4">{p.duree}</td>
                   <td class="py-2 pr-4">{p.difficulte}</td>
                   <td class="py-2 pr-4">{p.saisonIdeale}</td>
-                  <td class="py-2">{p.cout}</td>
+                  <td class="py-2 pr-4">{p.cout}</td>
+                  <td class="py-2">
+                    {p.source ? (
+                      <a href={p.source} target="_blank" rel="noopener noreferrer nofollow" class="text-accent underline hover:no-underline">
+                        Source ↗
+                      </a>
+                    ) : (
+                      <span class="text-ink-muted">—</span>
+                    )}
+                  </td>
                 </tr>
               ))
             }

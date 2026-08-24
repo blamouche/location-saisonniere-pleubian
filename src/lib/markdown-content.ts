@@ -48,7 +48,9 @@ ${[...liens.map((l) => `- [${l.nom}](/decouvrir/${l.slug}/)`), experienceLiee ? 
 }
 
 export function experienceMarkdown(experience: Experience, decouvrirLies: FicheLieu[], url: string): string {
-  const propositions = experience.propositions.map((p) => `| ${p.titre} | ${p.duree} | ${p.difficulte} | ${p.saisonIdeale} | ${p.cout} |`).join('\n');
+  const propositions = experience.propositions
+    .map((p) => `| ${p.titre} | ${p.duree} | ${p.difficulte} | ${p.saisonIdeale} | ${p.cout} | ${p.source ? `[Source](${p.source})` : '—'} |`)
+    .join('\n');
   const faq = experience.faq.map((f) => `**${f.q}**\n${f.r}`).join('\n\n');
 
   return `# ${experience.titre}
@@ -69,8 +71,8 @@ ${experience.depuisLaMaison}
 
 ## Propositions concrètes
 
-| Proposition | Durée | Difficulté | Saison idéale | Coût |
-|---|---|---|---|---|
+| Proposition | Durée | Difficulté | Saison idéale | Coût | Source |
+|---|---|---|---|---|---|
 ${propositions}
 
 ## Encadré pratique
