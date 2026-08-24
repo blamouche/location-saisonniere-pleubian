@@ -37,6 +37,8 @@ export const maisonSchema = z.object({
     voyageurs: z.number().int().positive(),
     chambres: z.number().int().positive(),
     couchages: z.number().int().positive(),
+    /** Couchages disponibles une fois le(s) convertible(s) déplié(s), si différent de `couchages`. */
+    couchagesConvertible: z.number().int().positive().optional(),
     sallesDeBain: z.number().int().positive(),
     wcSepare: z.boolean(),
   }),

@@ -37,7 +37,7 @@ const equipementsLabels: Record<string, string> = {
     <header>
       <h1 class="font-display text-4xl font-semibold">La maison</h1>
       <p class="mt-3 max-w-2xl text-ink-muted">
-        {maison.capacite.voyageurs} voyageurs · {maison.capacite.chambres} chambres · {maison.capacite.couchages} lits · {maison.capacite.sallesDeBain} salles de bain{maison.capacite.wcSepare && ' + WC séparé'}.
+        {maison.capacite.voyageurs} voyageurs · {maison.capacite.chambres} chambres · {maison.capacite.couchages} lits{maison.capacite.couchagesConvertible && ` (convertible ${maison.capacite.couchagesConvertible} lits)`} · {maison.capacite.sallesDeBain} salles de bain{maison.capacite.wcSepare && ' + WC séparé'}.
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
         <a href="/la-maison/galerie/" class="rounded-md border border-accent px-4 py-2 text-sm font-semibold text-accent hover:bg-accent-soft">Voir la galerie complète</a>

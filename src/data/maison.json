@@ -30,6 +30,7 @@
     "voyageurs": 8,
     "chambres": 4,
     "couchages": 5,
+    "couchagesConvertible": 7,
     "sallesDeBain": 2,
     "wcSepare": true
   },
