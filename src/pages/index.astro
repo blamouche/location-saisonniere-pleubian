@@ -85,7 +85,7 @@ const raisonsDeVenir = [
           const coeffs = pleinesMer.map((e) => e.coefficient).filter((c): c is number => c !== null);
           return (
             <span>
-              <strong class="text-ink">Marées à {maree.donnees!.port.nom}</strong> ({jour.date}) : pleine mer {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · basse mer{' '}
+              <strong class="text-ink">Marées à Pleubian</strong> ({jour.date}) : pleine mer {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · basse mer{' '}
               {bassesMer.map((e) => e.heure).join(' & ')}
               {coeffs.length > 0 && <> · coeff. {coeffs.join('/')}</>}
               {maree.statut === 'perime' && ' (donnée d’une précédente mise à jour)'}
