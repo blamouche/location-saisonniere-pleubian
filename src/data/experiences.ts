@@ -419,4 +419,64 @@ export const experiences: Experience[] = [
     decouvrirLies: ['plages-pleubian', 'sillon-de-talbert', 'cote-de-granit-rose'],
     heroSlug: 'saison-ete-3',
   },
+  {
+    slug: 'festival-chant-de-marin',
+    pilier: 'Culture',
+    titre: 'Festival du Chant de Marin (Paimpol, 2027)',
+    essentiel:
+      "Le Festival du Chant de Marin de Paimpol, l'un des plus grands rassemblements de musiques marines d'Europe (jusqu'à 170 000 festivaliers lors de l'édition 2025), revient à Paimpol les 6, 7 et 8 août 2027 pour sa 17ᵉ édition, sur le thème « De la Mer Noire à la Baltique ». Paimpol est à quelques minutes de la Maison Od Joge — réserver tôt est recommandé pour un tel événement.",
+    promesse:
+      "Les 6, 7 et 8 août 2027, le port de Paimpol accueille la 17ᵉ édition du Festival du Chant de Marin — l'un des plus grands festivals de musiques marines d'Europe, à quelques minutes de la maison.",
+    depuisLaMaison:
+      "Paimpol est à quelques minutes de la Maison Od Joge — distance exacte à vérifier porte-à-porte. La maison peut servir de camp de base pour le festival, en évitant la forte tension sur l'hébergement à Paimpol même pendant l'événement.",
+    propositions: [
+      {
+        titre: 'Vendredi 6 août 2027 — Ouverture',
+        duree: 'Soirée',
+        difficulte: 'Aucune',
+        saisonIdeale: '6 août 2027',
+        cout: 'Voir billetterie officielle',
+        source: 'https://www.paimpol-festival.bzh/',
+      },
+      {
+        titre: 'Samedi 7 août 2027 — Journée complète',
+        duree: 'Journée',
+        difficulte: 'Aucune',
+        saisonIdeale: '7 août 2027',
+        cout: 'Voir billetterie officielle',
+        source: 'https://www.paimpol-festival.bzh/',
+      },
+      {
+        titre: 'Dimanche 8 août 2027 — Clôture',
+        duree: 'Journée',
+        difficulte: 'Aucune',
+        saisonIdeale: '8 août 2027',
+        cout: 'Voir billetterie officielle',
+        source: 'https://www.paimpol-festival.bzh/',
+      },
+      {
+        titre: 'Défilé des bateaux traditionnels sur les quais',
+        duree: 'Quelques heures',
+        difficulte: 'Aucune',
+        saisonIdeale: 'Sur les 3 jours (environ 200 bateaux lors de l’édition 2025)',
+        cout: 'Gratuit (déambulation sur les quais)',
+        source: 'https://www.paimpol-festival.bzh/le-festival/decouvrir-le-festival/',
+      },
+    ],
+    encadrePratique: {
+      materiel: ['Vêtements adaptés à la météo (événement en extérieur, sur les quais)', 'Chaussures confortables'],
+      reservations:
+        "Réserver l'hébergement très en avance — l'édition 2025 a rassemblé jusqu'à 170 000 festivaliers sur 3 jours. Billetterie des concerts sur le site officiel du festival.",
+      prestataires: 'Festival du Chant de Marin, Paimpol (association organisatrice, entité réelle — source ci-dessous).',
+    },
+    faq: [
+      { q: 'Quelles sont les dates du festival en 2027 ?', r: 'Les 6, 7 et 8 août 2027, pour la 17ᵉ édition.' },
+      { q: 'Quel est le thème de l’édition 2027 ?', r: '« De la Mer Noire à la Baltique » — le festival met cap à l’Est : Balkans, Pays Baltes, Turquie, Roumanie, Ukraine, Pologne.' },
+      { q: 'Faut-il réserver l’hébergement longtemps à l’avance ?', r: 'Oui — l’édition 2025 a rassemblé jusqu’à 170 000 festivaliers sur 3 jours ; réserver plusieurs mois à l’avance est recommandé, en particulier sur Paimpol même.' },
+      { q: 'Le festival est-il gratuit ?', r: 'La déambulation sur les quais et une partie de la programmation sont accessibles librement ; certains concerts et animations sont payants — voir la billetterie officielle.' },
+      { q: 'Combien de temps dure le festival ?', r: 'Trois jours, du vendredi au dimanche.' },
+    ],
+    decouvrirLies: ['paimpol-beauport', 'presquile-sauvage'],
+    heroSlug: 'saison-ete-1',
+  },
 ];
