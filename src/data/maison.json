@@ -59,7 +59,7 @@
   "equipements": {
     "confort": ["Poêle à bois", "WiFi", "Espace de travail dédié", "Machine à espresso", "Cafetière manuelle"],
     "cuisine": ["Cuisine équipée", "Lave-vaisselle", "Réfrigérateur", "Four", "Four à micro-ondes", "Robot de cuisine"],
-    "exterieur": ["Jardin clos", "Stationnement gratuit"],
+    "exterieur": ["Jardin clos", "Stationnement gratuit", "Barbecue", "Table et chaises", "Chaises longues"],
     "securite": ["Boîte à clés sécurisée", "Détecteur de fumée"],
     "accessibilite": ["Chambre et salle de bain de plain-pied au RDC (pas d'escalier)"]
   },
