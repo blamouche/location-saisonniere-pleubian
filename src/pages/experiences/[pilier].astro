@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PlaceholderImage from '@/components/PlaceholderImage.astro';
 import Cta from '@/components/Cta.astro';
@@ -6,6 +7,7 @@ import { maison } from '@/data/maison';
 import { experiences } from '@/data/experiences';
 import { fichesLieux } from '@/data/decouvrir';
 import { buildDate } from '@/lib/build-date';
+import { experienceHeroImages } from '@/data/real-images';
 
 export function getStaticPaths() {
   return experiences.map((e) => ({ params: { pilier: e.slug }, props: { experience: e } }));
@@ -14,6 +16,7 @@ export function getStaticPaths() {
 const { experience } = Astro.props as { experience: (typeof experiences)[number] };
 const canonical = new URL(`/experiences/${experience.slug}/`, Astro.site).toString();
 const decouvrirLies = experience.decouvrirLies.map((slug) => fichesLieux.find((f) => f.slug === slug)).filter(Boolean) as typeof fichesLieux;
+const heroReel = experienceHeroImages[experience.slug];
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -45,7 +48,24 @@ const touristTripJsonLd = {
 >
   <!-- 1. Hero thématique -->
   <section class="relative">
-    <PlaceholderImage slug={experience.heroSlug} ratio="16x9" alt={`${experience.titre} (visuel provisoire)`} loading="eager" class="h-[45vh] min-h-[300px] w-full object-cover" />
+    {
+      heroReel ? (
+        <figure class="relative m-0">
+          <Image
+            src={heroReel.src}
+            alt={`${experience.titre}`}
+            loading="eager"
+            class="h-[45vh] min-h-[300px] w-full object-cover"
+            widths={[640, 960, 1280, 1600, 2048]}
+            sizes="100vw"
+            format="avif"
+          />
+          <figcaption class="absolute bottom-1 right-2 rounded bg-ink/50 px-2 py-0.5 text-[10px] text-white/90">{heroReel.credit}</figcaption>
+        </figure>
+      ) : (
+        <PlaceholderImage slug={experience.heroSlug} ratio="16x9" alt={`${experience.titre} (visuel provisoire)`} loading="eager" class="h-[45vh] min-h-[300px] w-full object-cover" />
+      )
+    }
     <div class="absolute inset-0 flex items-end bg-gradient-to-t from-ink/70 via-ink/10 to-transparent">
       <div class="mx-auto w-full max-w-4xl px-4 pb-8 text-white sm:px-6">
         <p class="text-sm font-semibold uppercase tracking-wide text-white/80">{experience.pilier}</p>

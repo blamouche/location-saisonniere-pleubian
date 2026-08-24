@@ -3,6 +3,7 @@ import heroPrintemps from '@/assets/images/hero/hero-printemps.jpg';
 import heroEte from '@/assets/images/hero/hero-ete.jpg';
 import heroAutomne from '@/assets/images/hero/hero-automne.jpg';
 import heroHiver from '@/assets/images/hero/hero-hiver.jpg';
+import festivalChantDeMarin from '@/assets/images/experiences/festival-chant-de-marin.jpg';
 import type { SaisonId } from './saisons';
 
 /**
@@ -18,4 +19,16 @@ export const heroImages: Partial<Record<SaisonId, { src: ImageMetadata; credit: 
   ete: { src: heroEte, credit: 'Photo : Peter Burdon / Unsplash (littoral rocheux, générique)' },
   automne: { src: heroAutomne, credit: 'Photo : Amzallag Micheline / Unsplash (maison bretonne en granit, générique)' },
   hiver: { src: heroHiver, credit: 'Photo : Cédric Le Bars / Unsplash (mer démontée, générique)' },
+};
+
+/**
+ * Visuels réels associés à une page `/experiences/[slug]/` précise (par slug), pour
+ * les cas — comme le Festival du Chant de Marin — où le visuel officiel de
+ * l'événement est plus juste qu'un placeholder générique.
+ */
+export const experienceHeroImages: Record<string, { src: ImageMetadata; credit: string }> = {
+  'festival-chant-de-marin': {
+    src: festivalChantDeMarin,
+    credit: 'Visuel officiel — Festival du Chant de Marin, Paimpol (paimpol-festival.bzh)',
+  },
 };
