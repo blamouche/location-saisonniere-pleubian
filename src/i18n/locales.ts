@@ -47,6 +47,7 @@ export const sectionSlugs: Record<string, Record<Locale, string>> = {
   legal: { fr: 'legal', en: 'legal', de: 'impressum' },
   avis: { fr: 'avis', en: 'reviews', de: 'bewertungen' },
   journal: { fr: 'journal', en: 'journal', de: 'journal' },
+  agenda: { fr: 'agenda', en: 'events', de: 'veranstaltungen' },
 };
 
 export function sectionSlug(section: keyof typeof sectionSlugs, locale: Locale): string {

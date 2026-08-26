@@ -30,6 +30,7 @@ const annee = new Date().getFullYear();
         <li><a href={sectionPath('la-maison', locale)} class="hover:text-accent">{dict.nav.laMaison}</a></li>
         {locale === 'fr' && <li><a href={sectionPath('experiences', locale)} class="hover:text-accent">{dict.nav.experiences}</a></li>}
         {locale === 'fr' && <li><a href={sectionPath('decouvrir', locale)} class="hover:text-accent">{dict.nav.decouvrir}</a></li>}
+        {locale === 'fr' && <li><a href={sectionPath('agenda', locale)} class="hover:text-accent">{dict.nav.agenda}</a></li>}
         {locale === 'fr' && <li><a href={sectionPath('journal', locale)} class="hover:text-accent">{dict.nav.journal}</a></li>}
         {locale === 'fr' && <li><a href={sectionPath('avis', locale)} class="hover:text-accent">{dict.footer.avis}</a></li>}
         <li><a href={sectionPath('reserver', locale)} class="hover:text-accent">{dict.nav.reserver}</a></li>

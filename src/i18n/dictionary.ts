@@ -10,6 +10,7 @@ export interface Dictionary {
     laMaison: string;
     experiences: string;
     decouvrir: string;
+    agenda: string;
     saisons: string;
     journal: string;
     reserver: string;
@@ -62,6 +63,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       laMaison: 'La maison',
       experiences: 'Expériences',
       decouvrir: 'Découvrir',
+      agenda: 'Agenda',
       saisons: 'Saisons',
       journal: 'Journal',
       reserver: 'Réserver',
@@ -104,6 +106,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       laMaison: 'The house',
       experiences: 'Experiences',
       decouvrir: 'Discover',
+      agenda: 'Events',
       saisons: 'Seasons',
       journal: 'Journal',
       reserver: 'Book',
@@ -146,6 +149,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       laMaison: 'Das Haus',
       experiences: 'Erlebnisse',
       decouvrir: 'Entdecken',
+      agenda: 'Veranstaltungen',
       saisons: 'Jahreszeiten',
       journal: 'Journal',
       reserver: 'Buchen',

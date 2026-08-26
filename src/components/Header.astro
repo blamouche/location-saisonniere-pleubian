@@ -18,6 +18,7 @@ const nav = [
   { href: sectionPath('la-maison', locale), label: dict.laMaison },
   ...(locale === 'fr' ? [{ href: sectionPath('experiences', locale), label: dict.experiences }] : []),
   ...(locale === 'fr' ? [{ href: sectionPath('decouvrir', locale), label: dict.decouvrir }] : []),
+  ...(locale === 'fr' ? [{ href: sectionPath('agenda', locale), label: dict.agenda }] : []),
   { href: sectionPath('saisons', locale), label: dict.saisons },
   { href: sectionPath('reserver', locale), label: dict.reserver },
   { href: sectionPath('contact', locale), label: dict.contact },
