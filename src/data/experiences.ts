@@ -128,18 +128,49 @@ export const experiences: Experience[] = [
     promesse: "Entre les estuaires du Trieux et du Jaudy, et face à l'archipel de Bréhat, le nautisme se pratique au rythme des marées et du vent.",
     depuisLaMaison: 'Plusieurs points de mise à l’eau (Kermagen, criques locales) à proximité — distance exacte à vérifier.',
     propositions: [
-      { titre: 'Kayak dans les criques locales', duree: '2 à 3h', difficulte: 'Facile (débutant accepté)', saisonIdeale: 'Mai à septembre', cout: 'Location à confirmer' },
-      { titre: 'Sortie voile vers l’archipel de Bréhat', duree: 'Demi-journée à journée', difficulte: 'Modéré (dépend du vent)', saisonIdeale: 'Été', cout: 'Location/sortie encadrée à confirmer' },
+      {
+        titre: 'Voile à Port-Blanc (Penvénan) — Centre Nautique de Port-Blanc',
+        duree: '2h à la semaine (cours/stages)',
+        difficulte: 'Tous niveaux — jardin des mers dès 4 ans, stages 4 à 97 ans',
+        saisonIdeale: 'Avril à septembre',
+        cout: 'Location dès 14 € · stages dès 133 € (tarifs du prestataire)',
+        source: 'https://www.cnportblanc.fr/',
+      },
+      {
+        titre: 'Voile & kayak de mer à Paimpol — Pôle Nautique Paimpol-Goëlo',
+        duree: 'Séance ou stage à la semaine',
+        difficulte: 'Tous niveaux — club loisir, hors compétition',
+        saisonIdeale: 'Toute l’année, vacances scolaires notamment',
+        cout: 'Voir tarifs du prestataire',
+        source: 'http://polenautique.paimpol-goelo.com/',
+      },
+      {
+        titre: 'Kayak/canoë sur le Trieux à Pontrieux — Club Nautique Pontrivien',
+        duree: '1h à la demi-journée (rivière, estuaire ou pleine mer vers Bréhat)',
+        difficulte: 'Facile en rivière (eau calme) à modéré en mer',
+        saisonIdeale: 'Avril à fin août (club ouvert sur cette période, sur demande le reste de l’année)',
+        cout: 'Leçon individuelle 30 €/h · location libre en rivière selon disponibilité',
+        source: 'https://www.canoe-kayak-pontrieux.fr/riviere',
+      },
+      {
+        titre: 'Location de bateau à moteur à Lézardrieux — Gourenez Nautic',
+        duree: 'Journée ou demi-journée',
+        difficulte: 'Facile — flotte variée, familles et pêche',
+        saisonIdeale: 'Avril à septembre',
+        cout: 'Voir tarifs du prestataire (conditions de permis selon modèle)',
+        source: 'https://www.gourenez-nautic.fr/',
+      },
     ],
     encadrePratique: {
       materiel: ['Vêtements adaptés à l’eau', 'Gilet de flottaison (fourni en location encadrée)'],
-      reservations: 'Réservation recommandée en haute saison auprès d’un prestataire local.',
-      prestataires: 'Loueur de kayak/voile local à confirmer avant publication (partenariat envisagé, PRD §11.5).',
+      reservations: 'Réservation recommandée en haute saison directement auprès de chaque prestataire.',
+      prestataires:
+        'Centre Nautique de Port-Blanc (Penvénan), Pôle Nautique Paimpol-Goëlo, Club Nautique Pontrivien (Pontrieux) et Gourenez Nautic (Lézardrieux) — voir liens ci-dessus. Distances depuis la maison à vérifier porte-à-porte. Aucun prestataire de location de bateau confirmé à Tréguier même à ce jour (le chantier naval du port vend et entretient des bateaux, mais ne loue pas).',
     },
     faq: [
       { q: 'Faut-il une expérience préalable pour le kayak ?', r: 'Non pour les sorties encadrées en crique abritée.' },
       { q: 'Le courant est-il fort autour de Bréhat ?', r: 'Le courant dépend fortement de la marée — sortie encadrée recommandée pour les débutants.' },
-      { q: 'Peut-on louer le matériel sur place ?', r: 'Prestataire à confirmer avant publication définitive.' },
+      { q: 'Peut-on louer le matériel sur place ?', r: 'Oui, auprès de plusieurs prestataires du territoire (Port-Blanc, Paimpol, Pontrieux, Lézardrieux) — voir le tableau ci-dessus.' },
     ],
     decouvrirLies: ['ile-de-brehat', 'plages-pleubian', 'presquile-sauvage'],
     heroSlug: 'saison-ete-2',
@@ -349,21 +380,37 @@ export const experiences: Experience[] = [
     pilier: 'Famille',
     titre: 'Activités en famille',
     essentiel:
-      "Les activités en famille autour de la Maison Od Joge combinent le jardin clos de la maison, la plage de Kermagen, une balade sur le Sillon de Talbert, et plusieurs sorties à la journée du côté de Pleumeur-Bodou et Paimpol : fermes pédagogiques, Zooparc de Trégomeur, Village Gaulois et Planétarium de Bretagne.",
-    promesse:
-      "Jardin clos, plage familiale, fermes pédagogiques, zoo, village gaulois et planétarium : la Presqu'île sauvage et ses environs se prêtent bien à un séjour en famille avec de jeunes enfants.",
-    depuisLaMaison: 'La maison elle-même est pensée pour les familles : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée, mer à 5 minutes à pied. Les sorties à la journée listées ci-dessous sont à Pleumeur-Bodou et Paimpol — distances exactes à vérifier porte-à-porte.',
+      "Les activités en famille les plus simples autour de la Maison Od Joge sont gratuites et à deux pas : le jardin clos de la maison, la plage de Kermagen, une balade sur le Sillon de Talbert. Pour les sorties à la journée (fermes, zoo, village gaulois, planétarium, accrobranche), chacune a sa propre fiche détaillée dans le pilier Famille.",
+    promesse: "Jardin clos, plage familiale à 5 minutes, et tout un choix de sorties à la journée détaillées chacune dans sa propre fiche.",
+    depuisLaMaison: 'La maison elle-même est pensée pour les familles : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée, mer à 5 minutes à pied.',
     propositions: [
       { titre: 'Plage de Kermagen', duree: 'Une demi-journée', difficulte: 'Facile', saisonIdeale: 'Été', cout: 'Gratuit' },
       { titre: 'Balade courte sur le Sillon de Talbert', duree: '~1h', difficulte: 'Facile, plat', saisonIdeale: "Toute l'année, selon marée", cout: 'Gratuit' },
+    ],
+    encadrePratique: {
+      materiel: ['Vêtements de rechange'],
+      reservations: 'Aucune réservation nécessaire pour la plage et le Sillon. Pour les sorties à la journée, voir la fiche dédiée à chacune.',
+      prestataires: 'Voir les fiches dédiées : accrobranche, fermes pédagogiques, zoo, village gaulois, planétarium, sortie nature du Sillon de Talbert.',
+    },
+    faq: [
+      { q: 'La maison est-elle adaptée aux jeunes enfants ?', r: 'Oui : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée.' },
       {
-        titre: 'Mini Forêt à Vivons Perchés (accrobranche, dès 2 ans)',
-        duree: '1h',
-        difficulte: 'Très facile',
-        saisonIdeale: "Toute l'année (ouvert du lundi au samedi)",
-        cout: 'Voir tarifs sur le site',
-        source: 'https://www.vivons-perches.bzh/accrobranche/',
+        q: 'Où trouver le détail des sorties à la journée (ferme, zoo, village gaulois, planétarium) ?',
+        r: 'Chacune a sa propre page dans le pilier Famille des expériences, avec tarifs, horaires et lien vers le site officiel.',
       },
+    ],
+    decouvrirLies: ['plages-pleubian', 'sillon-de-talbert', 'cote-de-granit-rose'],
+    heroSlug: 'saison-ete-3',
+  },
+  {
+    slug: 'fermes-pedagogiques',
+    pilier: 'Famille',
+    titre: 'Fermes pédagogiques près de Pleubian',
+    essentiel:
+      "Deux fermes à vocation pédagogique près de la Maison Od Joge : la ferme équestre Les Chevaux du Coat à Plourivo (balades à poney/cheval dès 3 ans) et la Ferme Marine du Trieux à Paimpol (élevage ostréicole, visite et vente directe). Deux sorties courtes, complémentaires, pour des enfants en bas âge.",
+    promesse: 'Deux fermes réelles à quelques minutes — une équestre, une marine — pour découvrir des animaux et un savoir-faire local.',
+    depuisLaMaison: 'Les Chevaux du Coat (Plourivo) et la Ferme Marine du Trieux (Paimpol) — distances exactes à vérifier porte-à-porte.',
+    propositions: [
       {
         titre: 'Ferme équestre Les Chevaux du Coat (Plourivo, Paimpol)',
         duree: 'Balade ~1h',
@@ -380,6 +427,28 @@ export const experiences: Experience[] = [
         cout: 'Gratuit',
         source: 'https://www.bretagnealaferme.com/cotes-d-armor/paimpol/ferme/ferme-marine-du-trieux/148275',
       },
+    ],
+    encadrePratique: {
+      materiel: ['Chaussures fermées', 'Vêtements de rechange'],
+      reservations: 'Réservation recommandée pour la ferme équestre ; visite libre à la Ferme Marine du Trieux aux horaires indiqués.',
+      prestataires: 'Les Chevaux du Coat, Ferme Marine du Trieux — entités réelles, sources ci-dessus.',
+    },
+    faq: [
+      { q: 'Les balades à poney conviennent-elles aux tout-petits ?', r: 'Les Chevaux du Coat accueille dès 3 ans, sur réservation.' },
+      { q: 'La Ferme Marine du Trieux se visite-t-elle librement ?', r: 'Oui, aux horaires indiqués (mardi à samedi, 14h-18h, à confirmer avant de s’y rendre).' },
+    ],
+    decouvrirLies: ['paimpol-beauport', 'presquile-sauvage'],
+    heroSlug: 'saison-printemps-1',
+  },
+  {
+    slug: 'zoo-tregomeur',
+    pilier: 'Famille',
+    titre: 'Zooparc de Trégomeur',
+    essentiel:
+      'Le Zooparc de Trégomeur, parc zoologique et botanique des Côtes-d’Armor, présente une grande variété d’espèces sur un parcours boisé pensé pour les familles. Ouvert toute l’année (horaires réduits hors saison), à une sortie à la journée depuis la Maison Od Joge — distance exacte à vérifier porte-à-porte.',
+    promesse: 'Un vrai parc zoologique régional, accessible en sortie à la journée depuis la Presqu’île sauvage.',
+    depuisLaMaison: 'Trégomeur — distance exacte à vérifier porte-à-porte, compter une sortie à la journée.',
+    propositions: [
       {
         titre: 'Zooparc de Trégomeur',
         duree: 'Une demi-journée à une journée',
@@ -388,6 +457,25 @@ export const experiences: Experience[] = [
         cout: '22,90 € adulte / 16,50 € enfant (tarifs 2026, à confirmer)',
         source: 'https://www.zoo-tregomeur.com/',
       },
+    ],
+    encadrePratique: {
+      materiel: ['Chaussures confortables (parcours à pied)', 'Pique-nique ou restauration sur place selon disponibilité'],
+      reservations: 'Billetterie sur place ou en ligne selon la période — voir le site officiel.',
+      prestataires: 'Zooparc de Trégomeur — entité réelle, source ci-dessus.',
+    },
+    faq: [{ q: 'Le zoo est-il ouvert toute l’année ?', r: 'Oui, avec des horaires réduits hors saison — à vérifier sur le site officiel avant de s’y rendre.' }],
+    decouvrirLies: ['presquile-sauvage'],
+    heroSlug: 'saison-printemps-2',
+  },
+  {
+    slug: 'village-gaulois',
+    pilier: 'Famille',
+    titre: 'Le Village Gaulois (Pleumeur-Bodou)',
+    essentiel:
+      'Le Village Gaulois de Pleumeur-Bodou, parc à thème familial, a rouvert après deux ans de fermeture consécutifs à un incendie en 2024, avec une ouverture annoncée en juillet-août 2026 — à confirmer sur place avant de s’y rendre. Une sortie à la journée depuis la Maison Od Joge.',
+    promesse: 'Un parc à thème familial dans les Côtes-d’Armor — vérifier l’ouverture saisonnière avant de vous déplacer.',
+    depuisLaMaison: 'Pleumeur-Bodou — distance exacte à vérifier porte-à-porte, compter une sortie à la journée.',
+    propositions: [
       {
         titre: 'Le Village Gaulois (Pleumeur-Bodou)',
         duree: 'Une demi-journée',
@@ -396,6 +484,30 @@ export const experiences: Experience[] = [
         cout: 'Billetterie sur place uniquement',
         source: 'https://www.levillagegaulois.org/php/home.php',
       },
+    ],
+    encadrePratique: {
+      materiel: ['Chaussures confortables'],
+      reservations: 'Billetterie sur place uniquement — vérifier les dates d’ouverture 2026 avant de s’y rendre.',
+      prestataires: 'Le Village Gaulois — entité réelle, source ci-dessus.',
+    },
+    faq: [
+      {
+        q: 'Le Village Gaulois est-il ouvert ?',
+        r: 'Le parc a rouvert après deux ans de fermeture, avec une ouverture annoncée en juillet-août 2026 — à confirmer sur place avant de s’y rendre.',
+      },
+    ],
+    decouvrirLies: ['presquile-sauvage'],
+    heroSlug: 'saison-automne-1',
+  },
+  {
+    slug: 'planetarium-bretagne',
+    pilier: 'Famille',
+    titre: 'Planétarium de Bretagne (Pleumeur-Bodou)',
+    essentiel:
+      'Le Planétarium de Bretagne à Pleumeur-Bodou propose des séances de découverte du ciel et de l’espace, dès 5 ans, sur réservation. Une sortie à la journée depuis la Maison Od Joge, à combiner avec le Village Gaulois ou la Cité des Télécoms tout proches.',
+    promesse: 'Une séance de planétarium accessible dès 5 ans, dans les Côtes-d’Armor.',
+    depuisLaMaison: 'Pleumeur-Bodou — distance exacte à vérifier porte-à-porte.',
+    propositions: [
       {
         titre: 'Planétarium de Bretagne (Pleumeur-Bodou)',
         duree: '~45 min (séance)',
@@ -406,18 +518,54 @@ export const experiences: Experience[] = [
       },
     ],
     encadrePratique: {
-      materiel: ['Vêtements de rechange', 'Chaussures fermées pour l’accrobranche et les fermes'],
-      reservations: 'Réservation recommandée pour l’accrobranche, la ferme équestre et le planétarium ; billetterie sur place pour le Village Gaulois.',
-      prestataires: 'Vivons Perchés, Les Chevaux du Coat, Ferme Marine du Trieux, Zooparc de Trégomeur, Le Village Gaulois, Planétarium de Bretagne — entités réelles, sources ci-dessous.',
+      materiel: [],
+      reservations: 'Réservation recommandée, séances à horaires fixes.',
+      prestataires: 'Planétarium de Bretagne — entité réelle, source ci-dessus.',
+    },
+    faq: [{ q: 'Le planétarium convient-il aux jeunes enfants ?', r: 'Oui, des séances sont proposées dès 5 ans.' }],
+    decouvrirLies: ['presquile-sauvage'],
+    heroSlug: 'saison-hiver-1',
+  },
+  {
+    slug: 'sillon-talbert-oiseaux',
+    pilier: 'Famille',
+    titre: 'Visite guidée du Sillon de Talbert et de ses oiseaux',
+    essentiel:
+      "La Maison du Sillon, point d'accueil de la Réserve naturelle du Sillon de Talbert à Pleubian (à quelques minutes de la Maison Od Joge), propose toute l'année des sorties nature encadrées par un agent de la réserve : excursion commentée, observation des oiseaux migrateurs, parcours botanique. Programme et tarifs communiqués sur place ou par la Maison du Sillon.",
+    promesse: 'Une sortie nature encadrée, sur la réserve naturelle la plus proche de la maison, réputée pour sa richesse ornithologique.',
+    depuisLaMaison: 'La Maison du Sillon, 48 rue du Sillon de Talbert, Pleubian — à quelques minutes de la maison.',
+    propositions: [
+      {
+        titre: 'Excursion commentée du Sillon de Talbert',
+        duree: 'Variable selon programme',
+        difficulte: 'Facile, plat',
+        saisonIdeale: "Toute l'année, programme renforcé au printemps/été",
+        cout: 'Voir programme (Maison du Sillon)',
+        source: 'https://www.reserve-sillondetalbert.bzh/agenda',
+      },
+      {
+        titre: 'Observation des oiseaux migrateurs',
+        duree: 'Variable selon programme',
+        difficulte: 'Facile',
+        saisonIdeale: 'Migrations de printemps et d’automne',
+        cout: 'Voir programme (Maison du Sillon)',
+        source: 'https://www.reserve-sillondetalbert.bzh/agenda',
+      },
+    ],
+    encadrePratique: {
+      materiel: ['Jumelles', 'Vêtements adaptés au vent et à la marée'],
+      reservations: "Programme annuel disponible à la Maison du Sillon, à la mairie de Pleubian ou dans les offices de tourisme — contact 02 96 16 54 67 / maison.sillon@mairie-pleubian.fr.",
+      prestataires: 'La Maison du Sillon (Réserve naturelle du Sillon de Talbert) — entité réelle, source ci-dessus.',
     },
     faq: [
-      { q: 'La maison est-elle adaptée aux jeunes enfants ?', r: 'Oui : jardin clos sans vis-à-vis, une chambre et une salle de bain de plain-pied au rez-de-chaussée.' },
-      { q: 'Y a-t-il des activités accessibles aux tout-petits ?', r: 'Oui, la Mini Forêt de l’accrobranche Vivons Perchés est accessible dès 2 ans (80 cm de haut maximum).' },
-      { q: 'Le Village Gaulois est-il ouvert ?', r: 'Le parc a rouvert après deux ans de fermeture, avec une ouverture annoncée en juillet-août 2026 — à confirmer sur place avant de s’y rendre.' },
-      { q: 'Le planétarium convient-il aux jeunes enfants ?', r: 'Oui, des séances sont proposées dès 5 ans.' },
+      {
+        q: 'Faut-il réserver pour une sortie nature ?',
+        r: 'Le programme et les modalités (réservation ou non selon la sortie) sont communiqués par la Maison du Sillon — contacter directement pour confirmer.',
+      },
+      { q: 'Ces sorties conviennent-elles aux enfants ?', r: 'Le site ne précise pas d’âge minimum pour les sorties grand public — se renseigner auprès de la Maison du Sillon selon l’activité choisie.' },
     ],
-    decouvrirLies: ['plages-pleubian', 'sillon-de-talbert', 'cote-de-granit-rose'],
-    heroSlug: 'saison-ete-3',
+    decouvrirLies: ['sillon-de-talbert', 'presquile-sauvage'],
+    heroSlug: 'saison-automne-3',
   },
   {
     slug: 'festival-chant-de-marin',
