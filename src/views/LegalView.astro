@@ -38,6 +38,13 @@ const prenoms = maison.hotes.map((h) => h.prenom).join(' & ');
       </dl>
     </section>
 
+    <section aria-labelledby="propriete-titre">
+      <h2 id="propriete-titre" class="font-display text-2xl font-semibold">{dict.proprieteTitre}</h2>
+      <div class="mt-4 space-y-3 text-sm text-ink-muted">
+        {dict.proprieteTexte.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
     <section aria-labelledby="confidentialite-titre">
       <h2 id="confidentialite-titre" class="font-display text-2xl font-semibold">{dict.confidentialiteTitre}</h2>
       <div class="mt-4 space-y-3 text-sm text-ink-muted">
@@ -45,9 +52,28 @@ const prenoms = maison.hotes.map((h) => h.prenom).join(' & ');
       </div>
     </section>
 
+    <section aria-labelledby="rgpd-titre">
+      <h2 id="rgpd-titre" class="font-display text-2xl font-semibold">{dict.rgpdDroitsTitre}</h2>
+      <div class="mt-4 space-y-3 text-sm text-ink-muted">
+        {dict.rgpdDroits.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
     <section aria-labelledby="cookies-titre">
       <h2 id="cookies-titre" class="font-display text-2xl font-semibold">{dict.cookiesTitre}</h2>
       <p class="mt-4 text-sm text-ink-muted">{dict.cookiesTexte}</p>
+    </section>
+
+    <section aria-labelledby="droit-titre">
+      <h2 id="droit-titre" class="font-display text-2xl font-semibold">{dict.droitTitre}</h2>
+      <div class="mt-4 space-y-3 text-sm text-ink-muted">
+        {dict.droitTexte.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <section aria-labelledby="mediation-titre">
+      <h2 id="mediation-titre" class="font-display text-2xl font-semibold">{dict.mediationTitre}</h2>
+      <p class="mt-4 text-sm text-ink-muted">{dict.mediationTexte}</p>
     </section>
   </div>
 </BaseLayout>
