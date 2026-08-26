@@ -11,6 +11,7 @@ import { getSaisonCourante } from '@/data/saisons';
 import { lodgingBusinessJsonLd } from '@/lib/jsonld';
 import { pointsInteret } from '@/data/points-interet';
 import { lireMaree } from '@/lib/maree';
+import { formatDateCourte } from '@/lib/build-date';
 import { experienceHeroImages } from '@/data/real-images';
 import { homeContent } from '@/i18n/pages/home';
 import { entryPath, homePath, sectionPath, sectionSlug, experienceSlugs, decouvrirSlugs, saisonLabels, type Locale } from '@/i18n/locales';
@@ -31,7 +32,12 @@ const canonical = new URL(homePath(locale), Astro.site).toString();
 
 const chiffresCles = [
   { label: dict.chiffres.voyageurs, value: `${maison.capacite.voyageurs}` },
-  { label: dict.chiffres.chambres, value: `${maison.capacite.chambres}` },
+  {
+    label: dict.chiffres.chambres,
+    value: maison.capacite.couchagesConvertible
+      ? dict.chambresConfigurables(maison.capacite.chambres, maison.capacite.couchages, maison.capacite.couchagesConvertible)
+      : `${maison.capacite.chambres}`,
+  },
   { label: dict.chiffres.sallesDeBain, value: `${maison.capacite.sallesDeBain}` },
   { label: dict.chiffres.jardin, value: dict.chiffres.jardinValue },
   { label: dict.chiffres.merAPied, value: maison.distances.mer.duree },
@@ -62,7 +68,7 @@ const chiffresCles = [
           {dict.heroPitch(maison.capacite.voyageurs, maison.adresse.commune, maison.adresse.lieuDit, maison.distances.mer.duree)}
         </p>
         <div class="mt-6">
-          <Cta campagne="accueil-hero" locale={locale} />
+          <Cta campagne="accueil-hero" locale={locale} variant="on-accent" />
         </div>
       </div>
     </div>
@@ -80,7 +86,7 @@ const chiffresCles = [
         const coeffs = pleinesMer.map((e) => e.coefficient).filter((c): c is number => c !== null);
         return (
           <p>
-            <strong class="text-ink">{dict.mareesLabel}</strong> ({jour.date}) : {dict.pleineMer} {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · {dict.basseMer}{' '}
+            <strong class="text-ink">{dict.mareesLabel}</strong> ({formatDateCourte(jour.date, locale)}) : {dict.pleineMer} {pleinesMer.map((e) => `${e.heure} (${e.hauteurMetres} m)`).join(' & ')} · {dict.basseMer}{' '}
             {bassesMer.map((e) => e.heure).join(' & ')}
             {coeffs.length > 0 && <> · {dict.coeff} {coeffs.join('/')}</>}
             {maree.statut === 'perime' && ` (${dict.donneePrecedente})`}
@@ -150,11 +156,15 @@ const chiffresCles = [
         <h2 id="apercu-titre" class="font-display text-2xl font-semibold">{dict.apercuTitre}</h2>
         <a href={`${sectionPath('la-maison', locale)}${sectionSlug('galerie', locale)}/`} class="text-sm font-semibold text-accent hover:underline">{dict.apercuGalerie}</a>
       </div>
-      <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {
-          dict.apercuPhotos.map((photo) => (
-            <RoomImage slug={photo.slug} ratio="4x5" alt={photo.label} class="w-full rounded-lg object-cover" />
-          ))
+          dict.apercuPhotos.map((photo) =>
+            photo.orientation === 'paysage' ? (
+              <RoomImage slug={photo.slug} ratio="16x9" alt={photo.label} class="col-span-2 aspect-[16/9] w-full self-start rounded-lg object-cover" />
+            ) : (
+              <RoomImage slug={photo.slug} ratio="4x5" alt={photo.label} class="aspect-[4/5] w-full self-start rounded-lg object-cover" />
+            )
+          )
         }
       </div>
     </section>

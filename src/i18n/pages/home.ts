@@ -21,9 +21,13 @@ export interface HomeContent {
   pitchTexte: (nom: string, voyageurs: number, commune: string, codePostal: string) => string;
   chiffresTitre: string;
   chiffres: { voyageurs: string; chambres: string; sallesDeBain: string; jardin: string; jardinValue: string; merAPied: string; statut: string; superhost: string; hote: string };
+  /** Ex. "4 (configurable de 5 à 7 lits)" — le nombre de chambres reste fixe, le nombre de lits varie selon l'agencement des lits gigogne/séparables. */
+  chambresConfigurables: (chambres: number, min: number, max: number) => string;
   apercuTitre: string;
   apercuGalerie: string;
-  apercuPhotos: { slug: string; label: string }[];
+  /** `orientation` pilote la mise en page (US-070) : les photos paysage prennent 2
+   * colonnes en ratio 16:9 plutôt que d'être recadrées en 4:5 comme les portraits. */
+  apercuPhotos: { slug: string; label: string; orientation: 'portrait' | 'paysage' }[];
   raisonsTitre: string;
   raisonsIntro: string;
   raisons: { titre: string; description: string; frSlug: string }[];
@@ -54,20 +58,21 @@ export const homeContent: Record<Locale, HomeContent> = {
     festivalKicker: 'Gros événement 2027',
     festivalTitre: 'Festival du Chant de Marin — Paimpol',
     festivalDetails: "6, 7 et 8 août 2027 · 17ᵉ édition · jusqu'à 170 000 festivaliers en 2025 · Paimpol à quelques minutes de la maison",
-    festivalCta: 'En savoir plus →',
+    festivalCta: 'Organiser votre visite →',
     pitchTexte: (nom, voyageurs, commune, codePostal) =>
-      `${nom} est une maison bretonne pour ${voyageurs} personnes, à ${commune} (${codePostal}), sur la Presqu'île sauvage entre les estuaires du Trieux et du Jaudy. Jardin clos, poêle à bois, espace de travail dédié, et le Sillon de Talbert à quelques minutes.`,
+      `${nom} est une maison bretonne pour ${voyageurs} personnes, à ${commune} (${codePostal}), sur la Presqu'île sauvage entre les estuaires du Trieux et du Jaudy. Jardin clos, poêle à bois, espace de travail dédié, la plage et le Sillon de Talbert à quelques minutes.`,
     chiffresTitre: "La maison en un coup d'œil",
     chiffres: { voyageurs: 'Voyageurs', chambres: 'Chambres', sallesDeBain: 'Salles de bain', jardin: 'Jardin', jardinValue: 'Clos, privatif, sans vis-à-vis', merAPied: 'Mer à pied', statut: 'Statut', superhost: 'Superhost', hote: 'Hôte' },
+    chambresConfigurables: (chambres, min, max) => `${chambres} (configurable de ${min} à ${max} lits)`,
     apercuTitre: 'Visite en images',
     apercuGalerie: 'Voir toute la galerie →',
     apercuPhotos: [
-      { slug: 'facade', label: 'Façade de la maison' },
-      { slug: 'salon', label: 'Le salon' },
-      { slug: 'cuisine', label: 'La cuisine équipée' },
-      { slug: 'chambre-1-etage', label: 'Une des chambres' },
-      { slug: 'jardin', label: 'Le jardin clos' },
-      { slug: 'poele-a-bois', label: 'Le poêle à bois' },
+      { slug: 'facade', label: 'Façade de la maison', orientation: 'paysage' },
+      { slug: 'salon', label: 'Le salon', orientation: 'portrait' },
+      { slug: 'cuisine', label: 'La cuisine équipée', orientation: 'portrait' },
+      { slug: 'chambre-1-etage', label: 'Une des chambres', orientation: 'portrait' },
+      { slug: 'jardin', label: 'Le jardin clos', orientation: 'portrait' },
+      { slug: 'poele-a-bois', label: 'Le poêle à bois', orientation: 'paysage' },
     ],
     raisonsTitre: '5 raisons de venir',
     raisonsIntro: 'Sport, bien-être, déconnexion, air pur, culture — cinq angles pour préparer un séjour.',
@@ -105,20 +110,21 @@ export const homeContent: Record<Locale, HomeContent> = {
     festivalKicker: 'Major event, 2027',
     festivalTitre: 'Sea Shanty Festival — Paimpol',
     festivalDetails: '6–8 August 2027 · 17th edition · up to 170,000 visitors in 2025 · Paimpol a few minutes from the house',
-    festivalCta: 'Learn more →',
+    festivalCta: 'Plan your visit →',
     pitchTexte: (nom, voyageurs, commune, codePostal) =>
-      `${nom} is a Breton stone house for ${voyageurs} people, in ${commune} (${codePostal}), on the wild peninsula between the Trieux and Jaudy estuaries. Enclosed garden, wood stove, a dedicated desk, and the Talbert sand spit a few minutes away.`,
+      `${nom} is a Breton stone house for ${voyageurs} people, in ${commune} (${codePostal}), on the wild peninsula between the Trieux and Jaudy estuaries. Enclosed garden, wood stove, a dedicated desk, the beach, and the Talbert sand spit a few minutes away.`,
     chiffresTitre: 'The house at a glance',
     chiffres: { voyageurs: 'Guests', chambres: 'Bedrooms', sallesDeBain: 'Bathrooms', jardin: 'Garden', jardinValue: 'Enclosed, private, no overlook', merAPied: 'Sea on foot', statut: 'Status', superhost: 'Superhost', hote: 'Host' },
+    chambresConfigurables: (chambres, min, max) => `${chambres} (${min} to ${max} beds, configurable)`,
     apercuTitre: 'A visual tour',
     apercuGalerie: 'See the full gallery →',
     apercuPhotos: [
-      { slug: 'facade', label: 'The house façade' },
-      { slug: 'salon', label: 'The living room' },
-      { slug: 'cuisine', label: 'The fitted kitchen' },
-      { slug: 'chambre-1-etage', label: 'One of the bedrooms' },
-      { slug: 'jardin', label: 'The enclosed garden' },
-      { slug: 'poele-a-bois', label: 'The wood stove' },
+      { slug: 'facade', label: 'The house façade', orientation: 'paysage' },
+      { slug: 'salon', label: 'The living room', orientation: 'portrait' },
+      { slug: 'cuisine', label: 'The fitted kitchen', orientation: 'portrait' },
+      { slug: 'chambre-1-etage', label: 'One of the bedrooms', orientation: 'portrait' },
+      { slug: 'jardin', label: 'The enclosed garden', orientation: 'portrait' },
+      { slug: 'poele-a-bois', label: 'The wood stove', orientation: 'paysage' },
     ],
     raisonsTitre: '5 reasons to come',
     raisonsIntro: 'Sport, wellbeing, disconnection, fresh air, culture — five angles for planning a stay.',
@@ -156,20 +162,21 @@ export const homeContent: Record<Locale, HomeContent> = {
     festivalKicker: 'Großes Ereignis 2027',
     festivalTitre: 'Shanty-Festival — Paimpol',
     festivalDetails: '6.–8. August 2027 · 17. Ausgabe · bis zu 170.000 Besucher 2025 · Paimpol nur wenige Minuten vom Haus entfernt',
-    festivalCta: 'Mehr erfahren →',
+    festivalCta: 'Besuch planen →',
     pitchTexte: (nom, voyageurs, commune, codePostal) =>
-      `${nom} ist ein bretonisches Steinhaus für ${voyageurs} Personen in ${commune} (${codePostal}), auf der wilden Halbinsel zwischen den Flussmündungen von Trieux und Jaudy. Umzäunter Garten, Holzofen, ein eigener Arbeitsplatz und der Sillon de Talbert nur wenige Minuten entfernt.`,
+      `${nom} ist ein bretonisches Steinhaus für ${voyageurs} Personen in ${commune} (${codePostal}), auf der wilden Halbinsel zwischen den Flussmündungen von Trieux und Jaudy. Umzäunter Garten, Holzofen, ein eigener Arbeitsplatz, der Strand und der Sillon de Talbert nur wenige Minuten entfernt.`,
     chiffresTitre: 'Das Haus auf einen Blick',
     chiffres: { voyageurs: 'Gäste', chambres: 'Schlafzimmer', sallesDeBain: 'Badezimmer', jardin: 'Garten', jardinValue: 'Umzäunt, privat, ohne Einsicht', merAPied: 'Meer zu Fuß', statut: 'Status', superhost: 'Superhost', hote: 'Gastgeber' },
+    chambresConfigurables: (chambres, min, max) => `${chambres} (variabel, ${min} bis ${max} Betten)`,
     apercuTitre: 'Rundgang in Bildern',
     apercuGalerie: 'Ganze Galerie ansehen →',
     apercuPhotos: [
-      { slug: 'facade', label: 'Die Fassade des Hauses' },
-      { slug: 'salon', label: 'Das Wohnzimmer' },
-      { slug: 'cuisine', label: 'Die ausgestattete Küche' },
-      { slug: 'chambre-1-etage', label: 'Eines der Schlafzimmer' },
-      { slug: 'jardin', label: 'Der umzäunte Garten' },
-      { slug: 'poele-a-bois', label: 'Der Holzofen' },
+      { slug: 'facade', label: 'Die Fassade des Hauses', orientation: 'paysage' },
+      { slug: 'salon', label: 'Das Wohnzimmer', orientation: 'portrait' },
+      { slug: 'cuisine', label: 'Die ausgestattete Küche', orientation: 'portrait' },
+      { slug: 'chambre-1-etage', label: 'Eines der Schlafzimmer', orientation: 'portrait' },
+      { slug: 'jardin', label: 'Der umzäunte Garten', orientation: 'portrait' },
+      { slug: 'poele-a-bois', label: 'Der Holzofen', orientation: 'paysage' },
     ],
     raisonsTitre: '5 Gründe zu kommen',
     raisonsIntro: 'Sport, Wohlbefinden, Digital Detox, frische Luft, Kultur — fünf Blickwinkel für die Reiseplanung.',

@@ -78,10 +78,46 @@
   --color-border: #cfd6de;
 }
 
-html {
-  background-color: var(--color-surface);
-  color: var(--color-ink);
-  font-family: var(--font-body);
+/*
+ * Bug corrigé : ces styles de base doivent vivre dans `@layer base` — sinon,
+ * n'étant rattachés à aucun layer, ils l'emportent TOUJOURS sur les classes
+ * Tailwind (`@layer utilities`, ex. `text-white`), quelle que soit la
+ * spécificité ou l'ordre dans le fichier (règle des cascade layers CSS). C'est
+ * ce qui rendait `a { color: inherit }` plus fort que `text-white`/`text-accent`
+ * sur tous les boutons `<a>` du site (texte noir illisible sur fond sombre).
+ */
+@layer base {
+  html {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+  }
+
+  body {
+    font-size: clamp(1rem, 0.94rem + 0.3vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  main :where(h2, h3) {
+    scroll-margin-top: 1.5rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 /*
@@ -89,6 +125,7 @@ html {
  * sont rendues au build (contenu réel, crawlable pour les 4 saisons) et le CSS
  * seul décide laquelle est visible, en suivant `data-season` sur <html>. Réagit
  * instantanément au changement de saison (script ou sélecteur) sans JS dédié.
+ * Volontairement hors `@layer` : ce toggle doit rester prioritaire.
  */
 [data-season-panel] {
   display: none;
@@ -98,32 +135,6 @@ html[data-season='ete'] [data-season-panel='ete'],
 html[data-season='automne'] [data-season-panel='automne'],
 html[data-season='hiver'] [data-season-panel='hiver'] {
   display: block;
-}
-
-body {
-  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.25rem);
-  line-height: 1.6;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  line-height: 1.15;
-}
-
-a {
-  color: inherit;
-}
-
-main :where(h2, h3) {
-  scroll-margin-top: 1.5rem;
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 2px;
 }
 
 .skip-link {
