@@ -1,0 +1,26 @@
+---
+import type { Avis } from '@/data/avis';
+
+export interface Props {
+  avis: Avis;
+}
+
+const { avis: a } = Astro.props;
+---
+
+<figure class="rounded-lg border border-border bg-surface p-5">
+  <div class="flex items-center justify-between gap-3">
+    <span class="text-sm font-semibold" aria-hidden="true">{'★'.repeat(Math.round(a.note))}{'☆'.repeat(5 - Math.round(a.note))}</span>
+    <span class="text-xs uppercase tracking-wide text-ink-muted">{a.plateforme}</span>
+  </div>
+  <blockquote class="mt-3 text-sm text-ink">{a.texte}</blockquote>
+  <figcaption class="mt-3 text-xs text-ink-muted">
+    {a.auteur} — {a.date}
+    {a.lienPlateforme && (
+      <>
+        {' '}
+        · <a href={a.lienPlateforme} target="_blank" rel="noopener noreferrer nofollow" class="underline hover:text-accent">voir sur {a.plateforme}</a>
+      </>
+    )}
+  </figcaption>
+</figure>

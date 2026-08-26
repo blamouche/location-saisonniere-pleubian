@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Cta from '@/components/Cta.astro';
+import AvisCard from '@/components/AvisCard.astro';
 import { maison } from '@/data/maison';
+import { avis } from '@/data/avis';
 ---
 
 <BaseLayout
@@ -18,16 +20,33 @@ import { maison } from '@/data/maison';
       </p>
     </header>
 
-    <section aria-labelledby="statut-titre" class="mt-10 rounded-lg border border-dashed border-border p-6 text-center">
-      <h2 id="statut-titre" class="font-display text-xl font-semibold">Import en préparation</h2>
-      <p class="mt-2 text-sm text-ink-muted">
-        Les avis seront importés depuis les plateformes de réservation ({maison.hotes.map((h) => h.prenom).join(' & ')} — statut
-        {maison.superhost ? ' Superhost' : ''}), avec une sauvegarde mensuelle documentée (PRD §14.5). Le script d'automatisation complet est
-        prévu au Lot 6 (US-072) ; en attendant, consultez les avis directement sur la plateforme de réservation.
-      </p>
-      <div class="mt-4 flex justify-center">
-        <Cta campagne="avis-page" />
-      </div>
-    </section>
+    {
+      avis.length > 0 ? (
+        <section aria-labelledby="avis-titre" class="mt-10">
+          <h2 id="avis-titre" class="sr-only">
+            Avis
+          </h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {avis.map((a) => (
+              <AvisCard avis={a} />
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section aria-labelledby="statut-titre" class="mt-10 rounded-lg border border-dashed border-border p-6 text-center">
+          <h2 id="statut-titre" class="font-display text-xl font-semibold">
+            Aucun avis pour l'instant
+          </h2>
+          <p class="mt-2 text-sm text-ink-muted">
+            Les avis publiés ici seront importés à la main depuis les plateformes de réservation ({maison.hotes.map((h) => h.prenom).join(' & ')} —
+            statut{maison.superhost ? ' Superhost' : ''}), texte intégral et auteur inchangés. En attendant, consultez les avis directement sur la
+            plateforme de réservation.
+          </p>
+          <div class="mt-4 flex justify-center">
+            <Cta campagne="avis-page" />
+          </div>
+        </section>
+      )
+    }
   </div>
 </BaseLayout>

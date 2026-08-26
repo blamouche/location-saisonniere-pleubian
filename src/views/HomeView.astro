@@ -3,6 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import FactBox from '@/components/FactBox.astro';
 import Cta from '@/components/Cta.astro';
 import RoomImage from '@/components/RoomImage.astro';
+import AvisCard from '@/components/AvisCard.astro';
+import { avis } from '@/data/avis';
 import HeroImage from '@/components/HeroImage.astro';
 import EnCeMoment from '@/components/EnCeMoment.astro';
 import { Image } from 'astro:assets';
@@ -229,10 +231,27 @@ const chiffresCles = [
     </section>
 
     <!-- 9. Avis -->
-    <section aria-labelledby="avis-titre" class="rounded-lg border border-dashed border-border p-6 text-center">
-      <h2 id="avis-titre" class="font-display text-2xl font-semibold">{dict.avisTitre}</h2>
-      <p class="mt-2 text-sm text-ink-muted">{dict.avisTexte}</p>
-    </section>
+    {
+      avis.length > 0 ? (
+        <section aria-labelledby="avis-titre">
+          <h2 id="avis-titre" class="font-display text-2xl font-semibold">
+            {dict.avisTitre}
+          </h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            {avis.slice(0, 3).map((a) => (
+              <AvisCard avis={a} />
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section aria-labelledby="avis-titre" class="rounded-lg border border-dashed border-border p-6 text-center">
+          <h2 id="avis-titre" class="font-display text-2xl font-semibold">
+            {dict.avisTitre}
+          </h2>
+          <p class="mt-2 text-sm text-ink-muted">{dict.avisTexte}</p>
+        </section>
+      )
+    }
 
     <!-- 10. Bandeau conversion -->
     <section aria-labelledby="conversion-titre" class="rounded-xl bg-accent px-6 py-10 text-center text-white">
