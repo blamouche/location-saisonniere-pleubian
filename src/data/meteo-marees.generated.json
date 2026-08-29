@@ -1,6 +1,6 @@
 {
   "statut": "ok",
-  "misAJour": "2026-08-28T17:13:06.314Z",
+  "misAJour": "2026-08-29T11:31:44.717Z",
   "source": "https://maree.shom.fr/harbor/PORT-BENI/hlt/0",
   "donnees": {
     "port": {
@@ -10,35 +10,6 @@
       "lon": -3.172333
     },
     "jours": [
-      {
-        "date": "2026-08-28",
-        "evenements": [
-          {
-            "type": "basse_mer",
-            "heure": "01:48",
-            "hauteurMetres": 1.89,
-            "coefficient": null
-          },
-          {
-            "type": "pleine_mer",
-            "heure": "07:56",
-            "hauteurMetres": 9.22,
-            "coefficient": 83
-          },
-          {
-            "type": "basse_mer",
-            "heure": "14:04",
-            "hauteurMetres": 1.91,
-            "coefficient": null
-          },
-          {
-            "type": "pleine_mer",
-            "heure": "20:08",
-            "hauteurMetres": 9.63,
-            "coefficient": 86
-          }
-        ]
-      },
       {
         "date": "2026-08-29",
         "evenements": [
@@ -210,6 +181,35 @@
             "heure": "23:37",
             "hauteurMetres": 8.44,
             "coefficient": 62
+          }
+        ]
+      },
+      {
+        "date": "2026-09-04",
+        "evenements": [
+          {
+            "type": "basse_mer",
+            "heure": "05:54",
+            "hauteurMetres": 2.95,
+            "coefficient": null
+          },
+          {
+            "type": "pleine_mer",
+            "heure": "11:57",
+            "hauteurMetres": 8.18,
+            "coefficient": 55
+          },
+          {
+            "type": "basse_mer",
+            "heure": "18:21",
+            "hauteurMetres": 3.26,
+            "coefficient": null
+          },
+          {
+            "type": "tide.none",
+            "heure": "--:--",
+            "hauteurMetres": null,
+            "coefficient": null
           }
         ]
       }
